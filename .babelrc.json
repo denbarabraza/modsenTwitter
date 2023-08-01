@@ -1,0 +1,9 @@
+{
+  "babelConfig": {
+    "babelrc": false,
+    "configFile": false,
+    "plugins": [
+      "@babel/plugin-proposal-decorators"
+    ]
+  }
+}
