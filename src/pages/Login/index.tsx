@@ -28,7 +28,7 @@ export const Login = () => {
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           type='email'
-          label='Email'
+          label='Email:'
           nameForValidate='email'
           placeholder='example@gmail.com'
           register={register}
@@ -37,7 +37,7 @@ export const Login = () => {
 
         <Input
           type='password'
-          label='Password'
+          label='Password:'
           nameForValidate='password'
           placeholder='example12'
           register={register}

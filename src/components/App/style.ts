@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -28,8 +28,8 @@ export const GlobalStyles = createGlobalStyle`
 
   * {
     font-family: 'Dosis', sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: ${({ theme }) => theme.valueInPx.px0};
+    padding: ${({ theme }) => theme.valueInPx.px0};
     box-sizing: border-box;
     text-decoration: none;
     outline: none;
@@ -37,4 +37,9 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
