@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
-import { FormWrapper } from '@/components/Form/FormWrapper/FormWrapper.tsx';
 import {
   DateBirthBlock,
   DayYearSelector,
@@ -16,6 +15,7 @@ import { monthNames } from '@/constants/monthNames.ts';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { getDays, getYears } from '@/utils/dateSelectors.ts';
+import { FormWrapper } from '@/components/Form/FormWrapper';
 
 export const SignUp = () => {
   const [month, setMonth] = useState<number>(0);
