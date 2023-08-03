@@ -2,6 +2,8 @@ export interface IUsedColors {
   black: string;
   blackOpacity: string;
   white: string;
+  darkGrayBlue: string;
+  darkBlue: string;
   gray: string;
   grayOpacity: string;
   twitterColor: string;
@@ -96,6 +98,6 @@ export interface ITheme {
 }
 
 export enum ThemeEnum {
-  Light = 'light',
-  Dark = 'dark',
+    Light = 'light',
+    Dark = 'dark',
 }

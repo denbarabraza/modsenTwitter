@@ -21,7 +21,7 @@ export const InputItem = styled('input').withConfig({
   color: #000;
   word-break: break-word;
 
-  background: #fff;
+  background: ${({ theme }) => theme.colors.formBackground};
   border: none;
 
   border-bottom: ${({ withError }) =>
@@ -43,7 +43,7 @@ export const IconShowPassword = styled.img`
   width: 16px;
   height: 16px;
   position: absolute;
-  top: 50%;
+  top: 37px;
   right: 2%;
   transform: translateY(-50%);
 `;

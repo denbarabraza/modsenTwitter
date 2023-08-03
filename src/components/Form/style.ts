@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.fontColor};
 
   width: ${({ theme }) => theme.valueInPercent.pr100};
   height: ${({ theme }) => theme.valueInPercent.pr100};
@@ -30,10 +31,10 @@ export const InnerWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  max-width: 60%;
-  padding: 20px 30px;
+  max-width: ${({ theme }) => theme.valueInPercent.pr50};
+  padding: ${({ theme }) => theme.valueInPx.px20} ${({ theme }) => theme.valueInPx.px30};
 
-  background: #fff;
+  background: ${({ theme }) => theme.colors.formBackground};
   border-radius: 10px;
   box-shadow:
     1px 1px 2px rgba(0, 0, 0, 0.1),
@@ -53,7 +54,7 @@ export const Title = styled.h3`
   font-size: 26px;
   font-weight: 600;
   line-height: 22px;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.fontColor};
 `;
 
 export const TextQuestion = styled.div`
@@ -62,7 +63,7 @@ export const TextQuestion = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 24px;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.fontColor};
 
   opacity: 0.5;
 `;
@@ -73,7 +74,7 @@ export const LinkRegistration = styled.div`
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
-  color: #212121;
+  color: ${({ theme }) => theme.colors.fontColor};
   text-decoration-line: underline;
 `;
 
@@ -107,7 +108,7 @@ export const Selector = css`
   background: transparent;
   border: 1px solid gray;
   border-radius: 4px;
-  color: black;
+  color: ${({ theme }) => theme.colors.fontColor};
   font-size: 12px;
 
   &:hover {
