@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
-import { FormWrapper } from '@/components/Form/FormWrapper';
+import { FormWrapper } from '@/components/Form/FormWrapper/FormWrapper.tsx';
 import {
   DateBirthBlock,
   DayYearSelector,
