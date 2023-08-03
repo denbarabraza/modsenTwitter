@@ -24,6 +24,9 @@ const schemaParam = {
     )
     .required('Enter your phone number')
     .min(11, 'At least 11 characters'),
+  day: Yup.string().required('Enter day'),
+  month: Yup.string().required('Enter month'),
+  year: Yup.string().required('Enter year'),
 };
 
 export const useFormHandler = (...keys: string[]) => {
