@@ -1,7 +1,7 @@
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
-import { FormWrapper } from '@/components/Form/FormWrapper/FormWrapper.tsx';
+import { FormWrapper } from '@/components/Form/FormWrapper';
 import { Form } from '@/components/Form/FormWrapper/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
 import { PATH } from '@/constants/path.ts';
