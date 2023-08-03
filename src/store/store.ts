@@ -1,7 +1,6 @@
+import { appReducer } from '@/store/slice/appSlice.ts';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-
-import { appReducer } from '@/store/slice/appSlice.ts';
 
 const rootReducer = combineReducers({
   app: appReducer,
