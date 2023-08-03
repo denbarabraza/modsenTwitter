@@ -1,8 +1,18 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const hint = keyframes`
+  0% {
+    transform: scale(1)
+  }
+  100% {
+    transform: scale(1.02)
+  }`;
 
 export const Container = styled.div`
-  width: 100vw;
-  height: calc(100vh - 40px);
+  width: ${({ theme }) => theme.valueInVw.vw100};
+  height: calc(
+    ${({ theme }) => theme.valueInVh.vh100} - ${({ theme }) => theme.valueInPx.px40}
+  );
 `;
 
 export const Wrapper = styled.div`
@@ -10,8 +20,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 100%;
-  height: 100%;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+  height: ${({ theme }) => theme.valueInPercent.pr100};
 `;
 
 export const InnerWrapper = styled.div`
@@ -70,4 +80,70 @@ export const LinkRegistration = styled.div`
 export const IconTwitter = styled.img`
   width: 30px;
   height: 30px;
+`;
+
+export const Selectors = styled.div`
+  margin-bottom: 10px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const DateBirthBlock = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const Selector = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background: transparent;
+  border: 1px solid gray;
+  border-radius: 4px;
+  color: black;
+  font-size: 12px;
+
+  &:hover {
+    -webkit-animation: ${hint} 200ms ease-out;
+    animation: ${hint} 200ms ease-out;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: gray;
+  }
+`;
+
+export const MonthSelector = styled.select`
+  ${Selector}
+  width: 50%;
+`;
+
+export const DayYearSelector = styled.select`
+  ${Selector}
+  width: 20%;
+`;
+
+export const Option = styled.option`
+  cursor: pointer;
+  background: white;
 `;

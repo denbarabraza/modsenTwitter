@@ -3,24 +3,21 @@ import styled from 'styled-components';
 export const ButtonItem = styled.button`
   cursor: pointer;
 
-  padding: 8px 0;
+  padding: ${({ theme }) => theme.valueInPx.px10} ${({ theme }) => theme.valueInPx.px0};
 
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 20px;
-  color: #ffffff;
+  font-size: ${({ theme }) => theme.fontSizes.l};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
+  line-height: ${({ theme }) => theme.valueInPx.px20};
+  color: ${({ theme }) => theme.colors.fontColor};
 
-  background: #1da1f2;
+  background: ${({ theme }) => theme.usedColors.twitterColor};
   border: none;
-  border-radius: 30px;
-  box-shadow:
-    0 4px 18px rgba(71, 75, 87, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-radius: ${({ theme }) => theme.valueInPx.px30};
+  box-shadow: 0 4px 18px ${({ theme }) => theme.colors.boxShadow}
   transition: all 0.2s ease - in -out;
 
   &:disabled {
-    background-color: gray;
-    opacity: 0.5;
+    background-color: ${({ theme }) => theme.usedColors.grayOpacity};
 
     &:hover {
       transform: none;
