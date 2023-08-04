@@ -45,7 +45,7 @@ export const IconShowPassword = styled.img`
   width: ${({ theme }) => theme.valueInPx.px16};
   height: ${({ theme }) => theme.valueInPx.px16};
   position: absolute;
-  top: ${({ theme }) => theme.valueInPx.px40};
+  top: ${({ theme }) => theme.valueInPx.px25};
   right: ${({ theme }) => theme.valueInPercent.pr2};
   transform: translateY(${({ theme }) => theme.valueInPercent.pr50});
 `;

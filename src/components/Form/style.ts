@@ -9,9 +9,9 @@ const hint = keyframes`
   }`;
 
 export const Container = styled.div`
-  width: ${({ theme }) => theme.valueInVw.vw100};
+  width: ${({ theme }) => theme.valueInPercent.pr100};
   height: calc(
-    ${({ theme }) => theme.valueInVh.vh100} - ${({ theme }) => theme.valueInPx.px40}
+    ${({ theme }) => theme.valueInVh.vh100} + ${({ theme }) => theme.valueInPx.px40}
   );
 `;
 

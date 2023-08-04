@@ -36,6 +36,38 @@ export const GlobalStyles = createGlobalStyle`
     list-style: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    &::-webkit-scrollbar {
+      width: ${({ theme }) => theme.valueInPx.px2};
+      height: ${({ theme }) => theme.valueInPx.px2};
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: ${({ theme }) => theme.usedColors.white};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.usedColors.gray};
+    }
+
+    &::-webkit-scrollbar-thumb:hover,
+    &::-webkit-scrollbar-thumb:active {
+      background-color: ${({ theme }) => theme.usedColors.gray};
+    }
+
+    &::-webkit-scrollbar-corner {
+      background-color: ${({ theme }) => theme.usedColors.white};
+    }
+
+
+    &::-webkit-scrollbar-thumb:horizontal {
+      background-color: ${({ theme }) => theme.usedColors.gray};
+    }
+
+    &::-webkit-scrollbar-thumb:hover:horizontal,
+    &::-webkit-scrollbar-thumb:active:horizontal {
+      background-color: ${({ theme }) => theme.usedColors.gray};
+    }
   }
 `;
 
