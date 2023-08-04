@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.fontColor};
 
   width: ${({ theme }) => theme.valueInPercent.pr100};
   height: ${({ theme }) => theme.valueInPercent.pr100};
@@ -30,39 +31,39 @@ export const InnerWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  max-width: 60%;
-  padding: 20px 30px;
+  max-width: ${({ theme }) => theme.valueInPercent.pr50};
+  padding: ${({ theme }) => theme.valueInPx.px20} ${({ theme }) => theme.valueInPx.px30};
 
-  background: #fff;
-  border-radius: 10px;
+  background: ${({ theme }) => theme.colors.formBackground};
+  border-radius: ${({ theme }) => theme.valueInPx.px10};
   box-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.1),
-    -1px -1px 2px rgba(0, 0, 0, 0.1);
+    1px 1px 2px ${({ theme }) => theme.colors.boxShadow},
+    -1px -1px 2px ${({ theme }) => theme.colors.boxShadow};
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: ${({ theme }) => theme.valueInPx.px15};
 
-  margin-bottom: 20px;
+  margin-bottom: ${({ theme }) => theme.valueInPx.px20};
 `;
 
 export const Title = styled.h3`
-  padding: 15px 0;
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 22px;
-  color: #000000;
+  padding: ${({ theme }) => theme.valueInPx.px15} ${({ theme }) => theme.valueInPx.px0};
+  font-size: ${({ theme }) => theme.fontSizes.xxxl};
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  line-height: ${({ theme }) => theme.valueInPx.px20};
+  color: ${({ theme }) => theme.colors.fontColor};
 `;
 
 export const TextQuestion = styled.div`
-  margin-bottom: 7px;
+  margin-bottom: ${({ theme }) => theme.indentation.i10};
 
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 24px;
-  color: #000000;
+  font-size: ${({ theme }) => theme.fontSizes.m};
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  line-height: ${({ theme }) => theme.valueInPx.px25};
+  color: ${({ theme }) => theme.colors.fontColor};
 
   opacity: 0.5;
 `;
@@ -70,22 +71,22 @@ export const TextQuestion = styled.div`
 export const LinkRegistration = styled.div`
   cursor: pointer;
 
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  color: #212121;
+  font-size: ${({ theme }) => theme.fontSizes.l};
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  line-height: ${({ theme }) => theme.valueInPx.px25};
+  color: ${({ theme }) => theme.colors.fontColor};
   text-decoration-line: underline;
 `;
 
 export const IconTwitter = styled.img`
-  width: 30px;
-  height: 30px;
+  width: ${({ theme }) => theme.valueInPx.px30};
+  height: ${({ theme }) => theme.valueInPx.px30};
 `;
 
 export const Selectors = styled.div`
-  margin-bottom: 10px;
-  width: 100%;
-  height: 30px;
+  margin-bottom: ${({ theme }) => theme.valueInPx.px10};
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+  height: ${({ theme }) => theme.valueInPx.px30};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -96,19 +97,19 @@ export const DateBirthBlock = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: ${({ theme }) => theme.valueInPx.px10};
 `;
 
 export const Selector = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
+  height: ${({ theme }) => theme.valueInPx.px30};
   background: transparent;
-  border: 1px solid gray;
-  border-radius: 4px;
-  color: black;
-  font-size: 12px;
+  border: 1px solid ${({ theme }) => theme.usedColors.gray};
+  border-radius: ${({ theme }) => theme.valueInPx.px5};
+  color: ${({ theme }) => theme.colors.fontColor};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
 
   &:hover {
     -webkit-animation: ${hint} 200ms ease-out;
@@ -117,33 +118,34 @@ export const Selector = css`
   }
 
   &::-webkit-scrollbar {
-    width: 2px;
+    width: ${({ theme }) => theme.valueInPx.px2};
   }
 
   &::-webkit-scrollbar-track {
-    background-color: white;
+    background-color: ${({ theme }) => theme.usedColors.white};
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: gray;
+    background-color: ${({ theme }) => theme.usedColors.gray};
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: gray;
+    background-color: ${({ theme }) => theme.usedColors.gray};
   }
 `;
 
 export const MonthSelector = styled.select`
+  width: ${({ theme }) => theme.valueInPercent.pr50};
   ${Selector}
-  width: 50%;
 `;
 
 export const DayYearSelector = styled.select`
+  width: ${({ theme }) => theme.valueInPercent.pr20};
   ${Selector}
-  width: 20%;
 `;
 
 export const Option = styled.option`
   cursor: pointer;
-  background: white;
+  background: ${({ theme }) => theme.usedColors.white};
+  color: ${({ theme }) => theme.usedColors.black};
 `;

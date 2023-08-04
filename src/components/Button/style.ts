@@ -8,7 +8,7 @@ export const ButtonItem = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   line-height: ${({ theme }) => theme.valueInPx.px20};
-  color: ${({ theme }) => theme.colors.fontColor};
+  color: ${({ theme }) => theme.usedColors.white};
 
   background: ${({ theme }) => theme.usedColors.twitterColor};
   border: none;

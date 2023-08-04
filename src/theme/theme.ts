@@ -6,9 +6,12 @@ export const usedColors: IUsedColors = {
   black: 'rgb(0,0,0)',
   blackOpacity: 'rgba(0,0,0,0.5)',
   white: 'rgb(255,255,255)',
+  darkGrayBlue: 'rgb(36,52,71)',
+  darkBlue: 'rgb(20,29,38)',
   gray: 'rgb(68,68,68)',
   grayOpacity: 'rgba(143,143,143,0.5)',
   twitterColor: 'rgba(29,161,242)',
+  red: 'rgb(255,36,75)',
 };
 
 const baseTheme: ITheme = {
@@ -17,6 +20,7 @@ const baseTheme: ITheme = {
     fontColorOpacity: usedColors.blackOpacity,
     headBackground: usedColors.twitterColor,
     mainBackground: usedColors.white,
+    formBackground: usedColors.white,
     boxShadow: usedColors.grayOpacity,
     toggleBackground: usedColors.white,
     toggleBackgroundChecked: usedColors.white,
@@ -30,6 +34,7 @@ const baseTheme: ITheme = {
     l: '16px',
     xl: '18px',
     xxl: '22px',
+    xxxl: '26px',
   },
   fontWeight: {
     light: 300,
@@ -53,6 +58,8 @@ const baseTheme: ITheme = {
     px2: '2px',
     px5: '5px',
     px10: '10px',
+    px15: '10px',
+    px16: '16px',
     px20: '20px',
     px25: '25px',
     px30: '30px',
@@ -71,7 +78,9 @@ const baseTheme: ITheme = {
     px480: '480px',
   },
   valueInPercent: {
+    pr2: '2%',
     pr10: '10%',
+    pr20: '20%',
     pr50: '50%',
     pr70: '70%',
     pr100: '100%',
@@ -113,7 +122,8 @@ export const darkTheme: DefaultTheme = {
     fontColor: usedColors.white,
     fontColorOpacity: usedColors.grayOpacity,
     headBackground: usedColors.black,
-    mainBackground: usedColors.black,
+    mainBackground: usedColors.darkBlue,
+    formBackground: usedColors.darkGrayBlue,
     boxShadow: usedColors.grayOpacity,
     toggleBackground: usedColors.twitterColor,
     toggleBackgroundChecked: usedColors.twitterColor,
