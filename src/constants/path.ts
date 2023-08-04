@@ -1,7 +1,6 @@
 export const PATH = {
   HOME: '/home',
   SIGN_UP: '/sign-up',
-  MAIN_SIGN_UP: '/main_sign',
   LOGIN: '/login',
   PROFILE: '/profile/:id',
   FEED: '/feed',

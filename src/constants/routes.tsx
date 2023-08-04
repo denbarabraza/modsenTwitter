@@ -18,16 +18,12 @@ const Profile = React.lazy(() =>
 const Feed = React.lazy(() =>
   import('@/pages/Feed').then(({ Feed }) => ({ default: Feed })),
 );
-const MainSignUp = React.lazy(() =>
-  import('@/pages/MainSignUp').then(({ MainSignUp }) => ({ default: MainSignUp })),
-);
 const PageNotFound = React.lazy(() =>
   import('@/pages/PageNotFound').then(({ PageNotFound }) => ({ default: PageNotFound })),
 );
 
 export const routes: RouteObject[] = [
-  { path: '/', element: <Navigate to={PATH.MAIN_SIGN_UP} /> },
-  { path: PATH.MAIN_SIGN_UP, element: <MainSignUp /> },
+  { path: '/', element: <Navigate to={PATH.HOME} /> },
   { path: PATH.HOME, element: <Home /> },
   { path: PATH.LOGIN, element: <Login /> },
   { path: PATH.SIGN_UP, element: <SignUp /> },
