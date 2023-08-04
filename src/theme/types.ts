@@ -7,6 +7,7 @@ export interface IUsedColors {
   gray: string;
   grayOpacity: string;
   twitterColor: string;
+  red: string;
 }
 
 export interface ITheme {
@@ -15,6 +16,7 @@ export interface ITheme {
     fontColorOpacity: string;
     headBackground: string;
     mainBackground: string;
+    formBackground: string;
     boxShadow: string;
     toggleBackground: string;
     toggleBackgroundChecked: string;
@@ -28,6 +30,7 @@ export interface ITheme {
     l: string;
     xl: string;
     xxl: string;
+    xxxl: string;
   };
   fontWeight: {
     light: number;
@@ -51,6 +54,8 @@ export interface ITheme {
     px2: string;
     px5: string;
     px10: string;
+    px15: string;
+    px16: string;
     px20: string;
     px25: string;
     px30: string;
@@ -69,7 +74,9 @@ export interface ITheme {
     px480: string;
   };
   valueInPercent: {
+    pr2: string;
     pr10: string;
+    pr20: string;
     pr50: string;
     pr70: string;
     pr100: string;
@@ -98,6 +105,6 @@ export interface ITheme {
 }
 
 export enum ThemeEnum {
-    Light = 'light',
-    Dark = 'dark',
+  Light = 'light',
+  Dark = 'dark',
 }

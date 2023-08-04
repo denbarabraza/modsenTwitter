@@ -11,6 +11,7 @@ export const usedColors: IUsedColors = {
   gray: 'rgb(68,68,68)',
   grayOpacity: 'rgba(143,143,143,0.5)',
   twitterColor: 'rgba(29,161,242)',
+  red: 'rgb(255,36,75)',
 };
 
 const baseTheme: ITheme = {
@@ -33,6 +34,7 @@ const baseTheme: ITheme = {
     l: '16px',
     xl: '18px',
     xxl: '22px',
+    xxxl: '26px',
   },
   fontWeight: {
     light: 300,
@@ -56,6 +58,8 @@ const baseTheme: ITheme = {
     px2: '2px',
     px5: '5px',
     px10: '10px',
+    px15: '10px',
+    px16: '16px',
     px20: '20px',
     px25: '25px',
     px30: '30px',
@@ -74,7 +78,9 @@ const baseTheme: ITheme = {
     px480: '480px',
   },
   valueInPercent: {
+    pr2: '2%',
     pr10: '10%',
+    pr20: '20%',
     pr50: '50%',
     pr70: '70%',
     pr100: '100%',

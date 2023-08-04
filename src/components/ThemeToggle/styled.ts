@@ -43,6 +43,6 @@ export const ToggleSlider = styled.span`
   }
 
   ${ToggleInput}:checked + &::before {
-    transform: translateX(25px);
+    transform: translateX(${({ theme }) => theme.valueInPx.px25};);
   }
 `;
