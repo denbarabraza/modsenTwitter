@@ -31,6 +31,8 @@ export interface ITheme {
     xl: string;
     xxl: string;
     xxxl: string;
+    x36: string;
+    x60: string;
   };
   fontWeight: {
     light: number;
@@ -43,10 +45,13 @@ export interface ITheme {
     i0: number;
     i5: string;
     i10: string;
+    i15: string;
     i20: string;
+    i25: string;
     i30: string;
     i40: string;
     i50: string;
+    i150: string;
   };
   valueInPx: {
     px0: string;
@@ -77,10 +82,14 @@ export interface ITheme {
     pr2: string;
     pr10: string;
     pr20: string;
+    pr40: string;
     pr50: string;
+    pr60: string;
     pr70: string;
+    pr80: string;
     pr100: string;
     pr150: string;
+    pr300: string;
   };
   valueInVh: {
     vh7: string;
@@ -101,6 +110,12 @@ export interface ITheme {
     vw80: string;
     vw90: string;
     vw100: string;
+  };
+  dimensions: {
+    mobile: number;
+    tablet: number;
+    laptop: number;
+    bigScreen: number;
   };
 }
 
