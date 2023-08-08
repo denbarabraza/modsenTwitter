@@ -1,4 +1,4 @@
-import { NavLinkItem } from '@/components/Header/style.ts';
+import { NavLinkItem } from '@/components/HeaderTest/style.ts';
 import { navLinks } from '@/constants/navLinks.ts';
 
 export const Header = () => {

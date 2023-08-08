@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: ${({ theme }) => theme.indentation.i0} auto;
-  width: ${({ theme }) => theme.valueInPercent.pr100};
+  width: ${({ theme }) => theme.valueInVw.vw100};
   height: ${({ theme }) => theme.valueInVh.vh100};
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {

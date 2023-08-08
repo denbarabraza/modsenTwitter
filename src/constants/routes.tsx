@@ -27,7 +27,7 @@ export const routes: RouteObject[] = [
   { path: PATH.HOME, element: <Home /> },
   { path: PATH.LOGIN, element: <Login /> },
   { path: PATH.SIGN_UP, element: <SignUp /> },
+  { path: PATH.NOT_FOUND, element: <PageNotFound /> },
   { path: PATH.PROFILE, element: <Profile /> },
   { path: PATH.FEED, element: <Feed /> },
-  { path: PATH.NOT_FOUND, element: <PageNotFound /> },
 ];

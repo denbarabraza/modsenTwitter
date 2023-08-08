@@ -5,7 +5,7 @@ import { ButtonItem } from '@/components/Button/style.ts';
 interface IButton {
   type?: 'submit';
   title: string;
-  isValid?: boolean;
+  isValid: boolean;
   callBack?: () => void;
 }
 

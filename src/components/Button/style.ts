@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ButtonItem = styled.button`
   cursor: pointer;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
 
   padding: ${({ theme }) => theme.valueInPx.px10} ${({ theme }) => theme.valueInPx.px0};
 
