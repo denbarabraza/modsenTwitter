@@ -1,24 +1,26 @@
+import { useRoutes } from 'react-router-dom';
+
 import { Container, GlobalStyles } from '@/components/App/style.ts';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ErrorFallback } from '@/components/ErrorBoundary/ErrorFallback';
 import { Header } from '@/components/HeaderTest';
 import { Theme } from '@/components/Theme';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { Pages } from '@/pages';
+import { rootRoutes } from '@/constants/routes.tsx';
+import { RootPages } from '@/pages';
+import { Main } from '@/pages/Main';
 
-const App = () => {
+export const App = () => {
+  const routeResult = useRoutes(rootRoutes);
+
   return (
     <Theme>
       <ErrorBoundary fallback={<ErrorFallback />}>
         <Container>
-          <ThemeToggle />
           <GlobalStyles />
           <Header />
-          <Pages />
+          {routeResult ? <RootPages /> : <Main />}
         </Container>
       </ErrorBoundary>
     </Theme>
   );
 };
-
-export default App;

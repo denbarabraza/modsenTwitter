@@ -7,7 +7,7 @@ import noEye from '@/assets/eye-close.svg';
 import { ErrorText, IconShowPassword, InputItem, LabelInput } from './style.ts';
 
 interface IInput {
-  label: string;
+  label?: string;
   type: string;
   placeholder?: string;
   error?: string;

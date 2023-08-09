@@ -6,7 +6,7 @@ export const Wrapper = styled(Link)`
   gap: ${({ theme }) => theme.valueInPx.px10};
   align-self: flex-start;
   font-weight: ${({ theme }) => theme.fontWeight.light};
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.fontSizes.l};
   color: ${({ theme }) => theme.colors.fontColor};
 
   &:hover {

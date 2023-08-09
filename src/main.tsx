@@ -4,7 +4,7 @@ import { HashRouter } from 'react-router-dom';
 
 import { store } from '@/store/store.ts';
 
-import App from './components/App';
+import { App } from './components/App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <HashRouter>

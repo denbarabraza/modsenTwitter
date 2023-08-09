@@ -85,12 +85,16 @@ export interface ITheme {
     pr10: string;
     pr15: string;
     pr20: string;
+    pr30: string;
     pr25: string;
     pr40: string;
+    pr45: string;
     pr50: string;
+    pr55: string;
     pr60: string;
     pr70: string;
     pr80: string;
+    pr90: string;
     pr100: string;
     pr150: string;
     pr300: string;

@@ -17,8 +17,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.p`
-  margin-top: ${({ theme }) => theme.valueInPercent.pr100};
-
   font-size: ${({ theme }) => theme.fontSizes.xxl};
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   color: ${({ theme }) => theme.colors.fontColor};
