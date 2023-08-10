@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
-  margin-top: ${({ theme }) => theme.valueInPercent.pr2};
-  margin-right: ${({ theme }) => theme.valueInPercent.pr2};
-  width: ${({ theme }) => theme.valueInPercent.pr25};
+  margin: ${({ theme }) => theme.valueInPercent.pr2};
+  width: ${({ theme }) => theme.valueInPercent.pr30};
   height: fit-content;
   display: flex;
   flex-direction: column;

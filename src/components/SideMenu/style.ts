@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: ${({ theme }) => theme.valueInPercent.pr20};
-  border: 1px solid blue;
+  width: ${({ theme }) => theme.valueInPercent.pr30};
+  height: 100vh;
 `;
 
 export const MenuBlock = styled.div`

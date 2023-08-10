@@ -36,7 +36,7 @@ export const SideMenu = () => {
             alt={text}
             src={theme === ThemeEnum.Dark ? srcAlt : src}
             text={text}
-            id='1'
+            id='2'
           />
         ))}
         <Button title='Tweet' callBack={() => console.log('Tweet')} isValid />

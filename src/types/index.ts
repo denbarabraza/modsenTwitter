@@ -7,7 +7,7 @@ export interface IUser {
   password: string;
   telegram: string;
   email: string;
-  gender: string;
+  gender: 'Male' | 'Female';
   token: string | undefined;
   photo: string;
 }

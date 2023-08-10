@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import myProfileIcon from '@/assets/photo.svg';
 import { IUser } from '@/types';
 
-export interface UserState {
+export interface IUserState {
   user: IUser;
   isAuth: boolean;
   isLoading: boolean;
@@ -13,8 +14,20 @@ export type UpdateUserPayload = Pick<IUser, 'surname' | 'gender' | 'name' | 'tel
 
 export type SetUserThunkPayload = Pick<IUser, 'email' | 'password'>;
 
-const initialState: UserState = {
-  user: {} as IUser,
+const initialState: IUserState = {
+  user: {
+    id: '1',
+    name: 'Denis',
+    nameLowercase: 'DENIS',
+    phone: '+375446541365461',
+    surname: 'Bareischev',
+    password: '1231123',
+    telegram: '@denbarabraza',
+    email: 'denis.bareischev@gmail.com',
+    gender: 'Male',
+    token: undefined,
+    photo: myProfileIcon,
+  },
   isAuth: false,
   isLoading: false,
   isError: '',

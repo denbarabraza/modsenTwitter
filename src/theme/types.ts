@@ -57,6 +57,7 @@ export interface ITheme {
     px0: string;
     px1: string;
     px2: string;
+    px3: string;
     px5: string;
     px10: string;
     px15: string;
@@ -95,6 +96,7 @@ export interface ITheme {
     pr70: string;
     pr80: string;
     pr90: string;
+    pr95: string;
     pr100: string;
     pr150: string;
     pr300: string;
