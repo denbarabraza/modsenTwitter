@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 
 import MyArrowBackSvg from '@/assets/arrow-back.svg';
 import MyWhiteArrowBackSvg from '@/assets/arrow-white.svg';
@@ -17,7 +17,7 @@ export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
   const currentTheme = useAppSelector(getThemeSelector);
 
   /* const isFeedPath = checkPath(pathname, PATH.FEED);
-            const isProfilePath = checkPath(pathname, `/profile/${id}`); */
+                const isProfilePath = checkPath(pathname, `/profile/${id}`); */
 
   const isFeedPath = false;
   const isProfilePath = true;
@@ -27,29 +27,25 @@ export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
   };
 
   return (
-    <>
-      {isAuth && (
-        <HeaderWrapper>
-          {isProfilePath ? (
-            <HeaderNav>
-              <Title>{isFeedPath ? 'Home' : name}</Title>
-              {!isFeedPath && <Counter>{tweetsCount} Tweets</Counter>}
-            </HeaderNav>
-          ) : (
-            <HeaderHomeNav>
-              <Icon
-                src={
-                  currentTheme === ThemeEnum.Dark ? MyWhiteArrowBackSvg : MyArrowBackSvg
-                }
-                alt='Go back Home'
-                onClick={handleNavigate}
-              />
-              <Title>Tweets</Title>
-            </HeaderHomeNav>
-          )}
-          <ThemeToggle />
-        </HeaderWrapper>
-      )}
-    </>
+    isAuth && (
+      <HeaderWrapper>
+        {isProfilePath ? (
+          <HeaderNav>
+            <Title>{isFeedPath ? 'Home' : name}</Title>
+            {!isFeedPath && <Counter>{tweetsCount} Tweets</Counter>}
+          </HeaderNav>
+        ) : (
+          <HeaderHomeNav>
+            <Icon
+              src={currentTheme === ThemeEnum.Dark ? MyWhiteArrowBackSvg : MyArrowBackSvg}
+              alt='Go back Home'
+              onClick={handleNavigate}
+            />
+            <Title>Tweets</Title>
+          </HeaderHomeNav>
+        )}
+        <ThemeToggle />
+      </HeaderWrapper>
+    )
   );
 });
