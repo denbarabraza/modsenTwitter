@@ -18,16 +18,53 @@ const Profile = React.lazy(() =>
 const Feed = React.lazy(() =>
   import('@/pages/Feed').then(({ Feed }) => ({ default: Feed })),
 );
+const Explore = React.lazy(() =>
+  import('@/pages/Explore').then(({ Explore }) => ({ default: Explore })),
+);
+const Notifications = React.lazy(() =>
+  import('@/pages/Notifications').then(({ Notifications }) => ({
+    default: Notifications,
+  })),
+);
+const Messages = React.lazy(() =>
+  import('@/pages/Messages').then(({ Messages }) => ({
+    default: Messages,
+  })),
+);
+const Bookmarks = React.lazy(() =>
+  import('@/pages/Bookmarks').then(({ Bookmarks }) => ({
+    default: Bookmarks,
+  })),
+);
+const Lists = React.lazy(() =>
+  import('@/pages/Lists').then(({ Lists }) => ({
+    default: Lists,
+  })),
+);
+const More = React.lazy(() =>
+  import('@/pages/More').then(({ More }) => ({
+    default: More,
+  })),
+);
 const PageNotFound = React.lazy(() =>
   import('@/pages/PageNotFound').then(({ PageNotFound }) => ({ default: PageNotFound })),
 );
 
-export const routes: RouteObject[] = [
+export const rootRoutes: RouteObject[] = [
   { path: '/', element: <Navigate to={PATH.HOME} /> },
   { path: PATH.HOME, element: <Home /> },
   { path: PATH.LOGIN, element: <Login /> },
   { path: PATH.SIGN_UP, element: <SignUp /> },
+];
+
+export const mainRoutes: RouteObject[] = [
+  { path: PATH.NOT_FOUND, element: <PageNotFound /> },
   { path: PATH.PROFILE, element: <Profile /> },
   { path: PATH.FEED, element: <Feed /> },
-  { path: PATH.NOT_FOUND, element: <PageNotFound /> },
+  { path: PATH.EXPLORE, element: <Explore /> },
+  { path: PATH.NOTIFICATIONS, element: <Notifications /> },
+  { path: PATH.MESSAGES, element: <Messages /> },
+  { path: PATH.BOOKMARKS, element: <Bookmarks /> },
+  { path: PATH.LISTS, element: <Lists /> },
+  { path: PATH.MORE, element: <More /> },
 ];

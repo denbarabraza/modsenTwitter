@@ -1,7 +1,7 @@
 import myBanner from '@/assets/back-twitter.png';
 import MyGoogleSvg from '@/assets/google.svg';
 import MyLogoSvg from '@/assets/logo.svg';
-import { homePageText } from '@/constants/homePage.ts';
+import { homePageText } from '@/constants/dataForPages.ts';
 import { PATH } from '@/constants/path.ts';
 
 import {

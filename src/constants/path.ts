@@ -2,7 +2,7 @@ export const PATH = {
   HOME: '/home',
   SIGN_UP: '/sign-up',
   LOGIN: '/login',
-  PROFILE: '/profile/:id',
+  PROFILE: '/profile',
   FEED: '/feed',
   FEED_TWEET: '/feed/:id',
   EXPLORE: '/explore',

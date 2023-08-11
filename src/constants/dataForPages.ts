@@ -77,3 +77,36 @@ export const homePageText = {
     },
   ],
 };
+
+export const sideSearchText = {
+  title: 'You might like',
+  link: 'Show more',
+  copyrightText: `© ${new Date().getFullYear()} Twitter, Inc.`,
+  navLinks: [
+    {
+      name: ' Terms of Service',
+      to: '#',
+    },
+    {
+      name: ' Privacy Policy',
+      to: '#',
+    },
+    {
+      name: ' Cookie Policy',
+      to: '#',
+    },
+    {
+      name: ' Imprint',
+      to: '#',
+    },
+    {
+      name: ' Ads info',
+      to: '#',
+    },
+
+    {
+      name: ' More',
+      to: '#',
+    },
+  ],
+};

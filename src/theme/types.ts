@@ -57,6 +57,7 @@ export interface ITheme {
     px0: string;
     px1: string;
     px2: string;
+    px3: string;
     px5: string;
     px10: string;
     px15: string;
@@ -69,6 +70,7 @@ export interface ITheme {
     px50: string;
     px60: string;
     px70: string;
+    px80: string;
     px100: string;
     px150: string;
     px200: string;
@@ -80,13 +82,21 @@ export interface ITheme {
   };
   valueInPercent: {
     pr2: string;
+    pr5: string;
     pr10: string;
+    pr15: string;
     pr20: string;
+    pr30: string;
+    pr25: string;
     pr40: string;
+    pr45: string;
     pr50: string;
+    pr55: string;
     pr60: string;
     pr70: string;
     pr80: string;
+    pr90: string;
+    pr95: string;
     pr100: string;
     pr150: string;
     pr300: string;

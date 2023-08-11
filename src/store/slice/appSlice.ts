@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAppInitialState } from '@/store/slice/interface.ts';
+import { IAlertObj, IAppInitialState } from '@/store/slice/interface.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 
 const initialState: IAppInitialState = {
   theme: ThemeEnum.Light,
+  alert: {
+    isVisible: false,
+    message: '',
+  },
 };
 
 export const appSlice = createSlice({
@@ -14,8 +18,11 @@ export const appSlice = createSlice({
     setTheme: (state, action: PayloadAction<ThemeEnum>) => {
       state.theme = action.payload;
     },
+    setAlert: (state, action: PayloadAction<IAlertObj>) => {
+      state.alert = action.payload;
+    },
   },
 });
 
-export const { setTheme } = appSlice.actions;
+export const { setTheme, setAlert } = appSlice.actions;
 export const appReducer = appSlice.reducer;

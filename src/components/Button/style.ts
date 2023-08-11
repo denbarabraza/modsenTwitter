@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const ButtonItem = styled.button`
   cursor: pointer;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
 
-  padding: ${({ theme }) => theme.valueInPx.px10} ${({ theme }) => theme.valueInPx.px0};
+  padding: ${({ theme }) => theme.valueInPx.px5} ${({ theme }) => theme.valueInPx.px0};
 
-  font-size: ${({ theme }) => theme.fontSizes.l};
+  font-size: ${({ theme }) => theme.fontSizes.m};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
   line-height: ${({ theme }) => theme.valueInPx.px20};
   color: ${({ theme }) => theme.usedColors.white};
