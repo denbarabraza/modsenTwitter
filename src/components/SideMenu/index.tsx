@@ -1,10 +1,14 @@
+import { signOut } from 'firebase/auth';
+
 import twitterLogo from '@/assets/logo.svg';
 import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { MenuItem } from '@/components/MenuItem';
 import { menuItems } from '@/constants/menuItems.ts';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { auth } from '@/firebase';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
+import { removeUser } from '@/store/slice/userSlice.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 
 import {
@@ -19,10 +23,16 @@ import {
 } from './style.ts';
 
 export const SideMenu = () => {
+  const dispatch = useAppDispatch();
   const theme = useAppSelector(getThemeSelector);
 
   const handleNavigate = () => {
     console.log('Navigate to user');
+  };
+
+  const handleLogOut = () => {
+    signOut(auth);
+    dispatch(removeUser());
   };
 
   return (
@@ -47,7 +57,7 @@ export const SideMenu = () => {
             <Email>@denbarabraza</Email>
           </Credentials>
         </UserInfo>
-        <Button title='Log Out' callBack={() => console.log('Log Out')} isValid />
+        <Button title='Log Out' callBack={handleLogOut} isValid />
       </MenuBlock>
     </Wrapper>
   );

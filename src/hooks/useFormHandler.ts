@@ -11,13 +11,13 @@ const schemaParam = {
       /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       'Incorrect email',
     ),
-  password: Yup.string().required('No password provided').min(5, 'At least 3 characters'),
+  password: Yup.string().required('No password provided').min(6, 'At least 6 characters'),
   confirmPwd: Yup.string().oneOf([Yup.ref('password')], 'Passwords does not match'),
   name: Yup.string()
     .required('Enter your name')
     .min(3, 'At least 3 characters')
     .max(22, 'Maximum number of characters 22'),
-  phoneNumber: Yup.string()
+  phone: Yup.string()
     .matches(
       /^(?:\+?\d{1,3})?[\s-]?\(?\d{2,3}\)?[\s-]*?[0-9]{3}?[ \\-]*[0-9]{2}?[ \\-]*[0-9]{2}$/,
       'Invalid phone number format',
@@ -51,7 +51,7 @@ export const useFormHandler = (...keys: string[]) => {
 
   const errorEmail = errors.email ? String(errors.email.message) : undefined;
   const errorPassword = errors.password ? String(errors.password.message) : undefined;
-  const errorNumber = errors.phoneNumber ? String(errors.phoneNumber.message) : undefined;
+  const errorNumber = errors.phone ? String(errors.phone.message) : undefined;
   const errorConfirmPwd = errors.confirmPwd
     ? String(errors.confirmPwd.message)
     : undefined;

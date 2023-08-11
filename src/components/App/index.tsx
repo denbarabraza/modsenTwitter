@@ -1,16 +1,15 @@
-import { useRoutes } from 'react-router-dom';
-
 import { Container, GlobalStyles } from '@/components/App/style.ts';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ErrorFallback } from '@/components/ErrorBoundary/ErrorFallback';
 import { Header } from '@/components/HeaderTest';
 import { Theme } from '@/components/Theme';
-import { rootRoutes } from '@/constants/routes.tsx';
+import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { RootPages } from '@/pages';
 import { Main } from '@/pages/Main';
+import { isAuthSelector } from '@/store/selectors/userSelectors.ts';
 
 export const App = () => {
-  const routeResult = useRoutes(rootRoutes);
+  const isAuth = useAppSelector(isAuthSelector);
 
   return (
     <Theme>
@@ -18,7 +17,7 @@ export const App = () => {
         <Container>
           <GlobalStyles />
           <Header />
-          {routeResult ? <RootPages /> : <Main />}
+          {!isAuth ? <RootPages /> : <Main />}
         </Container>
       </ErrorBoundary>
     </Theme>

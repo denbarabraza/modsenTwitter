@@ -4,19 +4,41 @@ import { Button } from '@/components/Button/Button.tsx';
 import { FormWrapper } from '@/components/Form';
 import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
+import { Loader } from '@/components/Loader';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
+import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
+import { logInUserThunk } from '@/store/thunks/logInUserThunk.ts';
+
+export interface ILogInFormInput {
+  email: string;
+  password: string;
+}
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
+  const { isLoading, isError } = useAppSelector(getUserDataSelector);
+
   const { errorEmail, errorPassword, handleSubmit, isValid, register } = useFormHandler(
     'email',
     'password',
   );
-  const onSubmit = (data: FieldValues) => {
-    const { email, password } = data;
-
-    console.log(email, password);
+  const handleLogIn = async ({ email, password }: FieldValues) => {
+    try {
+      dispatch(logInUserThunk({ email, password }));
+    } catch (e) {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message: isError || errorEmail || errorPassword || (e as Error).message,
+        }),
+      );
+    }
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <FormWrapper
@@ -25,7 +47,7 @@ export const Login = () => {
       title='Log in to Twitter'
       questionText='Don`t you have an account yet?'
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(handleLogIn)}>
         <Input
           type='email'
           label='Email:'

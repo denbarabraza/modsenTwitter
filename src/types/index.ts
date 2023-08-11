@@ -1,15 +1,18 @@
 export interface IUser {
   id: string;
-  name: string;
-  nameLowercase: string;
-  phone: string;
-  surname: string;
-  password: string;
-  telegram: string;
   email: string;
-  gender: 'Male' | 'Female';
-  token: string | undefined;
-  photo: string;
+  name: string;
+  lastName: string;
+  telegram?: string;
+  gender?: Gender | null;
+  phone: string;
+  dateOfBirth: string;
+  photo?: string;
+}
+
+export enum Gender {
+  Male = 'Male',
+  Female = 'Female',
 }
 
 export type ICreator = Pick<IUser, 'id' | 'email' | 'name' | 'photo'>;
@@ -34,8 +37,3 @@ export interface INewTweet {
 }
 
 export type ITweetBySearch = Pick<ITweet, 'text' | 'id'>;
-
-export type UpdateUserProps = Pick<
-  IUser,
-  'gender' | 'name' | 'password' | 'surname' | 'telegram'
->;

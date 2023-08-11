@@ -14,12 +14,37 @@ import {
 import { Input } from '@/components/Input/Input.tsx';
 import { monthNames } from '@/constants/monthNames.ts';
 import { PATH } from '@/constants/path.ts';
+import { signUpWithEmail } from '@/firebase/api/signUpWithEmail.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { useAppDispatch } from '@/hooks/useStoreControl.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
+import { setUser } from '@/store/slice/userSlice.ts';
+import { IUser } from '@/types';
 import { getDays, getYears } from '@/utils/dateSelectors.ts';
+
+export type NewUserDataType = Pick<
+  IUser,
+  'email' | 'name' | 'lastName' | 'phone' | 'dateOfBirth' | 'id'
+>;
+
+export const defaultValueUserSignUp = {
+  defaultName: 'Name',
+  defaultSurname: 'Surname',
+  defaultEmail: 'post@gmail.com',
+  defaultPhoto: '',
+  defaultTelegram: '@telegram',
+  defaultPhone: '+375444444444',
+  defaultMonth: 'August',
+  defaultDay: '11',
+  defaultYear: '2023',
+  defaultToken: '',
+};
 
 export const SignUp = () => {
   const [month, setMonth] = useState<number>(0);
   const [year, setYear] = useState<number>(0);
+
+  const dispatch = useAppDispatch();
 
   const handleSetMonth = (event: ChangeEvent<{ value: unknown }>) => {
     const monthIndex = monthNames.indexOf(event.target.value as string);
@@ -40,20 +65,68 @@ export const SignUp = () => {
     handleSubmit,
     isValid,
     register,
+    reset,
   } = useFormHandler(
     'email',
     'password',
     'confirmPwd',
     'name',
-    'phoneNumber',
+    'phone',
     'day',
     'month',
     'year',
   );
-  const onSubmit = (data: FieldValues) => {
-    const { email, password, name, phoneNumber, day, month, year } = data;
 
-    console.log(email, password, name, phoneNumber, day, month, year);
+  const handleSignUpFormSubmit = async ({
+    email,
+    password,
+    name,
+    phone,
+    day,
+    month,
+    year,
+  }: FieldValues) => {
+    try {
+      const newUserdata: NewUserDataType = {
+        id: 'user.uid',
+        email,
+        name: name.split(' ')[0],
+        lastName: name.split(' ')[1],
+        phone,
+        dateOfBirth: `${day}-${month}-${year}`,
+      };
+      const user = await signUpWithEmail(newUserdata, password);
+
+      if (newUserdata) {
+        const { defaultPhoto, defaultTelegram } = defaultValueUserSignUp;
+
+        const newUser = {
+          ...user,
+          telegram: defaultTelegram,
+          gender: null,
+          photo: defaultPhoto,
+        };
+
+        dispatch(setUser(newUser));
+      }
+
+      if (isValid) {
+        reset();
+      }
+    } catch (e) {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message:
+            errorEmail ||
+            errorName ||
+            errorPassword ||
+            errorNumber ||
+            errorConfirmPwd ||
+            (e as Error).message,
+        }),
+      );
+    }
   };
 
   return (
@@ -63,7 +136,7 @@ export const SignUp = () => {
       title='Create an account'
       questionText='Already have an account?'
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(handleSignUpFormSubmit)}>
         <Input
           type='name'
           label='Name:'
@@ -85,7 +158,7 @@ export const SignUp = () => {
         <Input
           type='phoneNumber'
           label='Phone number:'
-          nameForValidate='phoneNumber'
+          nameForValidate='phone'
           placeholder='+375 (44) 111-22-33'
           register={register}
           error={errorNumber}

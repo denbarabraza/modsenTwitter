@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import myProfileIcon from '@/assets/photo.svg';
+import { logInUserThunk } from '@/store/thunks/logInUserThunk.ts';
 import { IUser } from '@/types';
 
 export interface IUserState {
@@ -10,24 +10,10 @@ export interface IUserState {
   isError: string;
 }
 
-export type UpdateUserPayload = Pick<IUser, 'surname' | 'gender' | 'name' | 'telegram'>;
-
-export type SetUserThunkPayload = Pick<IUser, 'email' | 'password'>;
+export type UpdateUserPayload = Pick<IUser, 'lastName' | 'gender' | 'name' | 'telegram'>;
 
 const initialState: IUserState = {
-  user: {
-    id: '1',
-    name: 'Denis',
-    nameLowercase: 'DENIS',
-    phone: '+375446541365461',
-    surname: 'Bareischev',
-    password: '1231123',
-    telegram: '@denbarabraza',
-    email: 'denis.bareischev@gmail.com',
-    gender: 'Male',
-    token: undefined,
-    photo: myProfileIcon,
-  },
+  user: {} as IUser,
   isAuth: false,
   isLoading: false,
   isError: '',
@@ -55,6 +41,26 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.user = {} as IUser;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(logInUserThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
+      state.isAuth = true;
+      state.isLoading = false;
+      state.user = action.payload;
+      state.isError = '';
+    });
+    builder.addCase(logInUserThunk.pending, state => {
+      state.isAuth = false;
+      state.isLoading = true;
+      state.user = {} as IUser;
+      state.isError = '';
+    });
+    builder.addCase(logInUserThunk.rejected, state => {
+      state.isAuth = false;
+      state.isLoading = false;
+      state.user = {} as IUser;
+      state.isError = 'Login Error';
+    });
   },
 });
 
