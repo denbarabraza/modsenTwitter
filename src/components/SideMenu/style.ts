@@ -35,8 +35,9 @@ export const UserInfo = styled.div`
   width: ${({ theme }) => theme.valueInPercent.pr100};
   height: fit-content;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.formBackground};
   border-radius: ${({ theme }) => theme.valueInPx.px10};
   border: ${({ theme }) => theme.valueInPx.px1} solid
@@ -53,6 +54,15 @@ export const UserInfo = styled.div`
   @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
     flex-direction: column;
   }
+`;
+
+export const IconPhotoItem = styled.div`
+  padding: ${({ theme }) => theme.valueInPx.px10} ${({ theme }) => theme.valueInPx.px0};
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Credentials = styled.div`
@@ -75,7 +85,6 @@ export const Name = styled.p`
 `;
 
 export const Email = styled.p`
-  margin-top: ${({ theme }) => theme.indentation.i5};
   font-size: ${({ theme }) => theme.fontSizes.m};
   font-weight: ${({ theme }) => theme.fontWeight.light};
   color: ${({ theme }) => theme.colors.fontColor};
@@ -86,8 +95,8 @@ export const Email = styled.p`
 `;
 
 export const IconPhoto = styled.img`
-  width: ${({ theme }) => theme.valueInPx.px40};
-  height: ${({ theme }) => theme.valueInPx.px40};
+  width: ${({ theme }) => theme.valueInPx.px50};
+  height: ${({ theme }) => theme.valueInPx.px50};
   background-color: transparent;
   align-self: flex-start;
   border: ${({ theme }) => theme.valueInPx.px1} solid transparent;

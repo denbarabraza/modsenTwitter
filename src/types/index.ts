@@ -15,7 +15,7 @@ export enum Gender {
   Female = 'Female',
 }
 
-export type ICreator = Pick<IUser, 'id' | 'email' | 'name' | 'photo'>;
+export type ICreator = Pick<IUser, 'id' | 'email' | 'name' | 'photo' | 'lastName'>;
 
 export interface ITweet {
   id?: string;

@@ -1,5 +1,5 @@
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import twitterLogo from '@/assets/logo.svg';
 import myPhotoSvg from '@/assets/photo.svg';
@@ -13,12 +13,14 @@ import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
 import { removeUser } from '@/store/slice/userSlice.ts';
 import { ThemeEnum } from '@/theme/types.ts';
+import { checkPath } from '@/utils/checkPath.ts';
 
 import {
   Credentials,
   Email,
   IconLogo,
   IconPhoto,
+  IconPhotoItem,
   MenuBlock,
   Name,
   UserInfo,
@@ -30,8 +32,9 @@ export const SideMenu = () => {
   const theme = useAppSelector(getThemeSelector);
 
   const navigate = useNavigate();
-  // const { pathname } = useLocation();
-  const { id } = useAppSelector(getUserSelector);
+  const { name, email, id, photo, lastName } = useAppSelector(getUserSelector);
+  const { pathname } = useLocation();
+  const isFeedPath = checkPath(pathname, PATH.FEED);
 
   const handleNavigate = () => {
     navigate(`/profile/${id}`);
@@ -59,13 +62,22 @@ export const SideMenu = () => {
         ))}
         <Button title='Tweet' callBack={() => console.log('Tweet')} isValid />
         <UserInfo>
-          <IconPhoto src={myPhotoSvg} alt='photo user' onClick={handleNavigate} />
+          <IconPhotoItem>
+            <IconPhoto
+              src={photo || myPhotoSvg}
+              alt='profile in menu'
+              onClick={handleNavigate}
+            />
+          </IconPhotoItem>
+
           <Credentials>
-            <Name>Denis</Name>
-            <Email>@denbarabraza</Email>
+            <Name>
+              {name} {lastName}
+            </Name>
+            <Email>{email}</Email>
           </Credentials>
         </UserInfo>
-        <Button title='Log Out' callBack={handleLogOut} isValid />
+        {!isFeedPath && <Button title='Log Out' callBack={handleLogOut} isValid />}
       </MenuBlock>
     </Wrapper>
   );

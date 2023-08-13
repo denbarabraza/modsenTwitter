@@ -14,6 +14,7 @@ import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { userIdSelector } from '@/store/selectors/userSelectors.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
+import { tweetCreatedTime } from '@/utils/tweetCreatedTime.ts';
 
 import {
   Credentials,
@@ -32,10 +33,10 @@ import {
   UserDataBlock,
   Wrapper,
 } from './styles';
-import { TweetItemProps } from './types';
+import { ITweetItem } from './types';
 
-export const TweetItem: FC<TweetItemProps> = props => {
-  const { creatorId, username, email, date, text, likes, image, photo } = props;
+export const TweetItem: FC<ITweetItem> = props => {
+  const { creatorId, name, email, date, text, likes, image, photo, lastName } = props;
 
   const [isRemoveVisible, setIsRemoveVisible] = useState(false);
 
@@ -46,11 +47,10 @@ export const TweetItem: FC<TweetItemProps> = props => {
   const userId = useAppSelector(userIdSelector);
 
   const isLiked = likes.includes(userId);
-  const monthStart = 4;
-  const dayEnd = 11;
-  const formattedDate = ` · ${new Date(date).toDateString().slice(monthStart, dayEnd)}`;
 
-  const tweetCreatedTime = new Date().getTime();
+  const formattedDate = ` · ${new Date(date).toDateString().slice(4, 11)}`;
+
+  const tweetTime = tweetCreatedTime(date);
 
   const handleLikeTweet = () => {
     console.log('handleLikeTweet');
@@ -71,10 +71,11 @@ export const TweetItem: FC<TweetItemProps> = props => {
         <TweetContentWrapper>
           <Info>
             <UserDataBlock>
-              <Name>{username}</Name>
-              <Credentials>
-                {email} {isFeedPath ? tweetCreatedTime : formattedDate}
-              </Credentials>
+              <Name>
+                {name} {lastName}
+                <Credentials>{isFeedPath ? tweetTime : formattedDate}</Credentials>
+              </Name>
+              <Credentials>{email}</Credentials>
             </UserDataBlock>
             {creatorId === userId && (
               <>

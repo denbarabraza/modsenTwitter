@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import myTweetIMG from '@/assets/photo.svg';
 import mySearchSvg from '@/assets/search.svg';
@@ -6,7 +7,9 @@ import { Alert } from '@/components/Alert';
 import { TweetSearchResult } from '@/components/TweetSearchResult';
 import { UserSearchResult } from '@/components/UserSearchResult';
 import { sideSearchText } from '@/constants/dataForPages.ts';
+import { PATH } from '@/constants/path.ts';
 import { ICreator, ITweetBySearch } from '@/types';
+import { checkPath } from '@/utils/checkPath.ts';
 
 import {
   ButtonIcon,
@@ -31,7 +34,8 @@ export const SideSearch = () => {
     {
       id: 'ICreator',
       email: 'denis.bareischev@gmail.com',
-      name: 'DenB',
+      name: 'Jonh',
+      lastName: 'Wick',
       photo: myTweetIMG,
     },
   ]);
@@ -42,8 +46,13 @@ export const SideSearch = () => {
     },
   ]);
 
-  const usersResult = users.map(data => <UserSearchResult {...data} key={data.id} />);
-  const tweetsResult = tweets.map(data => <TweetSearchResult {...data} key={data.id} />);
+  const { pathname } = useLocation();
+  const isFeedPath = checkPath(pathname, PATH.FEED);
+
+  const usersResult = users.map(user => <UserSearchResult {...user} key={user.id} />);
+  const tweetsResult = tweets.map(tweet => (
+    <TweetSearchResult {...tweet} key={tweet.id} />
+  ));
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -65,8 +74,8 @@ export const SideSearch = () => {
       {(users.length !== 0 || tweets.length !== 0) && (
         <ResultWrapper>
           <Title>{title}</Title>
+          <ResultList>{isFeedPath ? usersResult : tweetsResult}</ResultList>
           <ResultList>{usersResult}</ResultList>
-          <ResultList>{tweetsResult}</ResultList>
           <TextLink to='#'>{link}</TextLink>
         </ResultWrapper>
       )}

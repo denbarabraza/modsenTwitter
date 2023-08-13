@@ -7,7 +7,7 @@ import myTweetImage from '@/assets/tweet-image.png';
 import { CreateTweetBlock } from '@/components/CreateTweet';
 import { Header } from '@/components/Header';
 import { TweetItem } from '@/components/TweetItem';
-import { UserBanner } from '@/components/UserBanner';
+import { UserInProfile } from '@/components/UserInProfile';
 import { FirebaseCollections } from '@/constants/firebase.ts';
 import { getDocument } from '@/firebase/api/getData.ts';
 import { ITweet, IUser } from '@/types';
@@ -18,11 +18,12 @@ export const Profile = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [tweets, setTweets] = useState<ITweet[]>([
     {
-      id: '21321',
-      tweetId: 'string',
+      id: 'K0945gHmE9c4wttuarfRiuKr7fj2',
+      tweetId: 'K0945gHmE9c4wttuarfRiuKr7fj2',
       creator: {
-        id: '1',
+        id: 'K0945gHmE9c4wttuarfRiuKr7fj2',
         name: 'Denis',
+        lastName: 'Bareischev',
         email: 'denis.bareischev@gmail.com',
         photo: myProfileIcon,
       },
@@ -37,6 +38,7 @@ export const Profile = () => {
       creator: {
         id: '2',
         name: 'Den',
+        lastName: 'Basd',
         email: 'denis.bareischev@gmail.com',
         photo: myProfileIcon,
       },
@@ -74,7 +76,7 @@ export const Profile = () => {
         <BannerBlock>
           <Banner src={myBanner} alt='profile banner' />
         </BannerBlock>
-        <UserBanner
+        <UserInProfile
           photo={photo || myProfileIcon}
           email={email}
           gender={gender}
@@ -93,7 +95,8 @@ export const Profile = () => {
               key={tweetId}
               tweetId={tweetId}
               creatorId={creator?.id}
-              username={creator?.name}
+              name={creator?.name}
+              lastName={creator?.lastName}
               email={creator?.email}
               photo={creator?.photo}
               date={date}

@@ -2,10 +2,11 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { ITweet } from '@/types';
 
-export interface TweetItemProps {
+export interface ITweetItem {
   tweetId: string;
   creatorId: string;
-  username: string;
+  name: string;
+  lastName: string;
   photo?: string;
   email: string;
   date: number;

@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const Wrapper = styled(Link)`
+export const Wrapper = styled(Link)<{ isActive: boolean }>`
   display: flex;
   gap: ${({ theme }) => theme.valueInPx.px10};
   align-self: flex-start;
   font-weight: ${({ theme }) => theme.fontWeight.light};
   font-size: ${({ theme }) => theme.fontSizes.l};
-  color: ${({ theme }) => theme.colors.fontColor};
+  font-size: ${({ theme, isActive }) =>
+    isActive ? theme.fontSizes.xl : theme.fontSizes.l};
+  color: ${({ theme, isActive }) =>
+    isActive ? theme.usedColors.twitterColor : theme.colors.fontColor};
+  text-decoration: ${({ isActive }) => (isActive ? 'underline' : 'none')};
 
   &:hover {
     text-decoration: underline;

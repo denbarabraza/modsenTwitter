@@ -26,7 +26,7 @@ const userBannerText = {
   followersCount: 47,
 };
 
-export const UserBanner: FC<IUser> = memo(
+export const UserInProfile: FC<IUser> = memo(
   ({ photo, name, email, gender, telegram, id }) => {
     const { followersText, followingText, followersCount, followingCount } =
       userBannerText;

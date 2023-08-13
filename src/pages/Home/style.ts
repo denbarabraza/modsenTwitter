@@ -191,7 +191,7 @@ export const Text = styled.p`
   width: ${({ theme }) => theme.valueInPercent.pr60};
   margin-bottom: ${({ theme }) => theme.indentation.i25};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.m};
   color: ${({ theme }) => theme.colors.fontColor};
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
@@ -209,7 +209,7 @@ export const Text = styled.p`
 
 export const TextLink = styled(Link)`
   margin-bottom: ${({ theme }) => theme.indentation.i25};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.m};
   color: ${({ theme }) => theme.usedColors.twitterColor};
 
   &:hover {

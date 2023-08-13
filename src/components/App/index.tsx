@@ -25,7 +25,7 @@ export const App = () => {
       return;
     }
     navigate(`/profile/${id}`);
-  }, [isAuth, id, navigate]);
+  }, [isAuth, id]);
 
   if (isAppLoading || isUserLoading) return <Loader />;
 

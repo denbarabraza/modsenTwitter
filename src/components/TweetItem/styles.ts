@@ -45,9 +45,9 @@ export const TweetContentWrapper = styled.div`
 
 export const IconWrapper = styled.div`
   position: absolute;
-  bottom: ${({ theme }) => theme.valueInPx.px3};
+  bottom: ${({ theme }) => theme.valueInPx.px10};
   right: ${({ theme }) => theme.valueInPercent.pr5};
-  width: ${({ theme }) => theme.valueInPercent.pr15};
+  width: ${({ theme }) => theme.valueInPercent.pr10};
   height: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
   justify-content: center;
@@ -122,6 +122,10 @@ export const EditIcon = styled.img`
 `;
 
 export const Name = styled.p`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: ${({ theme }) => theme.indentation.i5};
   margin-right: ${({ theme }) => theme.indentation.i5};
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
@@ -134,7 +138,7 @@ export const Name = styled.p`
 
 export const Credentials = styled.p`
   margin-right: ${({ theme }) => theme.indentation.i5};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.fontSizes.m};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   color: ${({ theme }) => theme.usedColors.twitterColor};
 
