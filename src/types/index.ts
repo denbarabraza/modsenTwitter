@@ -29,9 +29,10 @@ export interface ITweet {
 
 export interface INewTweet {
   name: string;
+  lastName: string;
   email: string;
   id: string;
-  photo: string;
+  photo: string | undefined;
   tweetValue: string;
   image?: File;
 }

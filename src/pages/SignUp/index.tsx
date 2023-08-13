@@ -17,7 +17,7 @@ import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
-import { signUpWithEmailThunk } from '@/store/thunks';
+import { signUpWithEmailThunk } from '@/store/thunks/auth';
 import { IUser } from '@/types';
 import { getDays, getYears } from '@/utils/dateSelectors.ts';
 

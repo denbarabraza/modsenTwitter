@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { logInWithEmailThunk, signUpWithEmailThunk } from '@/store/thunks';
+import { logInWithEmailThunk, signUpWithEmailThunk } from '@/store/thunks/auth';
 import { IUser } from '@/types';
 
 export interface IUserState {

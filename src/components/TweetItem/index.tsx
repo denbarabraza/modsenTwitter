@@ -8,10 +8,12 @@ import myLikeSvg from '@/assets/like.svg';
 import myRedLikeSvg from '@/assets/like-fill.svg';
 import myWhiteLikeSvg from '@/assets/like-white.svg';
 import myPhotoSvg from '@/assets/photo.svg';
+import { FirebaseCollections } from '@/constants/firebase.ts';
 import { PATH } from '@/constants/path.ts';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { userIdSelector } from '@/store/selectors/userSelectors.ts';
+import { deleteDocumentThunk } from '@/store/thunks/tweets';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
 import { tweetCreatedTime } from '@/utils/tweetCreatedTime.ts';
@@ -36,7 +38,21 @@ import {
 import { ITweetItem } from './types';
 
 export const TweetItem: FC<ITweetItem> = props => {
-  const { creatorId, name, email, date, text, likes, image, photo, lastName } = props;
+  const {
+    creatorId,
+    name,
+    email,
+    date,
+    text,
+    likes,
+    image,
+    photo,
+    lastName,
+    tweetId,
+    setTweets,
+  } = props;
+
+  const dispatch = useAppDispatch();
 
   const [isRemoveVisible, setIsRemoveVisible] = useState(false);
 
@@ -60,8 +76,11 @@ export const TweetItem: FC<ITweetItem> = props => {
     setIsRemoveVisible(prev => !prev);
   };
 
-  const handleDeleteTweet = () => {
-    console.log('handleDeleteTweet');
+  const handleDeleteTweet = async () => {
+    await dispatch(
+      deleteDocumentThunk({ collection: FirebaseCollections.Tweets, prop: tweetId }),
+    );
+    setTweets(prev => prev.filter(item => item.tweetId !== tweetId));
   };
 
   return (

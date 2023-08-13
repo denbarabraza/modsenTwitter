@@ -1,6 +1,16 @@
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 
+import { FirebaseCollections } from '@/constants/firebase.ts';
 import { db } from '@/firebase';
+import { ITweet } from '@/types';
 
 export const getDocument = async (collection: string, prop: string) => {
   const docSnapshot = await getDoc(doc(db, collection, prop));
@@ -10,4 +20,30 @@ export const getDocument = async (collection: string, prop: string) => {
   }
 
   return false;
+};
+
+export const getTweetsByUserId = async (field: string, id: string) => {
+  const q = query(
+    collection(db, FirebaseCollections.Tweets),
+    orderBy('date', 'desc'),
+    where(field, '==', id),
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  const tweetsByUserId = querySnapshot.docs.map(doc => {
+    const { text, date, creator, image, likes, tweetId } = doc.data() as ITweet;
+
+    return {
+      id: doc.id,
+      tweetId,
+      text,
+      date,
+      creator,
+      image,
+      likes,
+    };
+  });
+
+  return tweetsByUserId;
 };

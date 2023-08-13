@@ -10,7 +10,7 @@ import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
-import { logInWithEmailThunk, logInWithNumberThunk } from '@/store/thunks';
+import { logInWithEmailThunk, logInWithNumberThunk } from '@/store/thunks/auth';
 
 export interface ILogInFormInput {
   email: string;

@@ -19,11 +19,14 @@ export const appSlice = createSlice({
     setTheme: (state, action: PayloadAction<ThemeEnum>) => {
       state.theme = action.payload;
     },
+    setAppLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     setAlert: (state, action: PayloadAction<IAlertObj>) => {
       state.alert = action.payload;
     },
   },
 });
 
-export const { setTheme, setAlert } = appSlice.actions;
+export const { setTheme, setAlert, setAppLoading } = appSlice.actions;
 export const appReducer = appSlice.reducer;

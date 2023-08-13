@@ -4,6 +4,7 @@ import myImageSvg from '@/assets/image-blue.svg';
 import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { Loader } from '@/components/Loader';
+import { createNewTweet } from '@/firebase/helpers/createNewTweet.ts';
 import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
 import { ITweet } from '@/types';
@@ -27,15 +28,29 @@ export interface ICreateTweet {
 }
 
 export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
-  const { photo } = useAppSelector(getUserSelector);
+  const { id, email, name, photo, lastName } = useAppSelector(getUserSelector);
 
   const [tweetValue, setTweetValue] = useState<string>('');
-  const [image] = useState<File>();
+  const [image, setImage] = useState<File>();
   const [isLoading] = useState<boolean>(false);
 
-  const handleCreateTweet = (e: FormEvent) => {
-    console.log('handleCreateTweet');
+  const handleCreateTweet = async (e: FormEvent) => {
+    e.preventDefault();
+    if (tweetValue) {
+      const newTweet = await createNewTweet({
+        email,
+        id,
+        image,
+        name,
+        lastName,
+        photo,
+        tweetValue,
+      });
+
+      setTweets(prev => [newTweet, ...prev]);
+    }
     setTweetValue('');
+    setImage(undefined);
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {

@@ -5,7 +5,7 @@ import { homePageText } from '@/constants/dataForPages.ts';
 import { PATH } from '@/constants/path.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
-import { signUpWithGoogleThunk } from '@/store/thunks';
+import { signUpWithGoogleThunk } from '@/store/thunks/auth';
 
 import {
   Banner,
