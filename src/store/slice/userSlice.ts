@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { logInUserThunk } from '@/store/thunks/logInUserThunk.ts';
+import { logInWithEmailThunk, signUpWithEmailThunk } from '@/store/thunks';
 import { IUser } from '@/types';
 
 export interface IUserState {
@@ -36,6 +36,9 @@ export const userSlice = createSlice({
       state.isLoading = action.payload;
       state.user = {} as IUser;
     },
+    setError: (state, action: PayloadAction<string>) => {
+      state.isError = action.payload;
+    },
     removeUser: state => {
       state.isAuth = false;
       state.isLoading = false;
@@ -43,27 +46,53 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(logInUserThunk.fulfilled, (state, action: PayloadAction<IUser>) => {
-      state.isAuth = true;
-      state.isLoading = false;
-      state.user = action.payload;
-      state.isError = '';
-    });
-    builder.addCase(logInUserThunk.pending, state => {
+    builder.addCase(
+      logInWithEmailThunk.fulfilled,
+      (state, action: PayloadAction<IUser>) => {
+        state.isAuth = true;
+        state.isLoading = false;
+        state.user = action.payload;
+        state.isError = '';
+      },
+    );
+    builder.addCase(logInWithEmailThunk.pending, state => {
       state.isAuth = false;
       state.isLoading = true;
       state.user = {} as IUser;
       state.isError = '';
     });
-    builder.addCase(logInUserThunk.rejected, state => {
+    builder.addCase(logInWithEmailThunk.rejected, state => {
       state.isAuth = false;
       state.isLoading = false;
       state.user = {} as IUser;
       state.isError = 'Login Error';
     });
+    builder.addCase(
+      signUpWithEmailThunk.fulfilled,
+      (state, action: PayloadAction<IUser | undefined>) => {
+        state.isAuth = true;
+        state.isLoading = false;
+        state.user = action.payload || ({} as IUser);
+        state.isError = '';
+      },
+    );
+    builder.addCase(signUpWithEmailThunk.pending, state => {
+      state.isAuth = false;
+      state.isLoading = true;
+      state.user = {} as IUser;
+      state.isError = '';
+    });
+    builder.addCase(signUpWithEmailThunk.rejected, state => {
+      state.isAuth = false;
+      state.isLoading = false;
+      state.user = {} as IUser;
+    });
   },
 });
 
-export const { setUser, updateUser, removeUser, setLoading } = userSlice.actions;
+// signUpWithEmailThunk
+
+export const { setUser, updateUser, removeUser, setLoading, setError } =
+  userSlice.actions;
 
 export const userReducer = userSlice.reducer;

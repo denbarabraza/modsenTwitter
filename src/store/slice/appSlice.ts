@@ -5,6 +5,7 @@ import { ThemeEnum } from '@/theme/types.ts';
 
 const initialState: IAppInitialState = {
   theme: ThemeEnum.Light,
+  isLoading: false,
   alert: {
     isVisible: false,
     message: '',

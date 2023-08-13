@@ -2,6 +2,7 @@ import { FC, memo, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import twitter from '@/assets/logo.svg';
+import { PATH } from '@/constants/path.ts';
 
 import {
   Container,
@@ -25,10 +26,14 @@ export const FormWrapper: FC<IFormWrapper> = memo(
   ({ children, title, questionText, linkTitle, linkPath }) => {
     const navigate = useNavigate();
     const onClickNavigate = () => {
-      console.log(linkPath);
-
       if (linkPath) {
         navigate(linkPath, { replace: true });
+      }
+    };
+
+    const onClickNavigateHome = () => {
+      if (linkPath) {
+        navigate(PATH.HOME, { replace: true });
       }
     };
 
@@ -42,6 +47,11 @@ export const FormWrapper: FC<IFormWrapper> = memo(
             {questionText && <TextQuestion>{questionText}</TextQuestion>}
             {linkPath && (
               <LinkRegistration onClick={onClickNavigate}>{linkTitle}</LinkRegistration>
+            )}
+            {linkTitle === 'Sign Up' && (
+              <LinkRegistration onClick={onClickNavigateHome}>
+                Go to Home
+              </LinkRegistration>
             )}
           </InnerWrapper>
         </Wrapper>

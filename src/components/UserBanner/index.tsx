@@ -3,6 +3,7 @@ import { FC, memo } from 'react';
 import editProfile from '@/assets/editProfile.svg';
 import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
+import { IUser } from '@/types';
 
 import {
   Credentials,
@@ -16,7 +17,6 @@ import {
   UserInfo,
   Wrapper,
 } from './styles';
-import { UserBannerProps } from './types';
 
 const userBannerText = {
   buttonText: 'Edit profile',
@@ -26,7 +26,7 @@ const userBannerText = {
   followersCount: 47,
 };
 
-export const UserBanner: FC<UserBannerProps> = memo(
+export const UserBanner: FC<IUser> = memo(
   ({ photo, name, email, gender, telegram, id }) => {
     const { followersText, followingText, followersCount, followingCount } =
       userBannerText;
@@ -34,6 +34,7 @@ export const UserBanner: FC<UserBannerProps> = memo(
     const {
       id: authUserId,
       name: authUserName,
+      lastName: authLastName,
       email: authUserEmail,
       gender: authUserGender,
       telegram: authUserTelegram,
@@ -48,7 +49,7 @@ export const UserBanner: FC<UserBannerProps> = memo(
         <UserInfo>
           <Icon src={photo} alt='Twitter Logo' />
           <NameBlock>
-            <Name>{id === authUserId ? authUserName : name}</Name>
+            <Name>{id === authUserId ? `${authUserName} ${authLastName}` : name}</Name>
             {id === authUserId && (
               <IconEditProfile
                 src={editProfile}
@@ -60,8 +61,14 @@ export const UserBanner: FC<UserBannerProps> = memo(
 
           <Credentials>{id === authUserId ? authUserEmail : email}</Credentials>
           <Text>
-            <Credentials>{id === authUserId ? authUserGender : gender}</Credentials>
-            <TextLink to='#'>{id === authUserId ? authUserTelegram : telegram}</TextLink>
+            {authUserGender && (
+              <Credentials>{id === authUserId ? authUserGender : gender}</Credentials>
+            )}
+            {(authUserTelegram !== '@telegram' || telegram !== '@telegram') && (
+              <TextLink to='#'>
+                {id === authUserId ? authUserTelegram : telegram}
+              </TextLink>
+            )}
           </Text>
           <Statistics>
             <Credentials>

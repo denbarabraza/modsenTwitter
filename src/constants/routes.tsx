@@ -2,8 +2,6 @@ import React from 'react';
 import { Navigate, RouteObject } from 'react-router';
 
 import { PATH } from '@/constants/path';
-import { Login } from '@/pages/Login';
-import { SignUp } from '@/pages/SignUp';
 
 const Home = React.lazy(() =>
   import('@/pages/Home').then(({ Home }) => ({ default: Home })),
@@ -14,6 +12,12 @@ const Profile = React.lazy(() =>
 );
 const Feed = React.lazy(() =>
   import('@/pages/Feed').then(({ Feed }) => ({ default: Feed })),
+);
+const Login = React.lazy(() =>
+  import('@/pages/Login').then(({ Login }) => ({ default: Login })),
+);
+const SignUp = React.lazy(() =>
+  import('@/pages/SignUp').then(({ SignUp }) => ({ default: SignUp })),
 );
 const Explore = React.lazy(() =>
   import('@/pages/Explore').then(({ Explore }) => ({ default: Explore })),

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import myProfileIcon from '@/assets/photo.svg';
@@ -8,24 +8,14 @@ import { CreateTweetBlock } from '@/components/CreateTweet';
 import { Header } from '@/components/Header';
 import { TweetItem } from '@/components/TweetItem';
 import { UserBanner } from '@/components/UserBanner';
+import { FirebaseCollections } from '@/constants/firebase.ts';
+import { getDocument } from '@/firebase/api/getData.ts';
 import { ITweet, IUser } from '@/types';
 
 import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './styles.ts';
 
 export const Profile = () => {
-  const [user, setUser] = useState<IUser>({
-    id: '1',
-    name: 'Denis',
-    nameLowercase: 'DENIS',
-    phone: '+375446541365461',
-    surname: 'Bareischev',
-    password: '1231123',
-    telegram: '@denbarabraza',
-    email: 'denis.bareischev@gmail.com',
-    gender: 'Male',
-    token: undefined,
-    photo: myProfileIcon,
-  } as IUser);
+  const [user, setUser] = useState<IUser>({} as IUser);
   const [tweets, setTweets] = useState<ITweet[]>([
     {
       id: '21321',
@@ -56,17 +46,26 @@ export const Profile = () => {
     },
   ]);
 
-  console.log(tweets);
+  const { pathname } = useLocation();
+  const pathNameIndex = 2;
+  const pathId = pathname.split('/')[pathNameIndex];
 
   const handleGetUser = async () => {
-    console.log('handleGetUser');
-  };
+    const currentUser = (await getDocument(FirebaseCollections.Users, pathId)) as
+      | IUser
+      | false;
 
+    if (currentUser) setUser(currentUser);
+  };
   const handleGetUserTweets = async () => {
     console.log('handleGetUserTweets');
   };
 
-  const { photo, email, gender, name, phone, telegram, id, surname } = user;
+  const { photo, email, gender, name, phone, dateOfBirth, telegram, id, lastName } = user;
+
+  useEffect(() => {
+    handleGetUser();
+  }, [pathId]);
 
   return (
     <Wrapper>
@@ -76,14 +75,15 @@ export const Profile = () => {
           <Banner src={myBanner} alt='profile banner' />
         </BannerBlock>
         <UserBanner
-          photo={photo}
+          photo={photo || myProfileIcon}
           email={email}
           gender={gender}
           name={name}
           phone={phone}
           telegram={telegram}
           id={id}
-          surname={surname}
+          lastName={lastName}
+          dateOfBirth={dateOfBirth}
         />
         <CreateTweetBlock setTweets={setTweets} />
         <Title>Tweets</Title>

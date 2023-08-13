@@ -14,11 +14,10 @@ import {
 import { Input } from '@/components/Input/Input.tsx';
 import { monthNames } from '@/constants/monthNames.ts';
 import { PATH } from '@/constants/path.ts';
-import { signUpWithEmail } from '@/firebase/api/signUpWithEmail.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
-import { setUser } from '@/store/slice/userSlice.ts';
+import { signUpWithEmailThunk } from '@/store/thunks';
 import { IUser } from '@/types';
 import { getDays, getYears } from '@/utils/dateSelectors.ts';
 
@@ -26,19 +25,6 @@ export type NewUserDataType = Pick<
   IUser,
   'email' | 'name' | 'lastName' | 'phone' | 'dateOfBirth' | 'id'
 >;
-
-export const defaultValueUserSignUp = {
-  defaultName: 'Name',
-  defaultSurname: 'Surname',
-  defaultEmail: 'post@gmail.com',
-  defaultPhoto: '',
-  defaultTelegram: '@telegram',
-  defaultPhone: '+375444444444',
-  defaultMonth: 'August',
-  defaultDay: '11',
-  defaultYear: '2023',
-  defaultToken: '',
-};
 
 export const SignUp = () => {
   const [month, setMonth] = useState<number>(0);
@@ -65,7 +51,6 @@ export const SignUp = () => {
     handleSubmit,
     isValid,
     register,
-    reset,
   } = useFormHandler(
     'email',
     'password',
@@ -87,32 +72,17 @@ export const SignUp = () => {
     year,
   }: FieldValues) => {
     try {
-      const newUserdata: NewUserDataType = {
-        id: 'user.uid',
-        email,
-        name: name.split(' ')[0],
-        lastName: name.split(' ')[1],
-        phone,
-        dateOfBirth: `${day}-${month}-${year}`,
-      };
-      const user = await signUpWithEmail(newUserdata, password);
-
-      if (newUserdata) {
-        const { defaultPhoto, defaultTelegram } = defaultValueUserSignUp;
-
-        const newUser = {
-          ...user,
-          telegram: defaultTelegram,
-          gender: null,
-          photo: defaultPhoto,
-        };
-
-        dispatch(setUser(newUser));
-      }
-
-      if (isValid) {
-        reset();
-      }
+      dispatch(
+        signUpWithEmailThunk({
+          email,
+          password,
+          name,
+          phone,
+          day,
+          month,
+          year,
+        }),
+      );
     } catch (e) {
       dispatch(
         setAlert({
@@ -156,7 +126,7 @@ export const SignUp = () => {
         />
 
         <Input
-          type='phoneNumber'
+          type='phone'
           label='Phone number:'
           nameForValidate='phone'
           placeholder='+375 (44) 111-22-33'

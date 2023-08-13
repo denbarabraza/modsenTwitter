@@ -76,6 +76,10 @@ export const LinkRegistration = styled.div`
   line-height: ${({ theme }) => theme.valueInPx.px25};
   color: ${({ theme }) => theme.colors.fontColor};
   text-decoration-line: underline;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const IconTwitter = styled.img`

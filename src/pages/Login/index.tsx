@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
 import { FormWrapper } from '@/components/Form';
 import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
-import { Loader } from '@/components/Loader';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
-import { logInUserThunk } from '@/store/thunks/logInUserThunk.ts';
+import { logInWithEmailThunk, logInWithNumberThunk } from '@/store/thunks';
 
 export interface ILogInFormInput {
   email: string;
@@ -19,15 +19,23 @@ export interface ILogInFormInput {
 
 export const Login = () => {
   const dispatch = useAppDispatch();
-  const { isLoading, isError } = useAppSelector(getUserDataSelector);
+  const { isError } = useAppSelector(getUserDataSelector);
 
-  const { errorEmail, errorPassword, handleSubmit, isValid, register } = useFormHandler(
-    'email',
-    'password',
-  );
-  const handleLogIn = async ({ email, password }: FieldValues) => {
+  const [nameValidate, setNameValidate] = useState<'phone' | 'email'>('email');
+  const nameValidateRule = nameValidate === 'email' ? 'email' : 'phone';
+
+  const { errorEmail, errorPassword, isValid, errorNumber, handleSubmit, register } =
+    useFormHandler(nameValidateRule, 'password');
+
+  const handleLogIn = async ({ email, password, phone }: FieldValues) => {
     try {
-      dispatch(logInUserThunk({ email, password }));
+      (() => {
+        if (nameValidate === 'email') {
+          dispatch(logInWithEmailThunk({ email, password }));
+        } else {
+          dispatch(logInWithNumberThunk({ phone, password }));
+        }
+      })();
     } catch (e) {
       dispatch(
         setAlert({
@@ -38,8 +46,6 @@ export const Login = () => {
     }
   };
 
-  if (isLoading) return <Loader />;
-
   return (
     <FormWrapper
       linkTitle='Sign Up'
@@ -47,14 +53,15 @@ export const Login = () => {
       title='Log in to Twitter'
       questionText='Don`t you have an account yet?'
     >
-      <Form onSubmit={handleSubmit(handleLogIn)}>
+      <Form onSubmit={handleSubmit(handleLogIn)} noValidate>
         <Input
-          type='email'
-          label='Email:'
-          nameForValidate='email'
-          placeholder='example@gmail.com'
+          type={nameValidateRule}
+          label='Email or phone:'
+          nameForValidate={nameValidateRule}
+          placeholder='e@gmail.com'
           register={register}
-          error={errorEmail}
+          error={nameValidate === 'email' ? errorEmail : errorNumber}
+          emailOrPhoneCheck={setNameValidate}
         />
 
         <Input
