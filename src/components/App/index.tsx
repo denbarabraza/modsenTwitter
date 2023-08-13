@@ -1,26 +1,38 @@
-import { useRoutes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Container, GlobalStyles } from '@/components/App/style.ts';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { ErrorFallback } from '@/components/ErrorBoundary/ErrorFallback';
-import { Header } from '@/components/HeaderTest';
-import { Theme } from '@/components/Theme';
-import { rootRoutes } from '@/constants/routes.tsx';
+import { Loader } from '@/components/Loader';
+import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { RootPages } from '@/pages';
 import { Main } from '@/pages/Main';
+import { getAppLoadingSelector } from '@/store/selectors/appSelectors.ts';
+import {
+  getUserDataSelector,
+  getUserSelector,
+  isAuthSelector,
+} from '@/store/selectors/userSelectors.ts';
 
 export const App = () => {
-  const routeResult = useRoutes(rootRoutes);
+  const isAuth = useAppSelector(isAuthSelector);
+  const isUserLoading = useAppSelector(getUserDataSelector).isLoading;
+  const isAppLoading = useAppSelector(getAppLoadingSelector);
+  const { id } = useAppSelector(getUserSelector);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuth) {
+      return;
+    }
+    navigate(`/profile/${id}`);
+  }, [isAuth, id]);
+
+  if (isAppLoading || isUserLoading) return <Loader />;
 
   return (
-    <Theme>
-      <ErrorBoundary fallback={<ErrorFallback />}>
-        <Container>
-          <GlobalStyles />
-          <Header />
-          {routeResult ? <RootPages /> : <Main />}
-        </Container>
-      </ErrorBoundary>
-    </Theme>
+    <Container>
+      <GlobalStyles />
+      {!isAuth ? <RootPages /> : <Main />}
+    </Container>
   );
 };

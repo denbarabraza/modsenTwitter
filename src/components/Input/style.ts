@@ -21,7 +21,7 @@ export const InputItem = styled('input').withConfig({
   color: ${({ theme }) => theme.colors.fontColor};
   word-break: break-word;
 
-  background: ${({ theme }) => theme.colors.formBackground};
+  background: transparent;
   border: none;
 
   border-bottom: ${({ withError, theme }) =>

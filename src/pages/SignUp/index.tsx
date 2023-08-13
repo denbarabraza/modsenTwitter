@@ -15,11 +15,22 @@ import { Input } from '@/components/Input/Input.tsx';
 import { monthNames } from '@/constants/monthNames.ts';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { useAppDispatch } from '@/hooks/useStoreControl.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
+import { signUpWithEmailThunk } from '@/store/thunks';
+import { IUser } from '@/types';
 import { getDays, getYears } from '@/utils/dateSelectors.ts';
+
+export type NewUserDataType = Pick<
+  IUser,
+  'email' | 'name' | 'lastName' | 'phone' | 'dateOfBirth' | 'id'
+>;
 
 export const SignUp = () => {
   const [month, setMonth] = useState<number>(0);
   const [year, setYear] = useState<number>(0);
+
+  const dispatch = useAppDispatch();
 
   const handleSetMonth = (event: ChangeEvent<{ value: unknown }>) => {
     const monthIndex = monthNames.indexOf(event.target.value as string);
@@ -45,15 +56,47 @@ export const SignUp = () => {
     'password',
     'confirmPwd',
     'name',
-    'phoneNumber',
+    'phone',
     'day',
     'month',
     'year',
   );
-  const onSubmit = (data: FieldValues) => {
-    const { email, password, name, phoneNumber, day, month, year } = data;
 
-    console.log(email, password, name, phoneNumber, day, month, year);
+  const handleSignUpFormSubmit = async ({
+    email,
+    password,
+    name,
+    phone,
+    day,
+    month,
+    year,
+  }: FieldValues) => {
+    try {
+      dispatch(
+        signUpWithEmailThunk({
+          email,
+          password,
+          name,
+          phone,
+          day,
+          month,
+          year,
+        }),
+      );
+    } catch (e) {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message:
+            errorEmail ||
+            errorName ||
+            errorPassword ||
+            errorNumber ||
+            errorConfirmPwd ||
+            (e as Error).message,
+        }),
+      );
+    }
   };
 
   return (
@@ -63,7 +106,7 @@ export const SignUp = () => {
       title='Create an account'
       questionText='Already have an account?'
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(handleSignUpFormSubmit)}>
         <Input
           type='name'
           label='Name:'
@@ -83,9 +126,9 @@ export const SignUp = () => {
         />
 
         <Input
-          type='phoneNumber'
+          type='phone'
           label='Phone number:'
-          nameForValidate='phoneNumber'
+          nameForValidate='phone'
           placeholder='+375 (44) 111-22-33'
           register={register}
           error={errorNumber}

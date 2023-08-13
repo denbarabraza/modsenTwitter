@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
@@ -6,16 +7,43 @@ import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
+import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
+import { logInWithEmailThunk, logInWithNumberThunk } from '@/store/thunks';
+
+export interface ILogInFormInput {
+  email: string;
+  password: string;
+}
 
 export const Login = () => {
-  const { errorEmail, errorPassword, handleSubmit, isValid, register } = useFormHandler(
-    'email',
-    'password',
-  );
-  const onSubmit = (data: FieldValues) => {
-    const { email, password } = data;
+  const dispatch = useAppDispatch();
+  const { isError } = useAppSelector(getUserDataSelector);
 
-    console.log(email, password);
+  const [nameValidate, setNameValidate] = useState<'phone' | 'email'>('email');
+  const nameValidateRule = nameValidate === 'email' ? 'email' : 'phone';
+
+  const { errorEmail, errorPassword, isValid, errorNumber, handleSubmit, register } =
+    useFormHandler(nameValidateRule, 'password');
+
+  const handleLogIn = async ({ email, password, phone }: FieldValues) => {
+    try {
+      (() => {
+        if (nameValidate === 'email') {
+          dispatch(logInWithEmailThunk({ email, password }));
+        } else {
+          dispatch(logInWithNumberThunk({ phone, password }));
+        }
+      })();
+    } catch (e) {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message: isError || errorEmail || errorPassword || (e as Error).message,
+        }),
+      );
+    }
   };
 
   return (
@@ -25,14 +53,15 @@ export const Login = () => {
       title='Log in to Twitter'
       questionText='Don`t you have an account yet?'
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(handleLogIn)} noValidate>
         <Input
-          type='email'
-          label='Email:'
-          nameForValidate='email'
-          placeholder='example@gmail.com'
+          type={nameValidateRule}
+          label='Email or phone:'
+          nameForValidate={nameValidateRule}
+          placeholder='e@gmail.com'
           register={register}
-          error={errorEmail}
+          error={nameValidate === 'email' ? errorEmail : errorNumber}
+          emailOrPhoneCheck={setNameValidate}
         />
 
         <Input

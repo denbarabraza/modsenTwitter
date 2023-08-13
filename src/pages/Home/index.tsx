@@ -1,8 +1,11 @@
 import myBanner from '@/assets/back-twitter.png';
-import MyGoogleSvg from '@/assets/google.svg';
-import MyLogoSvg from '@/assets/logo.svg';
+import myGoogleSvg from '@/assets/google.svg';
+import myLogoSvg from '@/assets/logo.svg';
 import { homePageText } from '@/constants/dataForPages.ts';
 import { PATH } from '@/constants/path.ts';
+import { useAppDispatch } from '@/hooks/useStoreControl.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
+import { signUpWithGoogleThunk } from '@/store/thunks';
 
 import {
   Banner,
@@ -41,23 +44,39 @@ const {
 } = homePageText;
 
 export const Home = () => {
+  const dispatch = useAppDispatch();
+  const handleGoogleSignUp = async () => {
+    try {
+      dispatch(signUpWithGoogleThunk());
+    } catch (e) {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message: (e as Error).message,
+        }),
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <Main>
         <Banner src={myBanner} alt='Twitter Banner' />
         <Form>
           <IconWrapper>
-            <Icon src={MyLogoSvg} alt='Twitter Logo' />
+            <Icon src={myLogoSvg} alt='Twitter Logo' />
           </IconWrapper>
           <Title>{title}</Title>
           <SubTitle>{subTitle}</SubTitle>
-          <ButtonWrapper onClick={() => console.log('Google')}>
+          <ButtonWrapper type='button' onClick={handleGoogleSignUp}>
             <ButtonWithIcon>
-              <ButtonIcon src={MyGoogleSvg} alt='Google Logo' />
+              <ButtonIcon src={myGoogleSvg} alt='Google Logo' />
               {signUpGoogleText}
             </ButtonWithIcon>
           </ButtonWrapper>
-          <ButtonLink to={PATH.SIGN_UP}>{signUpEmailText}</ButtonLink>
+          <ButtonLink type='button' to={PATH.SIGN_UP}>
+            {signUpEmailText}
+          </ButtonLink>
           <Text>
             {termsText}
             <TextLink to={navLinks[2].to}>{navLinks[2].name}</TextLink>
@@ -69,9 +88,7 @@ export const Home = () => {
           </Text>
           <Text>
             {question}
-            <TextLink data-cy='logInLink' to={PATH.LOGIN}>
-              {loginText}
-            </TextLink>
+            <TextLink to={PATH.LOGIN}>{loginText}</TextLink>
           </Text>
         </Form>
       </Main>
