@@ -10,23 +10,27 @@ const initialState: IAppInitialState = {
     isVisible: false,
     message: '',
   },
+  isModalOpen: false,
 };
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setTheme: (state, action: PayloadAction<ThemeEnum>) => {
+    setTheme: (state: IAppInitialState, action: PayloadAction<ThemeEnum>) => {
       state.theme = action.payload;
     },
-    setAppLoading: (state, action: PayloadAction<boolean>) => {
+    setAppLoading: (state: IAppInitialState, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setAlert: (state, action: PayloadAction<IAlertObj>) => {
+    setAlert: (state: IAppInitialState, action: PayloadAction<IAlertObj>) => {
       state.alert = action.payload;
+    },
+    setModalStatus: (state: IAppInitialState, action: PayloadAction<boolean>) => {
+      state.isModalOpen = action.payload;
     },
   },
 });
 
-export const { setTheme, setAlert, setAppLoading } = appSlice.actions;
+export const { setTheme, setAlert, setAppLoading, setModalStatus } = appSlice.actions;
 export const appReducer = appSlice.reducer;

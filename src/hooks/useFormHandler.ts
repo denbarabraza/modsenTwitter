@@ -3,6 +3,11 @@ import * as Yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
+export enum SchemaParamEnum {
+  Auth = 'auth',
+  Edit = 'edit',
+}
+
 const schemaParam = {
   email: Yup.string()
     .required('No email provided')
@@ -12,7 +17,9 @@ const schemaParam = {
       'Incorrect email',
     ),
   password: Yup.string().required('No password provided').min(6, 'At least 6 characters'),
-  confirmPwd: Yup.string().oneOf([Yup.ref('password')], 'Passwords does not match'),
+  confirmPwd: Yup.string()
+    .required('Please confirm password')
+    .oneOf([Yup.ref('password')], 'Passwords does not match'),
   name: Yup.string()
     .required('Enter your name')
     .min(3, 'At least 3 characters')
@@ -29,9 +36,37 @@ const schemaParam = {
   year: Yup.string().required('Enter year'),
 };
 
-export const useFormHandler = (...keys: string[]) => {
+const schemaParamEdit = {
+  email: Yup.string()
+    .email('Incorrect email')
+    .matches(
+      /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      'Incorrect email',
+    ),
+  password: Yup.string().min(6, 'At least 6 characters'),
+  confirmPwd: Yup.string().oneOf([Yup.ref('password')], 'Passwords does not match'),
+  name: Yup.string()
+    .min(3, 'At least 3 characters')
+    .max(22, 'Maximum number of characters 22'),
+  phone: Yup.string()
+    .matches(
+      /^(?:\+?\d{1,3})?[\s-]?\(?\d{2,3}\)?[\s-]*?[0-9]{3}?[ \\-]*[0-9]{2}?[ \\-]*[0-9]{2}$/,
+      'Invalid phone number format',
+    )
+    .min(11, 'At least 11 characters'),
+  day: Yup.string(),
+  month: Yup.string(),
+  year: Yup.string(),
+  gender: Yup.string(),
+  telegram: Yup.string().min(3, 'At least 3 characters'),
+};
+
+export const useFormHandler = (type: SchemaParamEnum, ...keys: string[]) => {
   const param: any = {};
-  const schemaParamEntries = Object.entries(schemaParam);
+  const schemaParamEntries =
+    type === SchemaParamEnum.Auth
+      ? Object.entries(schemaParam)
+      : Object.entries(schemaParamEdit);
 
   keys.forEach(k =>
     schemaParamEntries.forEach(([key, value]) => {
@@ -47,9 +82,13 @@ export const useFormHandler = (...keys: string[]) => {
     formState: { errors, isValid },
     handleSubmit,
     reset,
-  } = useForm({ resolver: yupResolver(formSchema), mode: 'onTouched' });
+  } = useForm({
+    resolver: yupResolver(formSchema),
+    mode: 'onTouched',
+  });
 
   const errorEmail = errors.email ? String(errors.email.message) : undefined;
+  const errorTelegram = errors.telegram ? String(errors.telegram.message) : undefined;
   const errorPassword = errors.password ? String(errors.password.message) : undefined;
   const errorNumber = errors.phone ? String(errors.phone.message) : undefined;
   const errorConfirmPwd = errors.confirmPwd
@@ -66,6 +105,7 @@ export const useFormHandler = (...keys: string[]) => {
     errorPassword,
     errorConfirmPwd,
     errorName,
+    errorTelegram,
     errorNumber,
   };
 };

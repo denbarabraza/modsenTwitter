@@ -6,13 +6,13 @@ import { updateDocument } from '@/firebase/helpers/updateData.ts';
 
 type TFile = Blob | Uint8Array | ArrayBuffer;
 
-interface UploadFileProps {
+interface IUploadFile {
+  collection: FirebaseCollections;
   file: TFile;
   id: string;
-  collection: FirebaseCollections;
 }
 
-export const uploadFile = async (options: UploadFileProps) => {
+export const uploadFile = async (options: IUploadFile) => {
   const { collection, file, id } = options;
   const storageRef = ref(storage, id);
   const uploadTask = uploadBytesResumable(storageRef, file);

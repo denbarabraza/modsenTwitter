@@ -5,15 +5,20 @@ import myProfileIcon from '@/assets/photo.svg';
 import myBanner from '@/assets/profile-banner.png';
 import { CreateTweetBlock } from '@/components/CreateTweet';
 import { Header } from '@/components/Header';
+import { Modal } from '@/components/Modal';
+import { ProfileEditModal } from '@/components/ProfileEditModal';
 import { TweetItem } from '@/components/TweetItem';
 import { UserInProfile } from '@/components/UserInProfile';
 import { FirebaseCollections } from '@/constants/firebase.ts';
 import { getDocument, getTweetsByUserId } from '@/firebase/api/getData.ts';
+import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { ITweet, IUser } from '@/types';
 
 import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './styles.ts';
 
 export const Profile = () => {
+  const isModalOpen = useAppSelector(getModalStatusSelector);
   const [user, setUser] = useState<IUser>({} as IUser);
   const [tweets, setTweets] = useState<ITweet[]>([]);
 
@@ -43,7 +48,7 @@ export const Profile = () => {
   return (
     <Wrapper>
       <MainWrapper>
-        <Header tweetsCount={100} />
+        <Header tweetsCount={tweets.length} />
         <BannerBlock>
           <Banner src={myBanner} alt='profile banner' />
         </BannerBlock>
@@ -79,6 +84,11 @@ export const Profile = () => {
             />
           ))}
       </MainWrapper>
+      {isModalOpen && (
+        <Modal>
+          <ProfileEditModal />
+        </Modal>
+      )}
     </Wrapper>
   );
 };

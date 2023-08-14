@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { LikeCountProps } from './types';
+import { forwardPropGuard } from '@/utils/forwardPropGuard.ts';
 
 export const Wrapper = styled.header`
   position: relative;
@@ -45,10 +45,10 @@ export const TweetContentWrapper = styled.div`
 
 export const IconWrapper = styled.div`
   position: absolute;
-  bottom: ${({ theme }) => theme.valueInPx.px10};
-  right: ${({ theme }) => theme.valueInPercent.pr5};
+  top: ${({ theme }) => theme.valueInPx.px15};
+  right: ${({ theme }) => theme.valueInPx.px5};
   width: ${({ theme }) => theme.valueInPercent.pr10};
-  height: ${({ theme }) => theme.valueInPercent.pr100};
+  height: ${({ theme }) => theme.valueInPercent.pr80};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,7 +65,6 @@ export const Icon = styled.img`
   align-self: flex-start;
   background-color: transparent;
   border-radius: ${({ theme }) => theme.valueInPx.px10};
-  z-index: 100;
   cursor: pointer;
 
   &:hover {
@@ -109,12 +108,11 @@ export const UserDataBlock = styled.div`
 
 export const EditIcon = styled.img`
   position: absolute;
-  right: ${({ theme }) => theme.valueInPercent.pr5};
+  right: ${({ theme }) => theme.valueInPx.px5};
   width: ${({ theme }) => theme.valueInPx.px20};
-  height: ${({ theme }) => theme.valueInPx.px20};
+  height: ${({ theme }) => theme.valueInPx.px15};
   align-self: flex-start;
   background-color: transparent;
-  z-index: 101;
 
   &:hover {
     transform: scale(1.2);
@@ -166,16 +164,21 @@ export const TweetText = styled.p`
 `;
 
 export const ImageWrapper = styled.div`
-  margin-top: ${({ theme }) => theme.indentation.i15};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
 `;
 
 export const Image = styled.img`
-  width: ${({ theme }) => theme.valueInPercent.pr100};
+  width: ${({ theme }) => theme.valueInPercent.pr30};
   object-fit: contain;
   border-radius: ${({ theme }) => theme.valueInPx.px10};
 `;
 
-export const LikeCount = styled.p<LikeCountProps>`
+export const LikeCount = styled('p').withConfig({
+  shouldForwardProp: forwardPropGuard<{ isLiked: boolean }>(['isLiked']),
+})<{ isLiked: boolean }>`
   margin-left: ${({ theme }) => theme.indentation.i5};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeight.normal};

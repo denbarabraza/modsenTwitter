@@ -47,3 +47,25 @@ export const getTweetsByUserId = async (field: string, id: string) => {
 
   return tweetsByUserId;
 };
+
+export const getAllTweets = async () => {
+  const q = query(collection(db, FirebaseCollections.Tweets), orderBy('date', 'desc'));
+
+  const querySnapshot = await getDocs(q);
+
+  const allTweets = querySnapshot.docs.map(doc => {
+    const { text, date, creator, image, likes, tweetId } = doc.data() as ITweet;
+
+    return {
+      id: doc.id,
+      tweetId,
+      text,
+      date,
+      creator,
+      image,
+      likes,
+    };
+  });
+
+  return allTweets;
+};

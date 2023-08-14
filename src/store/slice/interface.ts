@@ -4,6 +4,7 @@ export interface IAppInitialState {
   theme: ThemeEnum;
   isLoading: boolean;
   alert: IAlertObj;
+  isModalOpen: boolean;
 }
 
 export interface IAlertObj {

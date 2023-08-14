@@ -16,6 +16,8 @@ export interface ITheme {
     fontColorOpacity: string;
     headBackground: string;
     mainBackground: string;
+    modalItemBackground: string;
+    modalContentBackground: string;
     formBackground: string;
     boxShadow: string;
     toggleBackground: string;

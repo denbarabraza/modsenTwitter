@@ -15,8 +15,6 @@ export const Wrapper = styled.div`
 
   color: ${({ theme }) => theme.colors.fontColor};
 
-  z-index: 100;
-
   animation-duration: 0.5s;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
@@ -110,7 +108,7 @@ export const FileWrapper = styled.div`
   background-color: transparent;
 `;
 
-export const UploadFile = styled.input``;
+export const UploadImage = styled.input``;
 
 export const UploadFileLabel = styled.label`
   background-color: transparent;

@@ -1,8 +1,9 @@
 import { FC, memo } from 'react';
 
 import editProfile from '@/assets/editProfile.svg';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
+import { setModalStatus } from '@/store/slice/appSlice.ts';
 import { IUser } from '@/types';
 
 import {
@@ -28,6 +29,7 @@ const userBannerText = {
 
 export const UserInProfile: FC<IUser> = memo(
   ({ photo, name, email, gender, telegram, id }) => {
+    const dispatch = useAppDispatch();
     const { followersText, followingText, followersCount, followingCount } =
       userBannerText;
 
@@ -40,8 +42,8 @@ export const UserInProfile: FC<IUser> = memo(
       telegram: authUserTelegram,
     } = useAppSelector(getUserSelector);
 
-    const onOpenModal = () => {
-      console.log('Modal open');
+    const onEditUser = () => {
+      dispatch(setModalStatus(true));
     };
 
     return (
@@ -54,7 +56,7 @@ export const UserInProfile: FC<IUser> = memo(
               <IconEditProfile
                 src={editProfile}
                 alt='edit profile'
-                onClick={onOpenModal}
+                onClick={onEditUser}
               />
             )}
           </NameBlock>

@@ -2,29 +2,16 @@ import { ChangeEvent, useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
 import { Button } from '@/components/Button/Button.tsx';
+import { DateBirth } from '@/components/DateBirth';
 import { FormWrapper } from '@/components/Form';
-import {
-  DateBirthBlock,
-  DayYearSelector,
-  Form,
-  MonthSelector,
-  Option,
-  Selectors,
-} from '@/components/Form/style.ts';
+import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
-import { monthNames } from '@/constants/monthNames.ts';
+import { monthNames } from '@/constants/dataForSelectors.ts';
 import { PATH } from '@/constants/path.ts';
-import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { SchemaParamEnum, useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 import { signUpWithEmailThunk } from '@/store/thunks/auth';
-import { IUser } from '@/types';
-import { getDays, getYears } from '@/utils/dateSelectors.ts';
-
-export type NewUserDataType = Pick<
-  IUser,
-  'email' | 'name' | 'lastName' | 'phone' | 'dateOfBirth' | 'id'
->;
 
 export const SignUp = () => {
   const [month, setMonth] = useState<number>(0);
@@ -52,6 +39,7 @@ export const SignUp = () => {
     isValid,
     register,
   } = useFormHandler(
+    SchemaParamEnum.Auth,
     'email',
     'password',
     'confirmPwd',
@@ -61,7 +49,6 @@ export const SignUp = () => {
     'month',
     'year',
   );
-
   const handleSignUpFormSubmit = async ({
     email,
     password,
@@ -151,32 +138,13 @@ export const SignUp = () => {
           register={register}
           error={errorConfirmPwd}
         />
-        <DateBirthBlock>
-          Date of birth:
-          <Selectors>
-            <MonthSelector {...register('month')} onChange={handleSetMonth}>
-              {monthNames.map(month => (
-                <Option key={month} value={month}>
-                  {month}
-                </Option>
-              ))}
-            </MonthSelector>
-            <DayYearSelector {...register('day')}>
-              {getDays(year, month).map(day => (
-                <Option key={day} value={day}>
-                  {day}
-                </Option>
-              ))}
-            </DayYearSelector>
-            <DayYearSelector {...register('year')} onChange={handleSetYear}>
-              {getYears().map(year => (
-                <Option key={year} value={year}>
-                  {year}
-                </Option>
-              ))}
-            </DayYearSelector>
-          </Selectors>
-        </DateBirthBlock>
+        <DateBirth
+          register={register}
+          handleSetMonth={handleSetMonth}
+          handleSetYear={handleSetYear}
+          year={year}
+          month={month}
+        />
 
         <Button isValid={isValid} type='submit' title='Create account' />
       </Form>

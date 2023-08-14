@@ -79,6 +79,7 @@ export const signUpWithEmailThunk = createAsyncThunk(
         telegram: defaultTelegram,
         photo: defaultPhoto,
       };
+
       const user = await signUpWithEmail(newUserdata, password);
 
       if (user) {

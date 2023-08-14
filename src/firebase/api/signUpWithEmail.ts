@@ -2,9 +2,9 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
 import { auth, db } from '@/firebase';
-import { NewUserDataType } from '@/pages/SignUp';
+import { IUser } from '@/types';
 
-export const signUpWithEmail = async (newUserdata: NewUserDataType, password: string) => {
+export const signUpWithEmail = async (newUserdata: IUser, password: string) => {
   const registeredUser = await createUserWithEmailAndPassword(
     auth,
     newUserdata.email,

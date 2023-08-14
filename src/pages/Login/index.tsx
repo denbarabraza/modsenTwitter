@@ -6,7 +6,7 @@ import { FormWrapper } from '@/components/Form';
 import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
 import { PATH } from '@/constants/path.ts';
-import { useFormHandler } from '@/hooks/useFormHandler.ts';
+import { SchemaParamEnum, useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
@@ -25,7 +25,7 @@ export const Login = () => {
   const nameValidateRule = nameValidate === 'email' ? 'email' : 'phone';
 
   const { errorEmail, errorPassword, isValid, errorNumber, handleSubmit, register } =
-    useFormHandler(nameValidateRule, 'password');
+    useFormHandler(SchemaParamEnum.Auth, nameValidateRule, 'password');
 
   const handleLogIn = async ({ email, password, phone }: FieldValues) => {
     try {

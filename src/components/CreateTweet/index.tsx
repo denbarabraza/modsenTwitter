@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from 'react';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
 import myPhotoSvg from '@/assets/photo.svg';
@@ -18,8 +19,8 @@ import {
   TextAreaWrapper,
   Tweet,
   TweetBlock,
-  UploadFile,
   UploadFileLabel,
+  UploadImage,
   Wrapper,
 } from './style.ts';
 
@@ -32,7 +33,7 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
 
   const [tweetValue, setTweetValue] = useState<string>('');
   const [image, setImage] = useState<File>();
-  const [isLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreateTweet = async (e: FormEvent) => {
     e.preventDefault();
@@ -57,8 +58,20 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
     setTweetValue(e.target.value);
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+
+    if (files) {
+      setIsLoading(true);
+      const storage = getStorage();
+      const storageRef = ref(storage, 'some-child');
+
+      uploadBytes(storageRef, files[0]).then(() => {
+        setIsLoading(false);
+      });
+
+      setImage(files[0]);
+    }
   };
 
   return (
@@ -77,7 +90,7 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
           )}
           <FileWrapper>
             <UploadFileLabel htmlFor='file'>
-              <UploadFile
+              <UploadImage
                 type='file'
                 id='file'
                 hidden

@@ -13,6 +13,7 @@ export const Container = styled.div`
   height: calc(
     ${({ theme }) => theme.valueInVh.vh100} + ${({ theme }) => theme.valueInPx.px40}
   );
+  overflow: auto;
 `;
 
 export const Wrapper = styled.div`
@@ -33,6 +34,7 @@ export const InnerWrapper = styled.div`
 
   max-width: ${({ theme }) => theme.valueInPercent.pr50};
   padding: ${({ theme }) => theme.valueInPx.px20} ${({ theme }) => theme.valueInPx.px30};
+  margin: ${({ theme }) => theme.valueInPx.px40} ${({ theme }) => theme.valueInPx.px0};
 
   background: ${({ theme }) => theme.colors.formBackground};
   border-radius: ${({ theme }) => theme.valueInPx.px10};
@@ -98,6 +100,7 @@ export const Selectors = styled.div`
 
 export const DateBirthBlock = styled.div`
   display: flex;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
@@ -145,6 +148,11 @@ export const MonthSelector = styled.select`
 
 export const DayYearSelector = styled.select`
   width: ${({ theme }) => theme.valueInPercent.pr20};
+  ${Selector}
+`;
+
+export const GenderSelector = styled.select`
+  width: ${({ theme }) => theme.valueInPercent.pr50};
   ${Selector}
 `;
 
