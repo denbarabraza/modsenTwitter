@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Message = styled.div`
   position: fixed;
-  bottom: ${({ theme }) => theme.valueInPercent.pr10};
-  right: ${({ theme }) => theme.valueInPercent.pr5};
+  bottom: ${({ theme }) => theme.valueInPercent.pr5};
+  left: ${({ theme }) => theme.valueInPercent.pr2};
   width: fit-content;
   height: ${({ theme }) => theme.valueInPercent.pr10};
   display: flex;
@@ -15,7 +15,7 @@ export const Message = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   border: ${({ theme }) => theme.valueInPx.px1} solid
     ${({ theme }) => theme.usedColors.twitterColor};
-  border-radius: ${({ theme }) => theme.valueInPx.px5};
+  border-radius: ${({ theme }) => theme.valueInPx.px20};
 
   z-index: 100;
 `;

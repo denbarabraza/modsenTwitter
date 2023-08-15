@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { ModalContent, ModalItem } from '@/components/Modal/styled.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
-import { setModalStatus } from '@/store/slice/appSlice.ts';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 
 export interface IModal {
   children: ReactNode;
@@ -12,10 +12,12 @@ export interface IModal {
 
 export const Modal: FC<IModal> = memo(({ children }) => {
   const dispatch = useAppDispatch();
-  const isModalOpen = useAppSelector(getModalStatusSelector);
+  const modalStatus = useAppSelector(getModalStatusSelector);
+
+  const isOpenModal = modalStatus !== ModalStatusEnum.Closed;
 
   const handleCloseModal = () => {
-    dispatch(setModalStatus(false));
+    dispatch(setModalStatus(ModalStatusEnum.Closed));
   };
 
   useEffect(() => {
@@ -24,11 +26,11 @@ export const Modal: FC<IModal> = memo(({ children }) => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen]);
+  }, [modalStatus]);
 
   return createPortal(
-    <ModalItem open={isModalOpen} onClick={handleCloseModal}>
-      <ModalContent open={isModalOpen} onClick={event => event.stopPropagation()}>
+    <ModalItem open={isOpenModal} onClick={handleCloseModal}>
+      <ModalContent open={isOpenModal} onClick={event => event.stopPropagation()}>
         {children}
       </ModalContent>
     </ModalItem>,

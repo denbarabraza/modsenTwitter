@@ -3,7 +3,7 @@ import { FC, memo } from 'react';
 import editProfile from '@/assets/editProfile.svg';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { setModalStatus } from '@/store/slice/appSlice.ts';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 import { IUser } from '@/types';
 
 import {
@@ -27,7 +27,9 @@ const userBannerText = {
   followersCount: 47,
 };
 
-export const UserInProfile: FC<IUser> = memo(
+type IUserInProfile = Omit<IUser, 'nameLowercase'>;
+
+export const UserInProfile: FC<IUserInProfile> = memo(
   ({ photo, name, email, gender, telegram, id }) => {
     const dispatch = useAppDispatch();
     const { followersText, followingText, followersCount, followingCount } =
@@ -43,7 +45,7 @@ export const UserInProfile: FC<IUser> = memo(
     } = useAppSelector(getUserSelector);
 
     const onEditUser = () => {
-      dispatch(setModalStatus(true));
+      dispatch(setModalStatus(ModalStatusEnum.EditProfile));
     };
 
     return (

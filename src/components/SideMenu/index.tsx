@@ -11,6 +11,7 @@ import { auth } from '@/firebase';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 import { removeUser } from '@/store/slice/userSlice.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
@@ -36,6 +37,10 @@ export const SideMenu = () => {
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);
 
+  const handleCreateTweetInMenu = () => {
+    dispatch(setModalStatus(ModalStatusEnum.CreateTweet));
+  };
+
   const handleNavigate = () => {
     navigate(`/profile/${id}`);
   };
@@ -60,7 +65,7 @@ export const SideMenu = () => {
             id={id}
           />
         ))}
-        <Button title='Tweet' callBack={() => console.log('Tweet')} isValid />
+        <Button title='Tweet' callBack={handleCreateTweetInMenu} isValid />
         <UserInfo>
           <IconPhotoItem>
             <IconPhoto

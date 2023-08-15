@@ -3,6 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAlertObj, IAppInitialState } from '@/store/slice/interface.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 
+export enum ModalStatusEnum {
+  Closed = 'modalClose',
+  EditProfile = 'modalForEditProfile',
+  CreateTweet = 'modalForCreateTweet',
+}
+
 const initialState: IAppInitialState = {
   theme: ThemeEnum.Light,
   isLoading: false,
@@ -10,7 +16,7 @@ const initialState: IAppInitialState = {
     isVisible: false,
     message: '',
   },
-  isModalOpen: false,
+  modalStatus: ModalStatusEnum.Closed,
 };
 
 export const appSlice = createSlice({
@@ -26,8 +32,8 @@ export const appSlice = createSlice({
     setAlert: (state: IAppInitialState, action: PayloadAction<IAlertObj>) => {
       state.alert = action.payload;
     },
-    setModalStatus: (state: IAppInitialState, action: PayloadAction<boolean>) => {
-      state.isModalOpen = action.payload;
+    setModalStatus: (state: IAppInitialState, action: PayloadAction<ModalStatusEnum>) => {
+      state.modalStatus = action.payload;
     },
   },
 });

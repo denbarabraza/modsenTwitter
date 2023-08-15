@@ -68,9 +68,11 @@ export const signUpWithEmailThunk = createAsyncThunk(
     try {
       const { email, password, name, phone, day, month, year, isValid, reset } = options;
       const { defaultPhoto, defaultTelegram } = defaultValueUserSignUp;
+      const nameLowercase = name.toLowerCase();
       const newUserdata: IUser = {
         id: 'user.uid',
         email,
+        nameLowercase,
         name: name.split(' ')[0],
         lastName: name.split(' ')[1],
         phone: pureNumberPhone(phone),
@@ -120,10 +122,11 @@ export const signUpWithGoogleThunk = createAsyncThunk(
       }
 
       const { defaultPhoto, defaultTelegram } = defaultValueUserSignUp;
-
+      const nameLowercase = displayName.toLowerCase();
       const newUser: IUser = {
         id: uid,
         email,
+        nameLowercase,
         name: displayName.split(' ')[0],
         lastName: displayName.split(' ')[1],
         phone: phoneNumber ?? '',

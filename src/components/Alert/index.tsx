@@ -15,7 +15,7 @@ export const Alert = () => {
   };
 
   const { isVisible, message } = useAppSelector(getAlertSelector);
-  const visibilityAlertTime = 5000;
+  const visibilityAlertTime = 3000;
 
   useEffect(() => {
     if (!isVisible) return;

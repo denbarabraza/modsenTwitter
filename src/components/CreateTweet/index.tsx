@@ -1,4 +1,12 @@
-import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
@@ -6,8 +14,10 @@ import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { Loader } from '@/components/Loader';
 import { createNewTweet } from '@/firebase/helpers/createNewTweet.ts';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
+import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 import { ITweet } from '@/types';
 
 import {
@@ -30,9 +40,12 @@ export interface ICreateTweet {
 
 export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
   const { id, email, name, photo, lastName } = useAppSelector(getUserSelector);
+  const modalStatus = useAppSelector(getModalStatusSelector);
+  const dispatch = useAppDispatch();
 
   const [tweetValue, setTweetValue] = useState<string>('');
   const [image, setImage] = useState<File>();
+  const [imageUrl, setImageUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreateTweet = async (e: FormEvent) => {
@@ -51,6 +64,9 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
 
     setTweetValue('');
     setImage(undefined);
+    if (modalStatus === ModalStatusEnum.CreateTweet) {
+      dispatch(setModalStatus(ModalStatusEnum.Closed));
+    }
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -70,8 +86,17 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
       });
 
       setImage(files[0]);
+      setImageUrl(URL.createObjectURL(files[0]));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [imageUrl]);
 
   return (
     <Wrapper>
@@ -84,9 +109,7 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
             onChange={handleChangeInput}
           />
           {isLoading && <Loader />}
-          {!isLoading && image && (
-            <PreloadImage src={URL.createObjectURL(image)} alt='Image preload' />
-          )}
+          {!isLoading && image && <PreloadImage src={imageUrl} alt='Image preload' />}
           <FileWrapper>
             <UploadFileLabel htmlFor='file'>
               <UploadImage

@@ -64,6 +64,7 @@ const {
   BOOKMARKS,
   LISTS,
   MORE,
+  FEED_TWEET,
 } = PATH;
 
 export const rootRoutes: RouteObject[] = [
@@ -77,6 +78,7 @@ export const mainRoutes: RouteObject[] = [
   { path: NOT_FOUND, element: <PageNotFound /> },
   { path: PROFILE, element: <Profile /> },
   { path: FEED, element: <Feed /> },
+  { path: FEED_TWEET, element: <Feed /> },
   { path: EXPLORE, element: <Explore /> },
   { path: NOTIFICATIONS, element: <Notifications /> },
   { path: MESSAGES, element: <Messages /> },

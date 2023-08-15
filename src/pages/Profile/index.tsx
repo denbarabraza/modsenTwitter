@@ -13,16 +13,15 @@ import { FirebaseCollections } from '@/constants/firebase.ts';
 import { getDocument, getTweetsByUserId } from '@/firebase/api/getData.ts';
 import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
+import { ModalStatusEnum } from '@/store/slice/appSlice.ts';
 import { ITweet, IUser } from '@/types';
 
 import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './styles.ts';
 
 export const Profile = () => {
-  const isModalOpen = useAppSelector(getModalStatusSelector);
+  const modalStatus = useAppSelector(getModalStatusSelector);
   const [user, setUser] = useState<IUser>({} as IUser);
   const [tweets, setTweets] = useState<ITweet[]>([]);
-
-  console.log(tweets);
 
   const { pathname } = useLocation();
   const activeUserId = pathname.split('/')[2];
@@ -48,8 +47,6 @@ export const Profile = () => {
 
   const { photo, email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
 
-  console.log('Profile');
-
   return (
     <Wrapper>
       <MainWrapper>
@@ -68,8 +65,10 @@ export const Profile = () => {
           lastName={lastName}
           dateOfBirth={dateOfBirth}
         />
-        <CreateTweetBlock setTweets={setTweets} />
-        <Title>Tweets</Title>
+        {modalStatus !== ModalStatusEnum.CreateTweet && (
+          <CreateTweetBlock setTweets={setTweets} />
+        )}
+        {tweets.length > 0 && <Title>Tweets</Title>}
         {tweets.length > 0 &&
           tweets.map(({ date, text, image, likes, tweetId, creator }) => (
             <TweetItem
@@ -89,9 +88,14 @@ export const Profile = () => {
             />
           ))}
       </MainWrapper>
-      {isModalOpen && (
+      {modalStatus === ModalStatusEnum.EditProfile && (
         <Modal>
           <ProfileEditModal handleGetUserTweets={handleGetUserTweets} />
+        </Modal>
+      )}
+      {modalStatus === ModalStatusEnum.CreateTweet && (
+        <Modal>
+          <CreateTweetBlock setTweets={setTweets} />
         </Modal>
       )}
     </Wrapper>
