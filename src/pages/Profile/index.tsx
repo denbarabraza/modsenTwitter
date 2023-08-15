@@ -22,6 +22,8 @@ export const Profile = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [tweets, setTweets] = useState<ITweet[]>([]);
 
+  console.log(tweets);
+
   const { pathname } = useLocation();
   const activeUserId = pathname.split('/')[2];
 
@@ -32,18 +34,21 @@ export const Profile = () => {
 
     if (currentUser) setUser(currentUser);
   };
+
   const handleGetUserTweets = async () => {
     const result = await getTweetsByUserId('creator.id', activeUserId);
 
     setTweets(result);
   };
 
-  const { photo, email, gender, name, phone, dateOfBirth, telegram, id, lastName } = user;
-
   useEffect(() => {
     handleGetUser();
     handleGetUserTweets();
   }, [activeUserId]);
+
+  const { photo, email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
+
+  console.log('Profile');
 
   return (
     <Wrapper>
@@ -86,7 +91,7 @@ export const Profile = () => {
       </MainWrapper>
       {isModalOpen && (
         <Modal>
-          <ProfileEditModal />
+          <ProfileEditModal handleGetUserTweets={handleGetUserTweets} />
         </Modal>
       )}
     </Wrapper>

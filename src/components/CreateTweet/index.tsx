@@ -37,19 +37,18 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
 
   const handleCreateTweet = async (e: FormEvent) => {
     e.preventDefault();
-    if (tweetValue) {
-      const newTweet = await createNewTweet({
-        email,
-        id,
-        image,
-        name,
-        lastName,
-        photo,
-        tweetValue,
-      });
+    const newTweet = await createNewTweet({
+      email,
+      id,
+      image,
+      name,
+      lastName,
+      photo,
+      tweetValue,
+    });
 
-      setTweets(prev => [newTweet, ...prev]);
-    }
+    setTweets(prev => [newTweet, ...prev]);
+
     setTweetValue('');
     setImage(undefined);
   };

@@ -8,7 +8,7 @@ import { Form } from '@/components/Form/style.ts';
 import { Input } from '@/components/Input/Input.tsx';
 import { monthNames } from '@/constants/dataForSelectors.ts';
 import { PATH } from '@/constants/path.ts';
-import { SchemaParamEnum, useFormHandler } from '@/hooks/useFormHandler.ts';
+import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 import { signUpWithEmailThunk } from '@/store/thunks/auth';
@@ -39,7 +39,6 @@ export const SignUp = () => {
     isValid,
     register,
   } = useFormHandler(
-    SchemaParamEnum.Auth,
     'email',
     'password',
     'confirmPwd',

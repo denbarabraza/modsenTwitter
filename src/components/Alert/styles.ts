@@ -5,18 +5,17 @@ export const Message = styled.div`
   bottom: ${({ theme }) => theme.valueInPercent.pr10};
   right: ${({ theme }) => theme.valueInPercent.pr5};
   width: fit-content;
-  height: ${({ theme }) => theme.valueInPercent.pr5};
+  height: ${({ theme }) => theme.valueInPercent.pr10};
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: ${({ theme }) => theme.indentation.i15};
   background-color: ${({ theme }) => theme.usedColors.twitterColor};
-  color: ${({ theme }) => theme.usedColors.grayOpacity};
+  color: ${({ theme }) => theme.usedColors.white};
   font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.normal};
   border: ${({ theme }) => theme.valueInPx.px1} solid
     ${({ theme }) => theme.usedColors.twitterColor};
   border-radius: ${({ theme }) => theme.valueInPx.px5};
-  opacity: 0.8;
 
   z-index: 100;
 `;

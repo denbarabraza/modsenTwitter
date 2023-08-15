@@ -1,28 +1,38 @@
-import { ChangeEvent, useState } from 'react';
-import { FieldValues } from 'react-hook-form';
+import { ChangeEvent, FC, useState } from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import mySaveIcon from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { GenderSelector, Option } from '@/components/Form/style.ts';
-import { Input } from '@/components/Input/Input.tsx';
+import { validationErrors, validationPatterns } from '@/constants/dataForEditModal.ts';
 import { gendersValue } from '@/constants/dataForSelectors.ts';
-import { SchemaParamEnum, useFormHandler } from '@/hooks/useFormHandler.ts';
+import { FirebaseCollections } from '@/constants/firebase.ts';
+import { getTweetsByUserId } from '@/firebase/api/getData.ts';
+import { updateDocument, updateUser } from '@/firebase/helpers/updateData.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { setAlert } from '@/store/slice/appSlice.ts';
+import { setAlert, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setUpdateUser } from '@/store/slice/userSlice.ts';
 
 import {
   Credentials,
+  EditItem,
+  ErrorText,
   Form,
   GenderBlock,
+  InputItem,
   Title,
   UserIcon,
   UserIconItem,
   Wrapper,
 } from './styles';
 
-export const ProfileEditModal = () => {
-  const [gender, setGender] = useState<number>(0);
+export interface IProfileEditModal {
+  handleGetUserTweets: () => void;
+}
+
+export const ProfileEditModal: FC<IProfileEditModal> = ({ handleGetUserTweets }) => {
+  const [, setGender] = useState<number>(0);
 
   const dispatch = useAppDispatch();
   const handleSetGender = (event: ChangeEvent<{ value: unknown }>) => {
@@ -34,46 +44,81 @@ export const ProfileEditModal = () => {
     lastName: currentLastName,
     telegram: currentTelegram,
     gender: currentGender,
+    id,
   } = useAppSelector(getUserSelector);
 
-  const {
-    errorEmail,
-    errorName,
-    errorPassword,
-    errorNumber,
-    errorConfirmPwd,
-    errorTelegram,
-    handleSubmit,
-    register,
-    isValid,
-  } = useFormHandler(
-    SchemaParamEnum.Edit,
-    'email',
-    'password',
-    'confirmPwd',
-    'name',
-    'phone',
-    'day',
-    'month',
-    'year',
-    'gender',
-    'telegram',
-  );
+  const { namePattern } = validationPatterns;
+  const { nameError, surnameError, passwordError } = validationErrors;
 
-  const handleFormSubmit = async ({ password, name, gender, telegram }: FieldValues) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onTouched' });
+
+  const handleFormSubmit: SubmitHandler<FieldValues> = async ({
+    gender,
+    name,
+    password,
+    surname,
+    telegram,
+  }) => {
     try {
-      console.log(password, name, gender, telegram);
+      let updatedTelegram = telegram;
+
+      if (telegram.includes('@')) {
+        updatedTelegram = `@${telegram}`;
+      }
+
+      await updateUser({
+        gender: gender || currentGender,
+        name: name || currentName,
+        password,
+        lastName: surname || currentLastName,
+        telegram: updatedTelegram || currentTelegram,
+      });
+      if (password) {
+        dispatch(
+          setAlert({
+            isVisible: true,
+            message: 'You need to re-signin to update password',
+          }),
+        );
+      }
+      dispatch(
+        setUpdateUser({
+          gender: gender || currentGender,
+          name: name || currentName,
+          lastName: surname || currentLastName,
+          telegram: telegram || currentTelegram,
+        }),
+      );
+      const userTweets = await getTweetsByUserId('creator.id', id);
+
+      await Promise.all(
+        userTweets.map(item =>
+          updateDocument({
+            collection: FirebaseCollections.Tweets,
+            id: item.tweetId,
+            newDoc: {
+              ...item,
+              creator: {
+                ...item.creator,
+                name: name || currentName,
+                lastName: surname || currentLastName,
+              },
+            },
+          }),
+        ),
+      );
+      handleGetUserTweets();
+
+      dispatch(setModalStatus(false));
     } catch (e) {
       dispatch(
         setAlert({
           isVisible: true,
-          message:
-            errorEmail ||
-            errorName ||
-            errorPassword ||
-            errorNumber ||
-            errorConfirmPwd ||
-            (e as Error).message,
+          message: 'The user`s data has not been updated...',
         }),
       );
     }
@@ -87,22 +132,47 @@ export const ProfileEditModal = () => {
       </UserIconItem>
 
       <Form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Input
-          type='name'
-          label='Name:'
-          nameForValidate='name'
-          placeholder={`${currentName} ${currentLastName}`}
-          register={register}
-          error={errorName}
-        />
-        <Input
-          type='phone'
-          label='Telegram'
-          nameForValidate='telegram'
-          placeholder={currentTelegram}
-          register={register}
-          error={errorTelegram}
-        />
+        <EditItem>
+          <Credentials>Name:</Credentials>
+          <InputItem
+            data-cy='nameField'
+            placeholder={currentName}
+            type='text'
+            {...register('name', { minLength: 3, pattern: namePattern })}
+          />
+          {errors.name && <ErrorText>{nameError}</ErrorText>}
+        </EditItem>
+        <EditItem>
+          <Credentials>Surname:</Credentials>
+          <InputItem
+            data-cy='nameField'
+            placeholder={currentLastName}
+            type='text'
+            {...register('surname', { minLength: 3, pattern: namePattern })}
+          />
+          {errors.surname && <ErrorText>{surnameError}</ErrorText>}
+        </EditItem>
+        <EditItem>
+          <Credentials>Create new password: </Credentials>
+          <InputItem
+            placeholder='example12'
+            type='text'
+            {...register('password', {
+              minLength: 6,
+            })}
+          />
+          {errors.password && <ErrorText>{passwordError}</ErrorText>}
+        </EditItem>
+        <EditItem>
+          <Credentials>Telegram:</Credentials>
+          <InputItem
+            data-cy='telegramField'
+            placeholder={currentTelegram}
+            type='text'
+            {...register('telegram')}
+          />
+        </EditItem>
+
         <GenderBlock>
           <Credentials>Gender</Credentials>
           <GenderSelector {...register('gender')} onChange={handleSetGender}>
@@ -113,25 +183,7 @@ export const ProfileEditModal = () => {
             ))}
           </GenderSelector>
         </GenderBlock>
-
-        <Input
-          type='password'
-          label='Create new password: '
-          nameForValidate='password'
-          placeholder='example12'
-          register={register}
-          error={errorPassword}
-        />
-
-        <Input
-          type='password'
-          label='Confirm new password:'
-          nameForValidate='confirmPwd'
-          placeholder='********'
-          register={register}
-          error={errorConfirmPwd}
-        />
-        <Button isValid={isValid} type='submit' title='Save' />
+        <Button isValid type='submit' title='Save' />
       </Form>
     </Wrapper>
   );
