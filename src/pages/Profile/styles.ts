@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: ${({ theme }) => theme.valueInVh.vh100};
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
     width: ${({ theme }) => theme.valueInPercent.pr100};
@@ -26,7 +27,7 @@ export const MainWrapper = styled.div`
   margin: ${({ theme }) => theme.indentation.i0} auto;
   margin-bottom: ${({ theme }) => theme.indentation.i20};
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: fit-content;
+  height: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -76,7 +77,7 @@ export const Title = styled.p`
   padding: ${({ theme }) => theme.indentation.i5};
   padding-left: ${({ theme }) => theme.indentation.i50};
   font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-weight: ${({ theme }) => theme.fontWeight.medium};
   color: ${({ theme }) => theme.colors.fontColor};
   border-bottom: ${({ theme }) => theme.valueInPx.px1} solid
     ${({ theme }) => theme.usedColors.grayOpacity};

@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { useLocation } from 'react-router-dom';
 
 import myDeleteSvg from '@/assets/delete.svg';
@@ -10,10 +11,11 @@ import myWhiteLikeSvg from '@/assets/like-white.svg';
 import myPhotoSvg from '@/assets/photo.svg';
 import { FirebaseCollections } from '@/constants/firebase.ts';
 import { PATH } from '@/constants/path.ts';
-import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
+import { db } from '@/firebase';
+import { setLikeOnTweet } from '@/firebase/helpers/setLikeOnTweet.ts';
+import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { userIdSelector } from '@/store/selectors/userSelectors.ts';
-import { deleteDocumentThunk } from '@/store/thunks/tweets';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
 import { tweetCreatedTime } from '@/utils/tweetCreatedTime.ts';
@@ -37,7 +39,7 @@ import {
 } from './styles';
 import { ITweetItem } from './types';
 
-export const TweetItem: FC<ITweetItem> = props => {
+export const TweetItem: FC<ITweetItem> = memo(props => {
   const {
     creatorId,
     name,
@@ -50,9 +52,8 @@ export const TweetItem: FC<ITweetItem> = props => {
     lastName,
     tweetId,
     setTweets,
+    handleGetTweets,
   } = props;
-
-  const dispatch = useAppDispatch();
 
   const [isRemoveVisible, setIsRemoveVisible] = useState(false);
 
@@ -68,8 +69,9 @@ export const TweetItem: FC<ITweetItem> = props => {
 
   const tweetTime = tweetCreatedTime(date);
 
-  const handleLikeTweet = () => {
-    console.log('handleLikeTweet');
+  const handleLikeTweet = async () => {
+    await setLikeOnTweet(tweetId, userId);
+    handleGetTweets();
   };
 
   const handleShowRemove = () => {
@@ -77,10 +79,8 @@ export const TweetItem: FC<ITweetItem> = props => {
   };
 
   const handleDeleteTweet = async () => {
-    await dispatch(
-      deleteDocumentThunk({ collection: FirebaseCollections.Tweets, prop: tweetId }),
-    );
-    setTweets(prev => prev.filter(item => item.tweetId !== tweetId));
+    await deleteDoc(doc(db, FirebaseCollections.Tweets, tweetId));
+    setTweets(prev => prev.filter(tweet => tweet.tweetId !== tweetId));
   };
 
   return (
@@ -138,4 +138,4 @@ export const TweetItem: FC<ITweetItem> = props => {
       </Tweet>
     </Wrapper>
   );
-};
+});

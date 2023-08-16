@@ -12,8 +12,11 @@ const schemaParam = {
       'Incorrect email',
     ),
   password: Yup.string().required('No password provided').min(6, 'At least 6 characters'),
-  confirmPwd: Yup.string().oneOf([Yup.ref('password')], 'Passwords does not match'),
+  confirmPwd: Yup.string()
+    .required('Please confirm password')
+    .oneOf([Yup.ref('password')], 'Passwords does not match'),
   name: Yup.string()
+    .matches(/^[A-Za-z]+\s[A-Za-z]+$/, 'Incorrect email')
     .required('Enter your name')
     .min(3, 'At least 3 characters')
     .max(22, 'Maximum number of characters 22'),
@@ -47,7 +50,10 @@ export const useFormHandler = (...keys: string[]) => {
     formState: { errors, isValid },
     handleSubmit,
     reset,
-  } = useForm({ resolver: yupResolver(formSchema), mode: 'onTouched' });
+  } = useForm({
+    resolver: yupResolver(formSchema),
+    mode: 'onTouched',
+  });
 
   const errorEmail = errors.email ? String(errors.email.message) : undefined;
   const errorPassword = errors.password ? String(errors.password.message) : undefined;

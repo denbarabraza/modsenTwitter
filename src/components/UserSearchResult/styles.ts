@@ -5,9 +5,23 @@ export const Wrapper = styled.div`
   width: ${({ theme }) => theme.valueInPercent.pr100};
   height: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.valueInPx.px10};
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
+  border-radius: ${({ theme }) => theme.valueInPx.px10};
+  border: ${({ theme }) => theme.valueInPx.px1} solid
+    ${({ theme }) => theme.usedColors.grayOpacity};
+  padding: ${({ theme }) => theme.indentation.i15};
+
+  @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.valueInPx.px10};
+    justify-content: flex-start;
+    align-items: center;
+  }
 `;
 
 export const User = styled.li`
@@ -24,7 +38,7 @@ export const Icon = styled.img`
   width: ${({ theme }) => theme.valueInPx.px40};
   height: ${({ theme }) => theme.valueInPx.px40};
   margin-right: ${({ theme }) => theme.valueInPercent.pr2};
-  align-self: flex-start;
+  align-self: center;
   background-color: transparent;
   border: ${({ theme }) => theme.valueInPx.px1} solid transparent;
   border-radius: ${({ theme }) => theme.valueInPx.px10};
@@ -47,7 +61,6 @@ export const UserName = styled.p`
 
 export const UserEmail = styled.p`
   margin-right: ${({ theme }) => theme.indentation.i5};
-  margin-top: ${({ theme }) => theme.indentation.i5};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   color: ${({ theme }) => theme.colors.fontColor};
@@ -56,12 +69,12 @@ export const UserEmail = styled.p`
 
 export const UserDescription = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: ${({ theme }) => theme.valueInPercent.pr80};
   height: fit-content;
 `;
 
 export const ButtonBlock = styled.div`
-  width: ${({ theme }) => theme.valueInPercent.pr20};
+  width: ${({ theme }) => theme.valueInPercent.pr50};
   height: fit-content;
 `;

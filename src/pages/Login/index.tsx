@@ -12,11 +12,6 @@ import { getUserDataSelector } from '@/store/selectors/userSelectors.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 import { logInWithEmailThunk, logInWithNumberThunk } from '@/store/thunks/auth';
 
-export interface ILogInFormInput {
-  email: string;
-  password: string;
-}
-
 export const Login = () => {
   const dispatch = useAppDispatch();
   const { isError } = useAppSelector(getUserDataSelector);

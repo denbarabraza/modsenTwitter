@@ -1,8 +1,9 @@
 import { FC, memo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
+import { useAppDispatch } from '@/hooks/useStoreControl.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
 
 import {
   ButtonBlock,
@@ -16,24 +17,31 @@ import {
 import { IUserSearchResultProps } from './types';
 
 export const UserSearchResult: FC<IUserSearchResultProps> = memo(
-  ({ name, email, photo, id }) => {
-    const navigate = useNavigate();
+  ({ name, telegram, photo, lastName }) => {
+    const dispatch = useAppDispatch();
 
-    const handleNavigate = () => {
-      navigate(`/profile/${id}`);
+    const handleFollow = () => {
+      dispatch(
+        setAlert({
+          isVisible: true,
+          message: `You have subscribed to a user ${name} ${lastName}`,
+        }),
+      );
     };
 
     return (
       <Wrapper>
         <UserDescription>
-          <Icon src={photo || myPhotoSvg} alt='userPhoto' onClick={handleNavigate} />
+          <Icon src={photo || myPhotoSvg} alt='userPhoto' />
           <User>
-            <UserName>{name}</UserName>
-            <UserEmail>{email}</UserEmail>
+            <UserName>
+              {name} {lastName}
+            </UserName>
+            {telegram && <UserEmail>{telegram}</UserEmail>}
           </User>
         </UserDescription>
         <ButtonBlock>
-          <Button title='Follow' isValid />
+          <Button title='Follow' isValid callBack={handleFollow} />
         </ButtonBlock>
       </Wrapper>
     );

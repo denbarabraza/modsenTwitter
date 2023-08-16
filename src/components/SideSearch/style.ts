@@ -84,6 +84,11 @@ export const Input = styled.input`
     opacity: 0.7;
   }
 
+  @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    width: ${({ theme }) => theme.valueInPercent.pr90};
+  }
+
   @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
     font-size: ${({ theme }) => theme.fontSizes.xxl};
   }
@@ -105,8 +110,8 @@ export const ResultWrapper = styled.div`
 `;
 
 export const Title = styled.p`
-  height: ${({ theme }) => theme.valueInPercent.pr100}
-  width: ${({ theme }) => theme.valueInPercent.pr100}
+  height: ${({ theme }) => theme.valueInPercent.pr100};
+  width: ${({ theme }) => theme.valueInPercent.pr100};
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   color: ${({ theme }) => theme.colors.fontColor};
@@ -116,13 +121,22 @@ export const Title = styled.p`
 export const ResultList = styled.ul`
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
   align-items: center;
+  gap: ${({ theme }) => theme.valueInPx.px15};
   margin: ${({ theme }) => theme.valueInPercent.pr2} auto;
   width: ${({ theme }) => theme.valueInPercent.pr100};
   background-color: transparent;
 `;
 
-export const TextLink = styled(Link)`
+export const ActionBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+`;
+
+export const SideSearchAction = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.usedColors.twitterColor};
   background: transparent;

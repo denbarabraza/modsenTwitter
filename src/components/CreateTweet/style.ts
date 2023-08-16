@@ -15,13 +15,15 @@ export const Wrapper = styled.div`
 
   color: ${({ theme }) => theme.colors.fontColor};
 
-  z-index: 100;
-
   animation-duration: 0.5s;
   animation-delay: 0.5s;
   animation-fill-mode: backwards;
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: ${({ theme }) => theme.valueInPercent.pr100};
   }
 `;
@@ -35,7 +37,7 @@ export const Tweet = styled.form`
   position: relative;
   margin: ${({ theme }) => theme.indentation.i0} auto;
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: fit-content;
+  height: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -45,16 +47,17 @@ export const Tweet = styled.form`
 export const TextAreaWrapper = styled.div`
   width: ${({ theme }) => theme.valueInPercent.pr100};
   padding-left: ${({ theme }) => theme.indentation.i25};
-  height: fit-content;
+  height: ${({ theme }) => theme.valueInPercent.pr100};
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
 `;
 
 export const Icon = styled.img`
-  width: ${({ theme }) => theme.valueInPx.px60};
-  height: ${({ theme }) => theme.valueInPx.px50};
+  width: ${({ theme }) => theme.valueInPx.px70};
+  height: ${({ theme }) => theme.valueInPx.px70};
   align-self: flex-start;
   background-color: transparent;
   border-radius: ${({ theme }) => theme.valueInPx.px10};
@@ -79,7 +82,7 @@ export const TextArea = styled.textarea`
   margin-top: ${({ theme }) => theme.indentation.i15};
   margin-bottom: ${({ theme }) => theme.indentation.i15};
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: ${({ theme }) => theme.valueInPx.px40};
+  height: ${({ theme }) => theme.valueInPercent.pr80};
   color: ${({ theme }) => theme.colors.fontColor};
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeight.medium};
@@ -110,7 +113,7 @@ export const FileWrapper = styled.div`
   background-color: transparent;
 `;
 
-export const UploadFile = styled.input``;
+export const UploadImage = styled.input``;
 
 export const UploadFileLabel = styled.label`
   background-color: transparent;

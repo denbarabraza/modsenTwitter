@@ -20,17 +20,21 @@ export const UserInfo = styled.div`
   position: relative;
   margin: ${({ theme }) => theme.indentation.i0} auto;
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  padding-top: ${({ theme }) => theme.indentation.i25};
+  padding-top: ${({ theme }) => theme.indentation.i20};
   height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.mainBackground};
+
+  @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
+    padding-top: ${({ theme }) => theme.indentation.i10};
+  }
 `;
 
 export const Icon = styled.img`
   position: absolute;
-  top: -${({ theme }) => theme.valueInPx.px80};
+  top: -${({ theme }) => theme.valueInPercent.pr60};
   left: -${({ theme }) => theme.valueInPx.px1};
   width: ${({ theme }) => theme.valueInPx.px100};
   height: ${({ theme }) => theme.valueInPx.px100};
@@ -41,6 +45,10 @@ export const Icon = styled.img`
 
   &:hover {
     transform: scale(1.2);
+  }
+
+  @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
+    top: -${({ theme }) => theme.valueInPercent.pr80};
   }
 `;
 

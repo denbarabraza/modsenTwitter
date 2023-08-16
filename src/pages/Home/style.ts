@@ -64,8 +64,11 @@ export const Form = styled.div`
   width: ${({ theme }) => theme.valueInPercent.pr40};
   padding-left: ${({ theme }) => theme.indentation.i40};
 
-  @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
+  @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
     width: ${({ theme }) => theme.valueInPercent.pr300};
+    align-items: center;
+    padding-left: ${({ theme }) => theme.indentation.i0};
+    padding: ${({ theme }) => theme.indentation.i10};
   }
 
   @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
@@ -200,6 +203,7 @@ export const Text = styled.p`
 
   @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
     width: ${({ theme }) => theme.valueInPercent.pr100};
+    text-align: center;
   }
 
   @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
@@ -229,8 +233,8 @@ export const Footer = styled.footer`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
-    height: fit-content;
+  @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
+    height: ${({ theme }) => theme.valueInPx.px150};
     width: ${({ theme }) => theme.valueInPercent.pr100};
   }
 `;

@@ -5,7 +5,7 @@ export const Wrapper = styled(Link)<{ isActive: boolean }>`
   display: flex;
   gap: ${({ theme }) => theme.valueInPx.px10};
   align-self: flex-start;
-  font-weight: ${({ theme }) => theme.fontWeight.light};
+  font-weight: ${({ theme }) => theme.fontWeight.normal};
   font-size: ${({ theme }) => theme.fontSizes.l};
   font-size: ${({ theme, isActive }) =>
     isActive ? theme.fontSizes.xl : theme.fontSizes.l};
@@ -18,13 +18,10 @@ export const Wrapper = styled(Link)<{ isActive: boolean }>`
     cursor: pointer;
   }
 
-  @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
-    margin-top: ${({ theme }) => theme.valueInPercent.pr2};
-    height: fit-content;
-  }
-
-  @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
-    margin-top: ${({ theme }) => theme.valueInPercent.pr2};
+  @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
+    gap: ${({ theme }) => theme.valueInPx.px5};
+    font-size: ${({ theme }) => theme.fontSizes.m};
+    font-weight: ${({ theme }) => theme.fontWeight.normal};
     height: fit-content;
   }
 

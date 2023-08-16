@@ -12,6 +12,7 @@ export const usedColors: IUsedColors = {
   grayOpacity: 'rgba(143,143,143,0.5)',
   twitterColor: 'rgba(29,161,242)',
   red: 'rgb(255,36,75)',
+  blueOpacity: 'rgb(224,239,255)',
 };
 
 const baseTheme: ITheme = {
@@ -21,11 +22,15 @@ const baseTheme: ITheme = {
     headBackground: usedColors.twitterColor,
     mainBackground: usedColors.white,
     formBackground: usedColors.white,
+    modalItemBackground: usedColors.white,
+    modalContentBackground: usedColors.grayOpacity,
     boxShadow: usedColors.grayOpacity,
     toggleBackground: usedColors.white,
     toggleBackgroundChecked: usedColors.white,
     toggleCircle: usedColors.twitterColor,
     toggleBorder: usedColors.twitterColor,
+    burgerMenuBackground: usedColors.blueOpacity,
+    tweetBackground: usedColors.blueOpacity,
   },
   usedColors: { ...usedColors },
   fontSizes: {
@@ -149,10 +154,14 @@ export const darkTheme: DefaultTheme = {
     headBackground: usedColors.darkGrayBlue,
     mainBackground: usedColors.darkBlue,
     formBackground: usedColors.darkGrayBlue,
+    modalItemBackground: usedColors.darkGrayBlue,
+    modalContentBackground: usedColors.blackOpacity,
     boxShadow: usedColors.grayOpacity,
     toggleBackground: usedColors.twitterColor,
     toggleBackgroundChecked: usedColors.twitterColor,
     toggleCircle: usedColors.white,
     toggleBorder: usedColors.twitterColor,
+    burgerMenuBackground: usedColors.darkGrayBlue,
+    tweetBackground: usedColors.darkGrayBlue,
   },
 };

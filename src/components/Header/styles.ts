@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { usedColors } from '@/theme/theme.ts';
-
 export const HeaderWrapper = styled.header`
   padding: 0 ${({ theme }) => theme.indentation.i20};
   width: ${({ theme }) => theme.valueInPercent.pr100};
@@ -20,8 +18,8 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const Icon = styled.img`
-  width: ${({ theme }) => theme.valueInPx.px10};
-  height: ${({ theme }) => theme.valueInPx.px10};
+  width: ${({ theme }) => theme.valueInPx.px30};
+  height: ${({ theme }) => theme.valueInPx.px30};
   margin-right: ${({ theme }) => theme.valueInPx.px25};
 
   &:hover {
@@ -32,6 +30,14 @@ export const Icon = styled.img`
     width: ${({ theme }) => theme.valueInPx.px30};
     height: ${({ theme }) => theme.valueInPx.px30};
   }
+`;
+
+export const HeaderRootItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.valueInPx.px10};
+  align-items: center;
+  max-width: ${({ theme }) => theme.valueInPercent.pr80};
 `;
 
 export const HeaderNav = styled.nav`

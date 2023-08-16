@@ -28,13 +28,11 @@ export const userSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload;
     },
-    updateUser: (state, action: PayloadAction<UpdateUserPayload>) => {
+    setUpdateUser: (state, action: PayloadAction<UpdateUserPayload>) => {
       state.user = { ...state.user, ...action.payload };
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isAuth = true;
       state.isLoading = action.payload;
-      state.user = {} as IUser;
     },
     setError: (state, action: PayloadAction<string>) => {
       state.isError = action.payload;
@@ -90,9 +88,6 @@ export const userSlice = createSlice({
   },
 });
 
-// signUpWithEmailThunk
-
-export const { setUser, updateUser, removeUser, setLoading, setError } =
-  userSlice.actions;
+export const { setUser, setUpdateUser, removeUser, setError } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

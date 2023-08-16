@@ -1,14 +1,17 @@
-import { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, memo, useEffect, useState } from 'react';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
 import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { Loader } from '@/components/Loader';
 import { createNewTweet } from '@/firebase/helpers/createNewTweet.ts';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
+import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ITweet } from '@/types';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 
+import { ICreateTweet } from './interface.ts';
 import {
   FileWrapper,
   Icon,
@@ -18,48 +21,70 @@ import {
   TextAreaWrapper,
   Tweet,
   TweetBlock,
-  UploadFile,
   UploadFileLabel,
+  UploadImage,
   Wrapper,
 } from './style.ts';
 
-export interface ICreateTweet {
-  setTweets: Dispatch<SetStateAction<ITweet[]>>;
-}
-
-export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
+export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
   const { id, email, name, photo, lastName } = useAppSelector(getUserSelector);
+  const modalStatus = useAppSelector(getModalStatusSelector);
+  const dispatch = useAppDispatch();
 
   const [tweetValue, setTweetValue] = useState<string>('');
   const [image, setImage] = useState<File>();
-  const [isLoading] = useState<boolean>(false);
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCreateTweet = async (e: FormEvent) => {
     e.preventDefault();
-    if (tweetValue) {
-      const newTweet = await createNewTweet({
-        email,
-        id,
-        image,
-        name,
-        lastName,
-        photo,
-        tweetValue,
-      });
+    const newTweet = await createNewTweet({
+      email,
+      id,
+      image,
+      name,
+      lastName,
+      photo,
+      tweetValue,
+    });
 
-      setTweets(prev => [newTweet, ...prev]);
-    }
+    setTweets(prev => [newTweet, ...prev]);
+
     setTweetValue('');
     setImage(undefined);
+    if (modalStatus === ModalStatusEnum.CreateTweet) {
+      dispatch(setModalStatus(ModalStatusEnum.Closed));
+    }
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTweetValue(e.target.value);
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+
+    if (files) {
+      setIsLoading(true);
+      const storage = getStorage();
+      const storageRef = ref(storage, 'some-child');
+
+      uploadBytes(storageRef, files[0]).then(() => {
+        setIsLoading(false);
+      });
+
+      setImage(files[0]);
+      setImageUrl(URL.createObjectURL(files[0]));
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (imageUrl) {
+        URL.revokeObjectURL(imageUrl);
+      }
+    };
+  }, [imageUrl]);
 
   return (
     <Wrapper>
@@ -72,12 +97,10 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
             onChange={handleChangeInput}
           />
           {isLoading && <Loader />}
-          {!isLoading && image && (
-            <PreloadImage src={URL.createObjectURL(image)} alt='Image preload' />
-          )}
+          {!isLoading && image && <PreloadImage src={imageUrl} alt='Image preload' />}
           <FileWrapper>
             <UploadFileLabel htmlFor='file'>
-              <UploadFile
+              <UploadImage
                 type='file'
                 id='file'
                 hidden
@@ -94,4 +117,4 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
       </Tweet>
     </Wrapper>
   );
-};
+});

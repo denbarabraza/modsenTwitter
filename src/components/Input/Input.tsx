@@ -1,20 +1,10 @@
-import { Dispatch, FC, memo, SetStateAction, useState } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { FC, memo, useState } from 'react';
 
 import eye from '@/assets/eye.svg';
 import noEye from '@/assets/eye-close.svg';
+import { IInput } from '@/components/Input/interface.ts';
 
 import { ErrorText, IconShowPassword, InputItem, LabelInput } from './style.ts';
-
-interface IInput {
-  label?: string;
-  type: string;
-  placeholder?: string;
-  error?: string;
-  register: UseFormRegister<FieldValues>;
-  nameForValidate: string;
-  emailOrPhoneCheck?: Dispatch<SetStateAction<'phone' | 'email'>>;
-}
 
 export const Input: FC<IInput> = memo(
   ({ type, label, placeholder, error, register, nameForValidate, emailOrPhoneCheck }) => {

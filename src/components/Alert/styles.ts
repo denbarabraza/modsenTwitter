@@ -2,21 +2,20 @@ import styled from 'styled-components';
 
 export const Message = styled.div`
   position: fixed;
-  bottom: ${({ theme }) => theme.valueInPercent.pr10};
-  right: ${({ theme }) => theme.valueInPercent.pr5};
+  bottom: ${({ theme }) => theme.valueInPercent.pr5};
+  right: ${({ theme }) => theme.valueInPercent.pr2};
   width: fit-content;
-  height: ${({ theme }) => theme.valueInPercent.pr5};
+  height: ${({ theme }) => theme.valueInPercent.pr10};
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: ${({ theme }) => theme.indentation.i15};
   background-color: ${({ theme }) => theme.usedColors.twitterColor};
-  color: ${({ theme }) => theme.usedColors.grayOpacity};
+  color: ${({ theme }) => theme.usedColors.white};
   font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.normal};
   border: ${({ theme }) => theme.valueInPx.px1} solid
     ${({ theme }) => theme.usedColors.twitterColor};
-  border-radius: ${({ theme }) => theme.valueInPx.px5};
-  opacity: 0.8;
+  border-radius: ${({ theme }) => theme.valueInPx.px20};
 
   z-index: 100;
 `;

@@ -11,18 +11,19 @@ import { auth } from '@/firebase';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 import { removeUser } from '@/store/slice/userSlice.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
 
 import {
   Credentials,
-  Email,
   IconLogo,
   IconPhoto,
   IconPhotoItem,
   MenuBlock,
   Name,
+  TelegramValue,
   UserInfo,
   Wrapper,
 } from './style.ts';
@@ -32,9 +33,13 @@ export const SideMenu = () => {
   const theme = useAppSelector(getThemeSelector);
 
   const navigate = useNavigate();
-  const { name, email, id, photo, lastName } = useAppSelector(getUserSelector);
+  const { name, id, photo, lastName, telegram } = useAppSelector(getUserSelector);
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);
+
+  const handleCreateTweetInMenu = () => {
+    dispatch(setModalStatus(ModalStatusEnum.CreateTweet));
+  };
 
   const handleNavigate = () => {
     navigate(`/profile/${id}`);
@@ -60,7 +65,7 @@ export const SideMenu = () => {
             id={id}
           />
         ))}
-        <Button title='Tweet' callBack={() => console.log('Tweet')} isValid />
+        <Button title='Tweet' callBack={handleCreateTweetInMenu} isValid />
         <UserInfo>
           <IconPhotoItem>
             <IconPhoto
@@ -69,12 +74,11 @@ export const SideMenu = () => {
               onClick={handleNavigate}
             />
           </IconPhotoItem>
-
           <Credentials>
             <Name>
               {name} {lastName}
             </Name>
-            <Email>{email}</Email>
+            {telegram && <TelegramValue>{telegram}</TelegramValue>}
           </Credentials>
         </UserInfo>
         {!isFeedPath && <Button title='Log Out' callBack={handleLogOut} isValid />}

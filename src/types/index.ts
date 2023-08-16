@@ -2,6 +2,7 @@ export interface IUser {
   id: string;
   email: string;
   name: string;
+  nameLowercase: string;
   lastName: string;
   telegram?: string;
   gender?: Gender | null;

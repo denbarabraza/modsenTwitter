@@ -1,7 +1,8 @@
-import { FC, memo, ReactNode } from 'react';
+import { FC, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import twitter from '@/assets/logo.svg';
+import { IFormWrapper } from '@/components/Form/interface.ts';
 import { PATH } from '@/constants/path.ts';
 
 import {
@@ -13,14 +14,6 @@ import {
   Title,
   Wrapper,
 } from './style.ts';
-
-interface IFormWrapper {
-  children?: ReactNode;
-  title?: string;
-  questionText?: string;
-  linkTitle?: string;
-  linkPath?: string;
-}
 
 export const FormWrapper: FC<IFormWrapper> = memo(
   ({ children, title, questionText, linkTitle, linkPath }) => {

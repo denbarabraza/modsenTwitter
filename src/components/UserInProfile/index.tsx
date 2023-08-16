@@ -1,9 +1,10 @@
 import { FC, memo } from 'react';
 
 import editProfile from '@/assets/editProfile.svg';
-import { useAppSelector } from '@/hooks/useStoreControl.ts';
+import { IUserInProfile } from '@/components/UserInProfile/type.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { IUser } from '@/types';
+import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
 
 import {
   Credentials,
@@ -22,12 +23,13 @@ const userBannerText = {
   buttonText: 'Edit profile',
   followingText: 'Following',
   followersText: 'Followers',
-  followingCount: 67,
-  followersCount: 47,
+  followingCount: 11,
+  followersCount: 43,
 };
 
-export const UserInProfile: FC<IUser> = memo(
+export const UserInProfile: FC<IUserInProfile> = memo(
   ({ photo, name, email, gender, telegram, id }) => {
+    const dispatch = useAppDispatch();
     const { followersText, followingText, followersCount, followingCount } =
       userBannerText;
 
@@ -40,8 +42,8 @@ export const UserInProfile: FC<IUser> = memo(
       telegram: authUserTelegram,
     } = useAppSelector(getUserSelector);
 
-    const onOpenModal = () => {
-      console.log('Modal open');
+    const onEditUser = () => {
+      dispatch(setModalStatus(ModalStatusEnum.EditProfile));
     };
 
     return (
@@ -54,7 +56,7 @@ export const UserInProfile: FC<IUser> = memo(
               <IconEditProfile
                 src={editProfile}
                 alt='edit profile'
-                onClick={onOpenModal}
+                onClick={onEditUser}
               />
             )}
           </NameBlock>

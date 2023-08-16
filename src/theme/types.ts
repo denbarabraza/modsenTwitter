@@ -8,6 +8,7 @@ export interface IUsedColors {
   grayOpacity: string;
   twitterColor: string;
   red: string;
+  blueOpacity: string;
 }
 
 export interface ITheme {
@@ -16,12 +17,16 @@ export interface ITheme {
     fontColorOpacity: string;
     headBackground: string;
     mainBackground: string;
+    modalItemBackground: string;
+    modalContentBackground: string;
     formBackground: string;
     boxShadow: string;
     toggleBackground: string;
     toggleBackgroundChecked: string;
     toggleCircle: string;
     toggleBorder: string;
+    burgerMenuBackground: string;
+    tweetBackground: string;
   };
   usedColors: IUsedColors;
   fontSizes: {

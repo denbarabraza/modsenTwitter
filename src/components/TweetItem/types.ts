@@ -17,7 +17,3 @@ export interface ITweetItem {
   setTweets: Dispatch<SetStateAction<ITweet[]>>;
   handleGetTweets: () => void;
 }
-
-export interface LikeCountProps {
-  isLiked: boolean;
-}
