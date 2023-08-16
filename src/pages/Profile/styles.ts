@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: ${({ theme }) => theme.valueInVh.vh100};
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
     width: ${({ theme }) => theme.valueInPercent.pr100};
@@ -26,7 +27,7 @@ export const MainWrapper = styled.div`
   margin: ${({ theme }) => theme.indentation.i0} auto;
   margin-bottom: ${({ theme }) => theme.indentation.i20};
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: fit-content;
+  height: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

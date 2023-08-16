@@ -17,14 +17,14 @@ import {
 import { IUserSearchResultProps } from './types';
 
 export const UserSearchResult: FC<IUserSearchResultProps> = memo(
-  ({ name, email, photo }) => {
+  ({ name, telegram, photo, lastName }) => {
     const dispatch = useAppDispatch();
 
     const handleFollow = () => {
       dispatch(
         setAlert({
           isVisible: true,
-          message: `You have subscribed to a user ${name}`,
+          message: `You have subscribed to a user ${name} ${lastName}`,
         }),
       );
     };
@@ -34,8 +34,10 @@ export const UserSearchResult: FC<IUserSearchResultProps> = memo(
         <UserDescription>
           <Icon src={photo || myPhotoSvg} alt='userPhoto' />
           <User>
-            <UserName>{name}</UserName>
-            <UserEmail>{email}</UserEmail>
+            <UserName>
+              {name} {lastName}
+            </UserName>
+            {telegram && <UserEmail>{telegram}</UserEmail>}
           </User>
         </UserDescription>
         <ButtonBlock>

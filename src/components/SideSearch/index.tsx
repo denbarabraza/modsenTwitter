@@ -1,8 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import mySearchSvg from '@/assets/search.svg';
-import { Alert } from '@/components/Alert';
 import { SetState } from '@/components/SideSearch/type.ts';
 import { TweetSearchResult } from '@/components/TweetSearchResult';
 import { UserSearchResult } from '@/components/UserSearchResult';
@@ -10,7 +9,7 @@ import { sideSearchText } from '@/constants/dataForPages.ts';
 import { PATH } from '@/constants/path.ts';
 import { getTweetsBySearch, getUsersBySearch } from '@/firebase/api/getData.ts';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
-import { setAlert, setAppLoading } from '@/store/slice/appSlice.ts';
+import { setAlert } from '@/store/slice/appSlice.ts';
 import { ICreator, ITweetBySearch } from '@/types';
 import { checkPath } from '@/utils/checkPath.ts';
 
@@ -24,7 +23,7 @@ import {
   ResultList,
   ResultWrapper,
   SearchWrapper,
-  TextLink,
+  ShowMoreItem,
   Title,
   Wrapper,
 } from './style.ts';
@@ -34,28 +33,22 @@ const { title, link, navLinks, copyrightText } = sideSearchText;
 export const SideSearch = () => {
   const dispatch = useAppDispatch();
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const [countItem, setCountItem] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>('');
-  const [users, setUsers] = useState<ICreator[]>([
-    {
-      id: 'ICreator',
-      email: 'denis.bareischev@gmail.com',
-      name: 'Jonh',
-      lastName: 'Wick',
-      photo: mySearchSvg,
-    },
-  ]);
-  const [tweets, setTweets] = useState<ITweetBySearch[]>([
-    {
-      id: 'ds',
-      text: '4-kursni tugatgunimcha kamida bitta biznesim bolishini, uylanish uchun moddiy jihatdan to la-to kis tayyor bo lishni, soglik va jismoniy holatni normallashtirishni reja qildim',
-    },
-  ]);
+  const [users, setUsers] = useState<ICreator[]>([]);
+  const [tweets, setTweets] = useState<ITweetBySearch[]>([]);
 
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);
+  const navigate = useNavigate();
 
-  const usersResult = users.map(data => <UserSearchResult {...data} key={data.id} />);
-  const tweetsResult = tweets.map(data => <TweetSearchResult {...data} key={data.id} />);
+  const usersResult = users
+    .filter((_, index) => index <= countItem)
+    .map(user => <UserSearchResult {...user} key={user.id} />);
+  const tweetsResult = tweets
+    .filter((_, index) => index <= countItem)
+    .map(tweet => <TweetSearchResult {...tweet} key={tweet.id} />);
 
   const getData = isFeedPath ? getUsersBySearch : getTweetsBySearch;
   const field = isFeedPath ? 'nameLowercase' : 'text';
@@ -67,8 +60,7 @@ export const SideSearch = () => {
   };
 
   const handleSearchData = async <T,>(setter: SetState<T[]>) => {
-    dispatch(setAppLoading(true));
-
+    setLoading(true);
     if (searchValue) {
       const newData = (await getData(field, readySearchValue)) as T[];
 
@@ -80,12 +72,11 @@ export const SideSearch = () => {
           }),
         );
       }
-      console.log(newData);
       setter(newData);
     } else {
       setter([]);
     }
-    dispatch(setAppLoading(false));
+    setLoading(false);
   };
 
   const handleSearch = async (e: FormEvent) => {
@@ -95,6 +86,17 @@ export const SideSearch = () => {
     if (!isFeedPath) handleSearchData(setTweets);
   };
 
+  const handleShowMoreItem = () => {
+    setCountItem(prevState => prevState + 2);
+  };
+
+  useEffect(() => {
+    setSearchValue('');
+    setCountItem(1);
+    setUsers([]);
+    setTweets([]);
+  }, [navigate]);
+
   return (
     <Wrapper>
       <SearchWrapper>
@@ -103,11 +105,12 @@ export const SideSearch = () => {
         </ButtonIcon>
         <Input placeholder={placeholder} value={searchValue} onChange={handleChange} />
       </SearchWrapper>
+      {loading && <div>Loading...</div>}
       {(users.length !== 0 || tweets.length !== 0) && (
         <ResultWrapper>
           <Title>{title}</Title>
           <ResultList>{isFeedPath ? usersResult : tweetsResult}</ResultList>
-          <TextLink to='#'>{link}</TextLink>
+          <ShowMoreItem onClick={handleShowMoreItem}>{link}</ShowMoreItem>
         </ResultWrapper>
       )}
       <Nav>
@@ -118,7 +121,6 @@ export const SideSearch = () => {
         ))}
         <NavItem>{copyrightText}</NavItem>
       </Nav>
-      <Alert />
     </Wrapper>
   );
 };
