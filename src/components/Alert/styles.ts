@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Message = styled.div`
   position: fixed;
   bottom: ${({ theme }) => theme.valueInPercent.pr5};
-  left: ${({ theme }) => theme.valueInPercent.pr2};
+  right: ${({ theme }) => theme.valueInPercent.pr2};
   width: fit-content;
   height: ${({ theme }) => theme.valueInPercent.pr10};
   display: flex;

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, memo, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import mySearchSvg from '@/assets/search.svg';
@@ -14,6 +14,7 @@ import { ICreator, ITweetBySearch } from '@/types';
 import { checkPath } from '@/utils/checkPath.ts';
 
 import {
+  ActionBlock,
   ButtonIcon,
   Icon,
   Input,
@@ -23,14 +24,14 @@ import {
   ResultList,
   ResultWrapper,
   SearchWrapper,
-  ShowMoreItem,
+  SideSearchAction,
   Title,
   Wrapper,
 } from './style.ts';
 
-const { title, link, navLinks, copyrightText } = sideSearchText;
+const { title, navLinks, copyrightText } = sideSearchText;
 
-export const SideSearch = () => {
+export const SideSearch = memo(() => {
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -90,11 +91,15 @@ export const SideSearch = () => {
     setCountItem(prevState => prevState + 2);
   };
 
-  useEffect(() => {
+  const handleClearValue = () => {
     setSearchValue('');
     setCountItem(1);
     setUsers([]);
     setTweets([]);
+  };
+
+  useEffect(() => {
+    handleClearValue();
   }, [navigate]);
 
   return (
@@ -110,7 +115,10 @@ export const SideSearch = () => {
         <ResultWrapper>
           <Title>{title}</Title>
           <ResultList>{isFeedPath ? usersResult : tweetsResult}</ResultList>
-          <ShowMoreItem onClick={handleShowMoreItem}>{link}</ShowMoreItem>
+          <ActionBlock>
+            <SideSearchAction onClick={handleShowMoreItem}>Show More</SideSearchAction>
+            <SideSearchAction onClick={handleClearValue}>Clear</SideSearchAction>
+          </ActionBlock>
         </ResultWrapper>
       )}
       <Nav>
@@ -123,4 +131,4 @@ export const SideSearch = () => {
       </Nav>
     </Wrapper>
   );
-};
+});

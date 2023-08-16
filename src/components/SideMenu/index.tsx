@@ -18,12 +18,12 @@ import { checkPath } from '@/utils/checkPath.ts';
 
 import {
   Credentials,
-  Email,
   IconLogo,
   IconPhoto,
   IconPhotoItem,
   MenuBlock,
   Name,
+  TelegramValue,
   UserInfo,
   Wrapper,
 } from './style.ts';
@@ -33,7 +33,7 @@ export const SideMenu = () => {
   const theme = useAppSelector(getThemeSelector);
 
   const navigate = useNavigate();
-  const { name, email, id, photo, lastName } = useAppSelector(getUserSelector);
+  const { name, id, photo, lastName, telegram } = useAppSelector(getUserSelector);
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);
 
@@ -78,7 +78,7 @@ export const SideMenu = () => {
             <Name>
               {name} {lastName}
             </Name>
-            <Email>{email}</Email>
+            {telegram && <TelegramValue>{telegram}</TelegramValue>}
           </Credentials>
         </UserInfo>
         {!isFeedPath && <Button title='Log Out' callBack={handleLogOut} isValid />}

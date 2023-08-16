@@ -129,7 +129,14 @@ export const ResultList = styled.ul`
   background-color: transparent;
 `;
 
-export const ShowMoreItem = styled.div`
+export const ActionBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+`;
+
+export const SideSearchAction = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.usedColors.twitterColor};
   background: transparent;

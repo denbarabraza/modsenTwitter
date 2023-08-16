@@ -85,7 +85,7 @@ export const Name = styled.p`
   }
 `;
 
-export const Email = styled.p`
+export const TelegramValue = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.m};
   font-weight: ${({ theme }) => theme.fontWeight.light};
   color: ${({ theme }) => theme.colors.fontColor};
