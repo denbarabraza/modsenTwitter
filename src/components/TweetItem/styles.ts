@@ -30,7 +30,7 @@ export const Tweet = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: ${({ theme }) => theme.colors.formBackground};
+  background-color: ${({ theme }) => theme.colors.tweetBackground};
   border-radius: ${({ theme }) => theme.valueInPx.px10};
 `;
 
@@ -151,6 +151,7 @@ export const TweetText = styled.p`
   height: fit-content;
   background: transparent;
   color: ${({ theme }) => theme.colors.fontColor};
+  word-break: break-word;
   font-size: ${({ theme }) => theme.fontSizes.m};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
 

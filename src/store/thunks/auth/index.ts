@@ -11,7 +11,7 @@ import { createDocument } from '@/firebase/api/createDocument.ts';
 import { getDocument } from '@/firebase/api/getData.ts';
 import { signInWithEmail } from '@/firebase/api/signInWithEmail.ts';
 import { signUpWithEmail } from '@/firebase/api/signUpWithEmail.ts';
-import { ILogInFormInput } from '@/pages/Login';
+import { ILogInFormInput } from '@/pages/Login/interface.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 import { setError, setUser } from '@/store/slice/userSlice.ts';
 import { IUser } from '@/types';

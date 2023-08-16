@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAlertObj, IAppInitialState } from '@/store/slice/interface.ts';
+import { IAlertObj, IAppInitialState } from '@/store/slice/interfaces.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 
 export enum ModalStatusEnum {

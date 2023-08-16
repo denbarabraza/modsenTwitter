@@ -1,9 +1,10 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, memo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import mySaveIcon from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { GenderSelector, Option } from '@/components/Form/style.ts';
+import { IProfileEditModal } from '@/components/ProfileEditModal/interface.ts';
 import { validationErrors, validationPatterns } from '@/constants/dataForEditModal.ts';
 import { gendersValue } from '@/constants/dataForSelectors.ts';
 import { FirebaseCollections } from '@/constants/firebase.ts';
@@ -11,7 +12,7 @@ import { getTweetsByUserId } from '@/firebase/api/getData.ts';
 import { updateDocument, updateUser } from '@/firebase/helpers/updateData.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { setAlert, setModalStatus } from '@/store/slice/appSlice.ts';
+import { ModalStatusEnum, setAlert, setModalStatus } from '@/store/slice/appSlice.ts';
 import { setUpdateUser } from '@/store/slice/userSlice.ts';
 
 import {
@@ -27,11 +28,7 @@ import {
   Wrapper,
 } from './styles';
 
-export interface IProfileEditModal {
-  handleGetUserTweets: () => void;
-}
-
-export const ProfileEditModal: FC<IProfileEditModal> = ({ handleGetUserTweets }) => {
+export const ProfileEditModal: FC<IProfileEditModal> = memo(({ handleGetUserTweets }) => {
   const [, setGender] = useState<number>(0);
 
   const dispatch = useAppDispatch();
@@ -66,7 +63,7 @@ export const ProfileEditModal: FC<IProfileEditModal> = ({ handleGetUserTweets })
     try {
       let updatedTelegram = telegram;
 
-      if (telegram.includes('@')) {
+      if (!telegram.includes('@')) {
         updatedTelegram = `@${telegram}`;
       }
 
@@ -113,7 +110,7 @@ export const ProfileEditModal: FC<IProfileEditModal> = ({ handleGetUserTweets })
       );
       handleGetUserTweets();
 
-      dispatch(setModalStatus(false));
+      dispatch(setModalStatus(ModalStatusEnum.Closed));
     } catch (e) {
       dispatch(
         setAlert({
@@ -187,4 +184,4 @@ export const ProfileEditModal: FC<IProfileEditModal> = ({ handleGetUserTweets })
       </Form>
     </Wrapper>
   );
-};
+});

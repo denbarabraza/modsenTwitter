@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   margin: ${({ theme }) => theme.indentation.i0} auto;
+  height: ${({ theme }) => theme.valueInVh.vh100};
   width: ${({ theme }) => theme.valueInPercent.pr100};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {

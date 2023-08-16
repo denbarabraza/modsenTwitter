@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { useLocation } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ import {
 } from './styles';
 import { ITweetItem } from './types';
 
-export const TweetItem: FC<ITweetItem> = props => {
+export const TweetItem: FC<ITweetItem> = memo(props => {
   const {
     creatorId,
     name,
@@ -138,4 +138,4 @@ export const TweetItem: FC<ITweetItem> = props => {
       </Tweet>
     </Wrapper>
   );
-};
+});

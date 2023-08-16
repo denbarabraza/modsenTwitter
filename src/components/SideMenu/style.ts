@@ -5,8 +5,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: ${({ theme }) => theme.valueInPercent.pr30};
-  height: 100vh;
+  width: ${({ theme }) => theme.valueInPercent.pr100};
+  height: ${({ theme }) => theme.valueInPercent.pr100};
 `;
 
 export const MenuBlock = styled.div`
@@ -14,8 +14,8 @@ export const MenuBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: ${({ theme }) => theme.valueInPx.px10};
-  width: 70%;
+  gap: ${({ theme }) => theme.valueInPx.px15};
+  width: ${({ theme }) => theme.valueInPercent.pr50};
 `;
 
 export const IconLogo = styled.img`
@@ -57,7 +57,7 @@ export const UserInfo = styled.div`
 `;
 
 export const IconPhotoItem = styled.div`
-  padding: ${({ theme }) => theme.valueInPx.px10} ${({ theme }) => theme.valueInPx.px0};
+  padding: ${({ theme }) => theme.valueInPx.px5} ${({ theme }) => theme.valueInPx.px0};
   width: ${({ theme }) => theme.valueInPercent.pr100};
   height: fit-content;
   display: flex;
@@ -70,6 +70,7 @@ export const Credentials = styled.div`
   height: fit-content;
   padding-left: ${({ theme }) => theme.indentation.i5};
   display: flex;
+  word-break: break-word;
   flex-direction: column;
   align-items: flex-start;
 `;
@@ -104,10 +105,6 @@ export const IconPhoto = styled.img`
 
   &:hover {
     transform: scale(1.2);
-  }
-
-  @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
-    margin-left: ${({ theme }) => theme.indentation.i25};
   }
 
   @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {

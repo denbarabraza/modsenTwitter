@@ -84,6 +84,11 @@ export const Input = styled.input`
     opacity: 0.7;
   }
 
+  @media (max-width: ${({ theme }) => theme.dimensions.laptop}px) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    width: ${({ theme }) => theme.valueInPercent.pr90};
+  }
+
   @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
     font-size: ${({ theme }) => theme.fontSizes.xxl};
   }

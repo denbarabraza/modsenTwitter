@@ -1,8 +1,9 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import mySearchSvg from '@/assets/search.svg';
 import { Alert } from '@/components/Alert';
+import { SetState } from '@/components/SideSearch/type.ts';
 import { TweetSearchResult } from '@/components/TweetSearchResult';
 import { UserSearchResult } from '@/components/UserSearchResult';
 import { sideSearchText } from '@/constants/dataForPages.ts';
@@ -29,8 +30,6 @@ import {
 } from './style.ts';
 
 const { title, link, navLinks, copyrightText } = sideSearchText;
-
-export type SetState<TState> = Dispatch<SetStateAction<TState>>;
 
 export const SideSearch = () => {
   const dispatch = useAppDispatch();
@@ -95,8 +94,6 @@ export const SideSearch = () => {
     if (isFeedPath) handleSearchData(setUsers);
     if (!isFeedPath) handleSearchData(setTweets);
   };
-
-  console.log(users, tweets);
 
   return (
     <Wrapper>

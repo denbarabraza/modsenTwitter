@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: calc(
-    ${({ theme }) => theme.valueInVh.vh100} + ${({ theme }) => theme.valueInPx.px40}
-  );
+  height: ${({ theme }) => theme.valueInPercent.pr100};
   margin: ${({ theme }) => theme.indentation.i0} auto;
   max-height: ${({ theme }) => theme.valueInPercent.pr80};
 
@@ -20,7 +18,7 @@ export const Wrapper = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
-    width: ${({ theme }) => theme.valueInPercent.pr80};
+    height: ${({ theme }) => theme.valueInPercent.pr80};
   }
 `;
 

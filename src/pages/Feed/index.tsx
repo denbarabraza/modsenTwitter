@@ -31,7 +31,7 @@ export const Feed = () => {
         {!params?.id ? (
           <>
             <CreateTweetBlock setTweets={setTweets} />
-            <Title>Tweets</Title>
+            {tweets.length > 0 && <Title>Tweets</Title>}
             {tweets.length > 0 &&
               tweets.map(({ date, text, image, likes, tweetId, creator }) => (
                 <TweetItem

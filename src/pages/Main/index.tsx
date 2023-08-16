@@ -3,12 +3,14 @@ import { SideMenu } from '@/components/SideMenu';
 import { SideSearch } from '@/components/SideSearch';
 import { MainPages } from '@/pages';
 
-import { Wrapper } from './styles.ts';
+import { MenuItemBlock, Wrapper } from './styles.ts';
 
 export const Main = () => {
   return (
     <Wrapper>
-      <SideMenu />
+      <MenuItemBlock>
+        <SideMenu />
+      </MenuItemBlock>
       <MainPages />
       <SideSearch />
       <Alert />

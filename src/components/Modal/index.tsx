@@ -1,14 +1,11 @@
-import { FC, memo, ReactNode, useEffect } from 'react';
+import { FC, memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
+import { IModal } from '@/components/Modal/interface.ts';
 import { ModalContent, ModalItem } from '@/components/Modal/styled.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
-
-export interface IModal {
-  children: ReactNode;
-}
 
 export const Modal: FC<IModal> = memo(({ children }) => {
   const dispatch = useAppDispatch();

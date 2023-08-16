@@ -1,12 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FC,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, FC, FormEvent, memo, useEffect, useState } from 'react';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
@@ -18,8 +10,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
 import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
-import { ITweet } from '@/types';
 
+import { ICreateTweet } from './interface.ts';
 import {
   FileWrapper,
   Icon,
@@ -34,11 +26,7 @@ import {
   Wrapper,
 } from './style.ts';
 
-export interface ICreateTweet {
-  setTweets: Dispatch<SetStateAction<ITweet[]>>;
-}
-
-export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
+export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
   const { id, email, name, photo, lastName } = useAppSelector(getUserSelector);
   const modalStatus = useAppSelector(getModalStatusSelector);
   const dispatch = useAppDispatch();
@@ -129,4 +117,4 @@ export const CreateTweetBlock: FC<ICreateTweet> = ({ setTweets }) => {
       </Tweet>
     </Wrapper>
   );
-};
+});

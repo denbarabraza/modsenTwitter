@@ -12,6 +12,7 @@ export const usedColors: IUsedColors = {
   grayOpacity: 'rgba(143,143,143,0.5)',
   twitterColor: 'rgba(29,161,242)',
   red: 'rgb(255,36,75)',
+  blueOpacity: 'rgb(224,239,255)',
 };
 
 const baseTheme: ITheme = {
@@ -28,6 +29,8 @@ const baseTheme: ITheme = {
     toggleBackgroundChecked: usedColors.white,
     toggleCircle: usedColors.twitterColor,
     toggleBorder: usedColors.twitterColor,
+    burgerMenuBackground: usedColors.blueOpacity,
+    tweetBackground: usedColors.blueOpacity,
   },
   usedColors: { ...usedColors },
   fontSizes: {
@@ -158,5 +161,7 @@ export const darkTheme: DefaultTheme = {
     toggleBackgroundChecked: usedColors.twitterColor,
     toggleCircle: usedColors.white,
     toggleBorder: usedColors.twitterColor,
+    burgerMenuBackground: usedColors.darkGrayBlue,
+    tweetBackground: usedColors.darkGrayBlue,
   },
 };

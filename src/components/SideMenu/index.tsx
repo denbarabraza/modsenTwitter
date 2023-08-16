@@ -74,7 +74,6 @@ export const SideMenu = () => {
               onClick={handleNavigate}
             />
           </IconPhotoItem>
-
           <Credentials>
             <Name>
               {name} {lastName}

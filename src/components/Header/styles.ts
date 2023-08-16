@@ -32,6 +32,14 @@ export const Icon = styled.img`
   }
 `;
 
+export const HeaderRootItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.valueInPx.px10};
+  align-items: center;
+  max-width: ${({ theme }) => theme.valueInPercent.pr80};
+`;
+
 export const HeaderNav = styled.nav`
   display: flex;
   flex-direction: column;

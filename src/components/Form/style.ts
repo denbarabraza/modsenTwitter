@@ -41,6 +41,10 @@ export const InnerWrapper = styled.div`
   box-shadow:
     1px 1px 2px ${({ theme }) => theme.colors.boxShadow},
     -1px -1px 2px ${({ theme }) => theme.colors.boxShadow};
+
+  @media (max-width: ${({ theme }) => theme.dimensions.mobile}px) {
+    max-width: ${({ theme }) => theme.valueInPercent.pr80};
+  }
 `;
 
 export const Form = styled.form`
@@ -89,24 +93,6 @@ export const IconTwitter = styled.img`
   height: ${({ theme }) => theme.valueInPx.px30};
 `;
 
-export const Selectors = styled.div`
-  margin-bottom: ${({ theme }) => theme.valueInPx.px10};
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: ${({ theme }) => theme.valueInPx.px30};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const DateBirthBlock = styled.div`
-  display: flex;
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.valueInPx.px10};
-`;
-
 export const Selector = css`
   display: flex;
   align-items: center;
@@ -139,16 +125,6 @@ export const Selector = css`
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${({ theme }) => theme.usedColors.gray};
   }
-`;
-
-export const MonthSelector = styled.select`
-  width: ${({ theme }) => theme.valueInPercent.pr50};
-  ${Selector}
-`;
-
-export const DayYearSelector = styled.select`
-  width: ${({ theme }) => theme.valueInPercent.pr20};
-  ${Selector}
 `;
 
 export const GenderSelector = styled.select`
