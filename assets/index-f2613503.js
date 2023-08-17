@@ -1,4 +1,4 @@
-import{s as o,r as a,j as n,$,c as p,O as m,u as v,T as s,a0 as f,f as P,Z as I,l as b,R as w,P as x}from"./index-78889b3f.js";const k="/assets/arrow-back-b4de9eeb.svg",j=o.button`
+import{s as o,r as a,j as n,$,c as p,O as m,u as v,T as s,a0 as f,f as P,Z as I,l as b,R as w,P as x}from"./index-8d0cbd5a.js";const k="/assets/arrow-back-b4de9eeb.svg",j=o.button`
   @media (min-width: ${({theme:e})=>e.dimensions.tablet}px) {
     display: none;
   }
