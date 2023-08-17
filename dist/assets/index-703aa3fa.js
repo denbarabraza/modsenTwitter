@@ -1,4 +1,4 @@
-import{s as t,n as h,L as a,u as p,j as n,t as $,P as r,h as g,a as u,b as f}from"./index-78889b3f.js";const w="/assets/back-twitter-791860c2.png",v="/assets/google-a1176fbd.svg",I=t.div`
+import{s as t,n as h,L as a,u as p,j as n,t as $,P as r,h as g,a as u,b as f}from"./index-8d0cbd5a.js";const w="/assets/back-twitter-791860c2.png",v="/assets/google-a1176fbd.svg",I=t.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

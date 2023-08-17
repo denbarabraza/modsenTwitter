@@ -1,0 +1,1 @@
+import{j as s}from"./index-8d0cbd5a.js";import{H as r}from"./index-f2613503.js";import{W as e,T as a}from"./rootStyles-3a9ab128.js";const m=()=>s.jsxs(e,{children:[s.jsx(r,{}),s.jsx(a,{children:"Messages Page"})]});export{m as Messages};

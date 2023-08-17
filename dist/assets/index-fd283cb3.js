@@ -1,1 +1,0 @@
-import{j as r}from"./index-78889b3f.js";import{H as i}from"./index-f37c9552.js";import{W as o,T as s}from"./rootStyles-f8b5223f.js";const m=()=>r.jsxs(o,{children:[r.jsx(i,{}),r.jsx(s,{children:"Notifications Page"})]});export{m as Notifications};
