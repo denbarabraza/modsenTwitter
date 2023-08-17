@@ -52,8 +52,8 @@ export const SideMenu = () => {
   };
 
   return (
-    <Wrapper>
-      <MenuBlock>
+    <Wrapper data-cy='menuWrapper'>
+      <MenuBlock data-cy='menuItem'>
         <IconLogo src={twitterLogo} alt='twitterLogo' />
         {menuItems.map(({ to, text, src, srcAlt }) => (
           <MenuItem

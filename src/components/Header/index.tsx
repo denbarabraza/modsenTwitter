@@ -33,7 +33,7 @@ export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper data-cy='headerItem'>
       {!isFeedPath ? (
         <HeaderRootItem>
           <MenuHeader />

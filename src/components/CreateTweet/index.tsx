@@ -87,11 +87,12 @@ export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
   }, [imageUrl]);
 
   return (
-    <Wrapper>
+    <Wrapper data-cy='createTweetBlock'>
       <Icon src={photo || myPhotoSvg} alt='Photo' />
       <Tweet onSubmit={handleCreateTweet}>
         <TextAreaWrapper>
           <TextArea
+            data-cy='textAreaTweet'
             placeholder='What`s happening'
             value={tweetValue}
             onChange={handleChangeInput}
@@ -111,7 +112,7 @@ export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
             </UploadFileLabel>
           </FileWrapper>
         </TextAreaWrapper>
-        <TweetBlock>
+        <TweetBlock data-cy='createInPage'>
           <Button title='Tweet' isValid />
         </TweetBlock>
       </Tweet>

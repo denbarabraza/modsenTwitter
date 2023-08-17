@@ -47,20 +47,22 @@ export const UserInProfile: FC<IUserInProfile> = memo(
     };
 
     return (
-      <Wrapper>
-        <UserInfo>
+      <Wrapper data-cy='userInfoBlock'>
+        <UserInfo data-cy='userInfo'>
           <Icon src={photo} alt='Twitter Logo' />
-          <NameBlock>
-            <Name>{id === authUserId ? `${authUserName} ${authLastName}` : name}</Name>
+          <NameBlock data-cy='nameBlock'>
+            <Name data-cy='nameItem'>
+              {id === authUserId ? `${authUserName} ${authLastName}` : name}
+            </Name>
             {id === authUserId && (
               <IconEditProfile
+                data-cy='editIcon'
                 src={editProfile}
                 alt='edit profile'
                 onClick={onEditUser}
               />
             )}
           </NameBlock>
-
           <Credentials>{id === authUserId ? authUserEmail : email}</Credentials>
           <Text>
             {authUserGender && (

@@ -84,10 +84,10 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper data-cy='tweetItemBlock'>
       <Icon src={photo || myPhotoSvg} alt='Photo' />
-      <Tweet>
-        <TweetContentWrapper>
+      <Tweet data-cy='tweetItem'>
+        <TweetContentWrapper data-cy='tweetContent'>
           <Info>
             <UserDataBlock>
               <Name>
@@ -99,7 +99,7 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
             {creatorId === userId && (
               <>
                 <EditIcon
-                  data-cy='editIcon'
+                  data-cy='editIconTweet'
                   src={currentTheme === ThemeEnum.Dark ? myWhiteEditSvg : myEditSvg}
                   alt='Edit'
                   onClick={handleShowRemove}
@@ -107,6 +107,7 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
                 {isRemoveVisible && (
                   <IconWrapper>
                     <ImageIcon
+                      data-cy='deleteIcon'
                       src={myDeleteSvg}
                       alt='Delete Tweet'
                       onClick={handleDeleteTweet}
@@ -116,7 +117,7 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
               </>
             )}
           </Info>
-          <TweetText>{text}</TweetText>
+          <TweetText data-cy='tweetItemText'>{text}</TweetText>
           {image && (
             <ImageWrapper>
               <Image src={image} />
@@ -130,6 +131,7 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
                   : (currentTheme === ThemeEnum.Dark && myWhiteLikeSvg) || myLikeSvg
               }
               alt='Like'
+              data-cy='likeIcon'
               onClick={handleLikeTweet}
             />
             <LikeCount isLiked={isLiked}>{likes.length}</LikeCount>

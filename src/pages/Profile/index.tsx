@@ -48,7 +48,7 @@ export const Profile = () => {
   const { photo, email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
 
   return (
-    <Wrapper>
+    <Wrapper data-cy='profileItem'>
       <MainWrapper>
         <Header tweetsCount={tweets.length} />
         <BannerBlock>

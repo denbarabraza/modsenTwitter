@@ -128,7 +128,7 @@ export const ProfileEditModal: FC<IProfileEditModal> = memo(({ handleGetUserTwee
         <UserIcon src={mySaveIcon} />
       </UserIconItem>
 
-      <Form onSubmit={handleSubmit(handleFormSubmit)}>
+      <Form onSubmit={handleSubmit(handleFormSubmit)} data-cy='formEditProfile'>
         <EditItem>
           <Credentials>Name:</Credentials>
           <InputItem

@@ -92,7 +92,7 @@ export const SignUp = () => {
       title='Create an account'
       questionText='Already have an account?'
     >
-      <Form onSubmit={handleSubmit(handleSignUpFormSubmit)}>
+      <Form onSubmit={handleSubmit(handleSignUpFormSubmit)} data-cy='formSignUpItem'>
         <Input
           type='name'
           label='Name:'

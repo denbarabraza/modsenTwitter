@@ -8,7 +8,7 @@ import { MenuItemBlock, Wrapper } from './styles.ts';
 export const Main = () => {
   return (
     <Wrapper>
-      <MenuItemBlock>
+      <MenuItemBlock data-cy='sideMenuBlock'>
         <SideMenu />
       </MenuItemBlock>
       <MainPages />
