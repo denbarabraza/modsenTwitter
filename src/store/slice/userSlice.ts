@@ -88,6 +88,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setUpdateUser, removeUser, setError } = userSlice.actions;
+export const { setUser, setLoading, setUpdateUser, removeUser, setError } =
+  userSlice.actions;
 
 export const userReducer = userSlice.reducer;

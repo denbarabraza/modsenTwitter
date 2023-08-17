@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ErrorText, ErrorWrapper } from '@/components/ErrorBoundary/styled';
 
 export const ErrorFallback = () => {

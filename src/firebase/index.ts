@@ -3,14 +3,24 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
+import {
+  VITE_FIREBASE_BUCKET_STORAGE,
+  VITE_FIREBASE_DOMAIN_AUTH,
+  VITE_FIREBASE_ID_API,
+  VITE_FIREBASE_ID_MEASUREMENT,
+  VITE_FIREBASE_ID_PROJECT,
+  VITE_FIREBASE_KEY_API,
+  VITE_FIREBASE_MESSAGING_ID_SENDER,
+} from '@/constants/environments.ts';
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_API_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: VITE_FIREBASE_KEY_API,
+  authDomain: VITE_FIREBASE_DOMAIN_AUTH,
+  projectId: VITE_FIREBASE_ID_PROJECT,
+  storageBucket: VITE_FIREBASE_BUCKET_STORAGE,
+  messagingSenderId: VITE_FIREBASE_MESSAGING_ID_SENDER,
+  appId: VITE_FIREBASE_ID_API,
+  measurementId: VITE_FIREBASE_ID_MEASUREMENT,
 };
 
 export const app = initializeApp(firebaseConfig);
