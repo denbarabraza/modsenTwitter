@@ -1,0 +1,15 @@
+export const PATH = {
+  HOME: '/home',
+  SIGN_UP: '/sign-up',
+  LOGIN: '/login',
+  PROFILE: '/profile/:id',
+  FEED: '/feed',
+  FEED_TWEET: '/feed/:id',
+  EXPLORE: '/explore',
+  NOTIFICATIONS: '/notifications',
+  MESSAGES: '/messages',
+  BOOKMARKS: '/bookmarks',
+  LISTS: '/lists',
+  MORE: '/more',
+  NOT_FOUND: '*',
+} as const;
