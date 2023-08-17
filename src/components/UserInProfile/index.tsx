@@ -2,9 +2,10 @@ import { FC, memo } from 'react';
 
 import editProfile from '@/assets/editProfile.svg';
 import { IUserInProfile } from '@/components/UserInProfile/type.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setModalStatus } from '@/store/slice/appSlice.ts';
 
 import {
   Credentials,
@@ -17,7 +18,7 @@ import {
   TextLink,
   UserInfo,
   Wrapper,
-} from './styles';
+} from './style.ts';
 
 const userBannerText = {
   buttonText: 'Edit profile',

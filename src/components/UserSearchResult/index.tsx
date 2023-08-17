@@ -13,8 +13,8 @@ import {
   UserEmail,
   UserName,
   Wrapper,
-} from './styles';
-import { IUserSearchResultProps } from './types';
+} from './style.ts';
+import { IUserSearchResultProps } from './type.ts';
 
 export const UserSearchResult: FC<IUserSearchResultProps> = memo(
   ({ name, telegram, photo, lastName }) => {

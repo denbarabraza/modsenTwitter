@@ -20,6 +20,7 @@ import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
 import { tweetCreatedTime } from '@/utils/tweetCreatedTime.ts';
 
+import { ITweetItem } from './interface.ts';
 import {
   Credentials,
   EditIcon,
@@ -36,8 +37,7 @@ import {
   TweetText,
   UserDataBlock,
   Wrapper,
-} from './styles';
-import { ITweetItem } from './types';
+} from './style.ts';
 
 export const TweetItem: FC<ITweetItem> = memo(props => {
   const {

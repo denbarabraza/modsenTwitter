@@ -1,10 +1,6 @@
-import {
-  appSlice,
-  ModalStatusEnum,
-  setAlert,
-  setTheme,
-} from '../../src/store/slice/appSlice';
-import { IAppInitialState } from '../../src/store/slice/interfaces';
+import { ModalStatusEnum } from '../../src/constants/modalStatus';
+import { appSlice, setAlert, setTheme } from '../../src/store/slice/appSlice';
+import { IAppInitialState } from '../../src/store/slice/types';
 import { ThemeEnum } from '../../src/theme/types';
 
 describe('appSlice', () => {

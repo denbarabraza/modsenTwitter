@@ -5,11 +5,12 @@ import myImageSvg from '@/assets/image-blue.svg';
 import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { Loader } from '@/components/Loader';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { createNewTweet } from '@/firebase/helpers/createNewTweet.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setModalStatus } from '@/store/slice/appSlice.ts';
 
 import { ICreateTweet } from './interface.ts';
 import {

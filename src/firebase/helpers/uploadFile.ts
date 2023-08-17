@@ -1,16 +1,8 @@
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
-import { FirebaseCollections } from '@/constants/firebase.ts';
 import { storage } from '@/firebase';
+import { IUploadFile } from '@/firebase/helpers/types.ts';
 import { updateDocument } from '@/firebase/helpers/updateData.ts';
-
-type TFile = Blob | Uint8Array | ArrayBuffer;
-
-interface IUploadFile {
-  collection: FirebaseCollections;
-  file: TFile;
-  id: string;
-}
 
 export const uploadFile = async (options: IUploadFile) => {
   const { collection, file, id } = options;

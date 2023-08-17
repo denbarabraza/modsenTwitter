@@ -8,11 +8,12 @@ import { IProfileEditModal } from '@/components/ProfileEditModal/interface.ts';
 import { validationErrors, validationPatterns } from '@/constants/dataForEditModal.ts';
 import { gendersValue } from '@/constants/dataForSelectors.ts';
 import { FirebaseCollections } from '@/constants/firebase.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { getTweetsByUserId } from '@/firebase/api/getData.ts';
 import { updateDocument, updateUser } from '@/firebase/helpers/updateData.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ModalStatusEnum, setAlert, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setAlert, setModalStatus } from '@/store/slice/appSlice.ts';
 import { setUpdateUser } from '@/store/slice/userSlice.ts';
 
 import {
@@ -26,7 +27,7 @@ import {
   UserIcon,
   UserIconItem,
   Wrapper,
-} from './styles';
+} from './style.ts';
 
 export const ProfileEditModal: FC<IProfileEditModal> = memo(({ handleGetUserTweets }) => {
   const [, setGender] = useState<number>(0);
@@ -127,7 +128,6 @@ export const ProfileEditModal: FC<IProfileEditModal> = memo(({ handleGetUserTwee
       <UserIconItem>
         <UserIcon src={mySaveIcon} />
       </UserIconItem>
-
       <Form onSubmit={handleSubmit(handleFormSubmit)} data-cy='formEditProfile'>
         <EditItem>
           <Credentials>Name:</Credentials>

@@ -1,16 +1,17 @@
 import { fireEvent, render } from '@testing-library/react';
 
 import { Button } from '../../src/components/Button/Button';
-import { RootProvider } from '../../src/components/RootProvider';
+import { Theme } from '../../src/components/Theme';
+import { ThemeEnum } from '../../src/theme/types';
 
 import '@testing-library/jest-dom';
 
 describe('Button', () => {
   test('renders with correct props', () => {
     const { getByText } = render(
-      <RootProvider>
+      <Theme theme={ThemeEnum.Dark}>
         <Button isValid type='submit' title='Log In' />
-      </RootProvider>,
+      </Theme>,
     );
     const buttonElement = getByText('Log In');
 
@@ -21,9 +22,9 @@ describe('Button', () => {
 
   test('renders disabled button when isValid is false', () => {
     const { getByText } = render(
-      <RootProvider>
+      <Theme theme={ThemeEnum.Dark}>
         <Button isValid={false} type='submit' title='Log In' />
-      </RootProvider>,
+      </Theme>,
     );
     const buttonElement = getByText('Log In');
 
@@ -35,9 +36,9 @@ describe('Button', () => {
   test('calls callBack function when clicked', () => {
     const mockCallBack = jest.fn();
     const { getByText } = render(
-      <RootProvider>
+      <Theme theme={ThemeEnum.Dark}>
         <Button isValid type='submit' title='Log In' callBack={mockCallBack} />
-      </RootProvider>,
+      </Theme>,
     );
     const buttonElement = getByText('Log In');
 

@@ -6,7 +6,7 @@ import { setTheme } from '@/store/slice/appSlice.ts';
 import { ThemeEnum } from '@/theme/types';
 
 import { IThemeToggle } from './interface';
-import { ToggleContainer, ToggleInput, ToggleLabel, ToggleSlider } from './styled';
+import { ToggleContainer, ToggleInput, ToggleLabel, ToggleSlider } from './style.ts';
 
 export const ThemeToggle: FC<IThemeToggle> = memo(({ open }) => {
   const theme = useAppSelector(getThemeSelector);

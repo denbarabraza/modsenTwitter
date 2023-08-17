@@ -5,7 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ErrorFallback } from '@/components/ErrorBoundary/ErrorFallback';
-import { Theme } from '@/components/Theme';
+import { WithTheme } from '@/components/Theme';
 import { persistor, store } from '@/store/store.ts';
 
 export const RootProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -13,9 +13,9 @@ export const RootProvider: FC<{ children: ReactNode }> = ({ children }) => {
     <HashRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Theme>
+          <WithTheme>
             <ErrorBoundary fallback={<ErrorFallback />}>{children}</ErrorBoundary>
-          </Theme>
+          </WithTheme>
         </PersistGate>
       </Provider>
     </HashRouter>

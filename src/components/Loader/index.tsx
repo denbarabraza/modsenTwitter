@@ -1,4 +1,4 @@
-import { Container, Spinner, Wrapper } from './styled';
+import { Container, Spinner, Wrapper } from './style.ts';
 
 export const Loader = () => {
   return (

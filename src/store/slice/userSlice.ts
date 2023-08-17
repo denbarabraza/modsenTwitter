@@ -1,16 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { IUserState, UpdateUserPayload } from '@/store/slice/types.ts';
 import { logInWithEmailThunk, signUpWithEmailThunk } from '@/store/thunks/auth';
 import { IUser } from '@/types';
-
-export interface IUserState {
-  user: IUser;
-  isAuth: boolean;
-  isLoading: boolean;
-  isError: string;
-}
-
-export type UpdateUserPayload = Pick<IUser, 'lastName' | 'gender' | 'name' | 'telegram'>;
 
 const initialState: IUserState = {
   user: {} as IUser,
@@ -88,7 +80,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setUser, setLoading, setUpdateUser, removeUser, setError } =
-  userSlice.actions;
+export const { setUser, setUpdateUser, removeUser, setError } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

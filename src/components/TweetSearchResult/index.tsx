@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Button/Button.tsx';
 
-import { ButtonBlock, User, UserName, Wrapper } from './styles';
-import { TweetSearchResultProps } from './types';
+import { ButtonBlock, User, UserName, Wrapper } from './style.ts';
+import { TweetSearchResultProps } from './type.ts';
 
 export const TweetSearchResult: FC<TweetSearchResultProps> = memo(({ id, text }) => {
   const navigate = useNavigate();

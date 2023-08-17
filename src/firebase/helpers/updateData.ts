@@ -1,15 +1,9 @@
 import { updatePassword } from 'firebase/auth';
-import { doc, DocumentData, updateDoc, WithFieldValue } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 
 import { FirebaseCollections } from '@/constants/firebase.ts';
 import { auth, db } from '@/firebase';
-import { Gender } from '@/types';
-
-interface IUpdateData {
-  collection: string;
-  id: string;
-  newDoc: WithFieldValue<DocumentData>;
-}
+import { IEditUserData, IUpdateData } from '@/firebase/helpers/types.ts';
 
 export const updateDocument = async (options: IUpdateData) => {
   const { collection, newDoc, id } = options;
@@ -25,14 +19,6 @@ export const updateUserPassword = async (password: string) => {
     await updatePassword(user, password);
   }
 };
-
-export interface IEditUserData {
-  gender: Gender;
-  name: string;
-  password: string;
-  lastName: string;
-  telegram: string;
-}
 
 export const updateUser = async ({
   gender,
