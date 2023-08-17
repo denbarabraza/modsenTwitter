@@ -10,13 +10,13 @@ import { ProfileEditModal } from '@/components/ProfileEditModal';
 import { TweetItem } from '@/components/TweetItem';
 import { UserInProfile } from '@/components/UserInProfile';
 import { FirebaseCollections } from '@/constants/firebase.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { getDocument, getTweetsByUserId } from '@/firebase/api/getData.ts';
 import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
-import { ModalStatusEnum } from '@/store/slice/appSlice.ts';
 import { ITweet, IUser } from '@/types';
 
-import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './styles.ts';
+import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './style.ts';
 
 export const Profile = () => {
   const modalStatus = useAppSelector(getModalStatusSelector);
@@ -48,7 +48,7 @@ export const Profile = () => {
   const { photo, email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
 
   return (
-    <Wrapper>
+    <Wrapper data-cy='profileItem'>
       <MainWrapper>
         <Header tweetsCount={tweets.length} />
         <BannerBlock>

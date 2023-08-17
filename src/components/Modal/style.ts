@@ -36,6 +36,6 @@ export const ModalContent = styled.div<{ open: boolean }>`
   transform: ${({ open }) => (open ? '' : 'scale(1)')};
   @media (max-width: ${({ theme }) => theme.dimensions.tablet}px) {
     width: ${({ theme }) => theme.valueInVw.vw90};
-    min-height: ${({ theme }) => theme.valueInVh.vh75};
+    max-height: ${({ theme }) => theme.valueInVh.vh75};
   }
 `;

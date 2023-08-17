@@ -1,9 +1,12 @@
 {
-  "babelConfig": {
-    "babelrc": false,
-    "configFile": false,
-    "plugins": [
-      "@babel/plugin-proposal-decorators"
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
     ]
-  }
+  ]
 }

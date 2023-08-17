@@ -47,6 +47,7 @@ export const Input: FC<IInput> = memo(
         {label}
         <InputItem
           withError={!!error}
+          data-cy='input'
           {...registerRule}
           type={typeInput}
           placeholder={placeholder}
@@ -54,7 +55,7 @@ export const Input: FC<IInput> = memo(
         {type === 'password' && (
           <IconShowPassword onClick={showPasswordHandler} src={iconPas} alt='icon eye' />
         )}
-        {error && <ErrorText>{error}</ErrorText>}
+        {error && <ErrorText data-cy='errorText'>{error}</ErrorText>}
       </LabelInput>
     );
   },

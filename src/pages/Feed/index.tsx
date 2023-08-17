@@ -5,7 +5,7 @@ import { CreateTweetBlock } from '@/components/CreateTweet';
 import { Header } from '@/components/Header';
 import { TweetItem } from '@/components/TweetItem';
 import { getAllTweets } from '@/firebase/api/getData.ts';
-import { MainWrapper, Title, Wrapper } from '@/pages/Profile/styles.ts';
+import { MainWrapper, Title, Wrapper } from '@/pages/Profile/style.ts';
 import { ITweet } from '@/types';
 
 export const Feed = () => {

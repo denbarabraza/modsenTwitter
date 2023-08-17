@@ -1,11 +1,15 @@
 import { FC, memo } from 'react';
 
 import { IBurgerMenu } from './interface';
-import { StyledBurgerMenu } from './styled';
+import { StyledBurgerMenu } from './style.ts';
 
 export const BurgerMenu: FC<IBurgerMenu> = memo(({ open, setOpen }) => {
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
   return (
-    <StyledBurgerMenu open={open} onClick={() => setOpen(!open)}>
+    <StyledBurgerMenu open={open} onClick={handleOpen}>
       <div />
       <div />
       <div />

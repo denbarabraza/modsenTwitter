@@ -17,7 +17,7 @@ import {
   HeaderWrapper,
   Icon,
   Title,
-} from './styles';
+} from './style.ts';
 import { IHeaderProps } from './types';
 
 export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
@@ -33,7 +33,7 @@ export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
   };
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper data-cy='headerItem'>
       {!isFeedPath ? (
         <HeaderRootItem>
           <MenuHeader />

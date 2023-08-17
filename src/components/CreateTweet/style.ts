@@ -101,13 +101,6 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const ErrorText = styled.p`
-  margin-bottom: ${({ theme }) => theme.indentation.i25};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.usedColors.twitterColor};
-  align-self: flex-start;
-`;
-
 export const FileWrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.indentation.i15};
   background-color: transparent;

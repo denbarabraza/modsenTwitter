@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-const schemaParam = {
+export const schemaParam = {
   email: Yup.string()
     .required('No email provided')
     .email('Incorrect email')

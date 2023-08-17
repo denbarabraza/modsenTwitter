@@ -59,7 +59,7 @@ export const Home = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper data-cy='homePage'>
       <Main>
         <Banner src={myBanner} alt='Twitter Banner' />
         <Form>
@@ -68,13 +68,17 @@ export const Home = () => {
           </IconWrapper>
           <Title>{title}</Title>
           <SubTitle>{subTitle}</SubTitle>
-          <ButtonWrapper type='button' onClick={handleGoogleSignUp}>
+          <ButtonWrapper
+            type='button'
+            onClick={handleGoogleSignUp}
+            data-cy='googleSignIn'
+          >
             <ButtonWithIcon>
               <ButtonIcon src={myGoogleSvg} alt='Google Logo' />
               {signUpGoogleText}
             </ButtonWithIcon>
           </ButtonWrapper>
-          <ButtonLink type='button' to={PATH.SIGN_UP}>
+          <ButtonLink type='button' to={PATH.SIGN_UP} data-cy='signUpLink'>
             {signUpEmailText}
           </ButtonLink>
           <Text>
@@ -88,7 +92,9 @@ export const Home = () => {
           </Text>
           <Text>
             {question}
-            <TextLink to={PATH.LOGIN}>{loginText}</TextLink>
+            <TextLink to={PATH.LOGIN} data-cy='logInLink'>
+              {loginText}
+            </TextLink>
           </Text>
         </Form>
       </Main>

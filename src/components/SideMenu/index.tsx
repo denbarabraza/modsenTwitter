@@ -6,12 +6,13 @@ import myPhotoSvg from '@/assets/photo.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { MenuItem } from '@/components/MenuItem';
 import { menuItems } from '@/constants/menuItems.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { PATH } from '@/constants/path.ts';
 import { auth } from '@/firebase';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getThemeSelector } from '@/store/selectors/appSelectors.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setModalStatus } from '@/store/slice/appSlice.ts';
 import { removeUser } from '@/store/slice/userSlice.ts';
 import { ThemeEnum } from '@/theme/types.ts';
 import { checkPath } from '@/utils/checkPath.ts';
@@ -52,8 +53,8 @@ export const SideMenu = () => {
   };
 
   return (
-    <Wrapper>
-      <MenuBlock>
+    <Wrapper data-cy='menuWrapper'>
+      <MenuBlock data-cy='menuItem'>
         <IconLogo src={twitterLogo} alt='twitterLogo' />
         {menuItems.map(({ to, text, src, srcAlt }) => (
           <MenuItem

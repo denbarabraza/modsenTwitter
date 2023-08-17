@@ -2,9 +2,10 @@ import { FC, memo } from 'react';
 
 import editProfile from '@/assets/editProfile.svg';
 import { IUserInProfile } from '@/components/UserInProfile/type.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
-import { ModalStatusEnum, setModalStatus } from '@/store/slice/appSlice.ts';
+import { setModalStatus } from '@/store/slice/appSlice.ts';
 
 import {
   Credentials,
@@ -17,7 +18,7 @@ import {
   TextLink,
   UserInfo,
   Wrapper,
-} from './styles';
+} from './style.ts';
 
 const userBannerText = {
   buttonText: 'Edit profile',
@@ -47,20 +48,22 @@ export const UserInProfile: FC<IUserInProfile> = memo(
     };
 
     return (
-      <Wrapper>
-        <UserInfo>
+      <Wrapper data-cy='userInfoBlock'>
+        <UserInfo data-cy='userInfo'>
           <Icon src={photo} alt='Twitter Logo' />
-          <NameBlock>
-            <Name>{id === authUserId ? `${authUserName} ${authLastName}` : name}</Name>
+          <NameBlock data-cy='nameBlock'>
+            <Name data-cy='nameItem'>
+              {id === authUserId ? `${authUserName} ${authLastName}` : name}
+            </Name>
             {id === authUserId && (
               <IconEditProfile
+                data-cy='editIcon'
                 src={editProfile}
                 alt='edit profile'
                 onClick={onEditUser}
               />
             )}
           </NameBlock>
-
           <Credentials>{id === authUserId ? authUserEmail : email}</Credentials>
           <Text>
             {authUserGender && (

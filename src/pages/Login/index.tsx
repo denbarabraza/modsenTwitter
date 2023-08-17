@@ -48,7 +48,7 @@ export const Login = () => {
       title='Log in to Twitter'
       questionText='Don`t you have an account yet?'
     >
-      <Form onSubmit={handleSubmit(handleLogIn)} noValidate>
+      <Form onSubmit={handleSubmit(handleLogIn)} noValidate data-cy='formLoginItem'>
         <Input
           type={nameValidateRule}
           label='Email or phone:'

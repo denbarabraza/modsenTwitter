@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IAlertObj, IAppInitialState } from '@/store/slice/interfaces.ts';
+import { ModalStatusEnum } from '@/constants/modalStatus.ts';
+import { IAlertObj, IAppInitialState } from '@/store/slice/types.ts';
 import { ThemeEnum } from '@/theme/types.ts';
-
-export enum ModalStatusEnum {
-  Closed = 'modalClose',
-  EditProfile = 'modalForEditProfile',
-  CreateTweet = 'modalForCreateTweet',
-}
 
 const initialState: IAppInitialState = {
   theme: ThemeEnum.Light,
@@ -38,5 +33,5 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setTheme, setAlert, setAppLoading, setModalStatus } = appSlice.actions;
+export const { setTheme, setAlert, setModalStatus } = appSlice.actions;
 export const appReducer = appSlice.reducer;
