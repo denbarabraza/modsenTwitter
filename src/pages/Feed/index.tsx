@@ -18,11 +18,11 @@ export const Feed = () => {
     setTweets(result);
   };
 
+  const tweetBySearch = tweets.filter(item => item.id === params?.id) as ITweet[];
+
   useEffect(() => {
     handleGetAllTweets();
   }, []);
-
-  const tweetBySearch = tweets.filter(item => item.id === params?.id) as ITweet[];
 
   return (
     <Wrapper>
