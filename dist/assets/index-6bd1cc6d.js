@@ -1,1 +1,0 @@
-import{j as r}from"./index-8d0cbd5a.js";import{H as o}from"./index-f2613503.js";import{W as s,T as e}from"./rootStyles-3a9ab128.js";const i=()=>r.jsxs(s,{children:[r.jsx(o,{}),r.jsx(e,{children:"Bookmarks Page"})]});export{i as Bookmarks};
