@@ -1,1 +1,0 @@
-import{j as r}from"./index-8d0cbd5a.js";import{H as s}from"./index-f2613503.js";import{W as t,T as e}from"./rootStyles-3a9ab128.js";const m=()=>r.jsxs(t,{children:[r.jsx(s,{}),r.jsx(e,{children:"Lists Page"})]});export{m as Lists};
