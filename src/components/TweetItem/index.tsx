@@ -48,7 +48,6 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
     text,
     likes,
     image,
-    photo,
     lastName,
     tweetId,
     setTweets,
@@ -85,7 +84,7 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
 
   return (
     <Wrapper data-cy='tweetItemBlock'>
-      <Icon src={photo || myPhotoSvg} alt='Photo' />
+      <Icon src={myPhotoSvg} alt='Photo' />
       <Tweet data-cy='tweetItem'>
         <TweetContentWrapper data-cy='tweetContent'>
           <Info>

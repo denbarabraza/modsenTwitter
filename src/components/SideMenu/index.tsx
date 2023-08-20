@@ -34,7 +34,7 @@ export const SideMenu = () => {
   const theme = useAppSelector(getThemeSelector);
 
   const navigate = useNavigate();
-  const { name, id, photo, lastName, telegram } = useAppSelector(getUserSelector);
+  const { name, id, lastName, telegram } = useAppSelector(getUserSelector);
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);
 
@@ -69,11 +69,7 @@ export const SideMenu = () => {
         <Button title='Tweet' callBack={handleCreateTweetInMenu} isValid />
         <UserInfo>
           <IconPhotoItem>
-            <IconPhoto
-              src={photo || myPhotoSvg}
-              alt='profile in menu'
-              onClick={handleNavigate}
-            />
+            <IconPhoto src={myPhotoSvg} alt='profile in menu' onClick={handleNavigate} />
           </IconPhotoItem>
           <Credentials>
             <Name>

@@ -45,7 +45,7 @@ export const Profile = () => {
     handleGetUserTweets();
   }, [activeUserId]);
 
-  const { photo, email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
+  const { email, gender, name, phone, telegram, id, lastName, dateOfBirth } = user;
 
   return (
     <Wrapper data-cy='profileItem'>
@@ -55,7 +55,7 @@ export const Profile = () => {
           <Banner src={myBanner} alt='profile banner' />
         </BannerBlock>
         <UserInProfile
-          photo={photo || myProfileIcon}
+          photo={myProfileIcon}
           email={email}
           gender={gender}
           name={name}
