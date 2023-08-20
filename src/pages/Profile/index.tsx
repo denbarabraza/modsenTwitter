@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import myProfileIcon from '@/assets/photo.svg';
 import myBanner from '@/assets/profile-banner.png';
+import myProfileIcon from '@/assets/userPhoto.svg';
 import { CreateTweetBlock } from '@/components/CreateTweet';
 import { Header } from '@/components/Header';
 import { Modal } from '@/components/Modal';

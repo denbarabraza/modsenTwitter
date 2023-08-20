@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 
-import myPhotoSvg from '@/assets/photo.svg';
+import myPhotoSvg from '@/assets/userPhoto.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';

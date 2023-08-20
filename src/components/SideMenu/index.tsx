@@ -2,7 +2,7 @@ import { signOut } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import twitterLogo from '@/assets/logo.svg';
-import myPhotoSvg from '@/assets/photo.svg';
+import myPhotoSvg from '@/assets/userPhoto.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { MenuItem } from '@/components/MenuItem';
 import { menuItems } from '@/constants/menuItems.ts';

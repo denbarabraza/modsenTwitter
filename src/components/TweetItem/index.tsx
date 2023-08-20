@@ -8,7 +8,7 @@ import myWhiteEditSvg from '@/assets/edit-white.svg';
 import myLikeSvg from '@/assets/like.svg';
 import myRedLikeSvg from '@/assets/like-fill.svg';
 import myWhiteLikeSvg from '@/assets/like-white.svg';
-import myPhotoSvg from '@/assets/photo.svg';
+import myPhotoSvg from '@/assets/userPhoto.svg';
 import { FirebaseCollections } from '@/constants/firebase.ts';
 import { PATH } from '@/constants/path.ts';
 import { db } from '@/firebase';

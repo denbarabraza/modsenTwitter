@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, memo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
-import mySaveIcon from '@/assets/photo.svg';
+import mySaveIcon from '@/assets/userPhoto.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { GenderSelector, Option } from '@/components/Form/style.ts';
 import { IProfileEditModal } from '@/components/ProfileEditModal/interface.ts';

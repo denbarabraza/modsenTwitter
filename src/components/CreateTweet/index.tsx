@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent, memo, useEffect, useState } from 'react';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
-import myPhotoSvg from '@/assets/photo.svg';
+import myPhotoSvg from '@/assets/userPhoto.svg';
 import { Button } from '@/components/Button/Button.tsx';
 import { Loader } from '@/components/Loader';
 import { ModalStatusEnum } from '@/constants/modalStatus.ts';

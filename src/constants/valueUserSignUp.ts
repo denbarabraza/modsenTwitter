@@ -1,4 +1,4 @@
-import myDefaultUserPhoto from '@/assets/photo.svg';
+import myDefaultUserPhoto from '@/assets/userPhoto.svg';
 
 export const defaultValueUserSignUp = {
   defaultName: 'Name',
