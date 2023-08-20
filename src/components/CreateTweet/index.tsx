@@ -89,7 +89,7 @@ export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
 
   return (
     <Wrapper data-cy='createTweetBlock'>
-      <Icon src={photo || myPhotoSvg} alt='Photo' />
+      <Icon src={myPhotoSvg} alt='Photo' />
       <Tweet onSubmit={handleCreateTweet}>
         <TextAreaWrapper>
           <TextArea
