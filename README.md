@@ -52,8 +52,7 @@
 
 ## Описание экранов
 
-1.
-Страница [Sign Up](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A368&t=T3Vik0PUWZKXqlCN-0)
+1. Страница [Sign Up](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A368&t=T3Vik0PUWZKXqlCN-0)
 
 На данной странице пользователь может ввести свое имя и номер телефона, дату рождения для того, чтобы
 зарегистрироваться. Все поля должны быть обязательными.
@@ -69,8 +68,7 @@
 При нажатии на "Sign up to Twitter" пользователь переходит на
 страницу [авторизации](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A869&t=T3Vik0PUWZKXqlCN-0).
 
-3.
-Страница [Profile](https://www.figma.вom/file/KaвuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A58&t=T3Vik0PUWZKXqlCN-0)
+3. Страница [Profile](https://www.figma.вom/file/KaвuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A58&t=T3Vik0PUWZKXqlCN-0)
 
 На странице профиля отображается информация о пользователе. При нажатии на edit profile открывается модальное окно в
 котором можно добавить/изменить данные о пользователе:
@@ -84,8 +82,7 @@
 добавление картинки).
 Также предусмотрена возможность выхода из аккаунта.
 
-4.
-Страница [Feed](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A465&t=T3Vik0PUWZKXqlCN-0)
+4. Страница [Feed](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=1%3A465&t=T3Vik0PUWZKXqlCN-0)
 
 В шапке страницы есть возможность сменить общую тему приложения.
 На странице есть возможность создать новый твит, который добавится на текущей странице и на странице самого
@@ -93,8 +90,7 @@
 В поиске Search Twitter происходит список пользователей Twitter(поиск должен происходить на стороне firebase и была
 возможность у твитов поставить лайк).
 
-5.
-Страница [icons](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=6%3A279&t=T3Vik0PUWZKXqlCN-0)
+5. Страница [icons](https://www.figma.com/file/KaCuGri1cQKxx4FMIfBZ6T/Modsen-Twitter?node-id=6%3A279&t=T3Vik0PUWZKXqlCN-0)
 содержит вспомогательные иконки для приложения.
 
 ## Используемые технологии

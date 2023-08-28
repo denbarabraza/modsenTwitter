@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FieldValues } from 'react-hook-form';
 
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/components/Button';
 import { FormWrapper } from '@/components/Form';
-import { Form } from '@/components/Form/style.ts';
-import { Input } from '@/components/Input/Input.tsx';
+import { Form } from '@/components/Form/styled.ts';
+import { Input } from '@/components/Input';
 import { PATH } from '@/constants/path.ts';
 import { useFormHandler } from '@/hooks/useFormHandler.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';

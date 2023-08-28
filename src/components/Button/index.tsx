@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
 import { IButton } from './interface.ts';
-import { ButtonItem } from './style.ts';
+import { ButtonItem } from './styled.ts';
 
 export const Button: FC<IButton> = memo(({ type, title, isValid, callBack }) => {
   return (

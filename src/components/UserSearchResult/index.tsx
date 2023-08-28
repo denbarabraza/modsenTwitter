@@ -1,7 +1,7 @@
 import { FC, memo } from 'react';
 
 import myPhotoSvg from '@/assets/userPhoto.svg';
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/components/Button';
 import { useAppDispatch } from '@/hooks/useStoreControl.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 
@@ -13,7 +13,7 @@ import {
   UserEmail,
   UserName,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 import { IUserSearchResultProps } from './type.ts';
 
 export const UserSearchResult: FC<IUserSearchResultProps> = memo(

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import twitterLogo from '@/assets/logo.svg';
 import myPhotoSvg from '@/assets/userPhoto.svg';
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/components/Button';
 import { MenuItem } from '@/components/MenuItem';
 import { menuItems } from '@/constants/menuItems.ts';
 import { ModalStatusEnum } from '@/constants/modalStatus.ts';
@@ -27,7 +27,7 @@ import {
   TelegramValue,
   UserInfo,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
 export const SideMenu = () => {
   const dispatch = useAppDispatch();

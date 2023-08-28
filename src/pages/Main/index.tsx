@@ -3,7 +3,7 @@ import { SideMenu } from '@/components/SideMenu';
 import { SideSearch } from '@/components/SideSearch';
 import { MainPages } from '@/pages';
 
-import { MenuItemBlock, Wrapper } from './style.ts';
+import { MenuItemBlock, Wrapper } from './styled.ts';
 
 export const Main = () => {
   return (

@@ -2,8 +2,8 @@ import { ChangeEvent, FC, memo, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 
 import mySaveIcon from '@/assets/userPhoto.svg';
-import { Button } from '@/components/Button/Button.tsx';
-import { GenderSelector, Option } from '@/components/Form/style.ts';
+import { Button } from '@/components/Button';
+import { GenderSelector, Option } from '@/components/Form/styled.ts';
 import { IProfileEditModal } from '@/components/ProfileEditModal/interface.ts';
 import { validationErrors, validationPatterns } from '@/constants/dataForEditModal.ts';
 import { gendersValue } from '@/constants/dataForSelectors.ts';
@@ -27,7 +27,7 @@ import {
   UserIcon,
   UserIconItem,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
 export const ProfileEditModal: FC<IProfileEditModal> = memo(({ handleGetUserTweets }) => {
   const [, setGender] = useState<number>(0);

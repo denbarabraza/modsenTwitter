@@ -1,4 +1,4 @@
-import { ErrorText, ErrorWrapper } from '@/components/ErrorBoundary/style.ts';
+import { ErrorText, ErrorWrapper } from '@/components/ErrorBoundary/styled.ts';
 
 export const ErrorFallback = () => {
   return (

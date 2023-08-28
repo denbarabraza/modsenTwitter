@@ -9,6 +9,7 @@ import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
 import { checkPath } from '@/utils/checkPath.ts';
 
+import { IHeaderProps } from './interface.ts';
 import {
   Counter,
   HeaderHomeNav,
@@ -17,8 +18,7 @@ import {
   HeaderWrapper,
   Icon,
   Title,
-} from './style.ts';
-import { IHeaderProps } from './types';
+} from './styled.ts';
 
 export const Header: FC<IHeaderProps> = memo(({ tweetsCount }) => {
   const { name, id, lastName } = useAppSelector(getUserSelector);

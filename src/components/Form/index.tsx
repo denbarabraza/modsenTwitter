@@ -13,7 +13,7 @@ import {
   TextQuestion,
   Title,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
 export const FormWrapper: FC<IFormWrapper> = memo(
   ({ children, title, questionText, linkTitle, linkPath }) => {

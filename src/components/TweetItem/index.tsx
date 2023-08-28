@@ -37,10 +37,10 @@ import {
   TweetText,
   UserDataBlock,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
-export const TweetItem: FC<ITweetItem> = memo(props => {
-  const {
+export const TweetItem: FC<ITweetItem> = memo(
+  ({
     creatorId,
     name,
     email,
@@ -52,91 +52,90 @@ export const TweetItem: FC<ITweetItem> = memo(props => {
     tweetId,
     setTweets,
     handleGetTweets,
-  } = props;
+  }) => {
+    const currentTheme = useAppSelector(getThemeSelector);
+    const userId = useAppSelector(userIdSelector);
 
-  const [isRemoveVisible, setIsRemoveVisible] = useState(false);
+    const [isRemoveVisible, setIsRemoveVisible] = useState(false);
 
-  const { pathname } = useLocation();
-  const isFeedPath = checkPath(pathname, PATH.FEED);
+    const { pathname } = useLocation();
+    const isFeedPath = checkPath(pathname, PATH.FEED);
+    const isLiked = likes.includes(userId);
 
-  const currentTheme = useAppSelector(getThemeSelector);
-  const userId = useAppSelector(userIdSelector);
+    const formattedDate = ` · ${new Date(date).toDateString().slice(4, 11)}`;
 
-  const isLiked = likes.includes(userId);
+    const tweetTime = tweetCreatedTime(date);
 
-  const formattedDate = ` · ${new Date(date).toDateString().slice(4, 11)}`;
+    const likeRule = isLiked
+      ? myRedLikeSvg
+      : (currentTheme === ThemeEnum.Dark && myWhiteLikeSvg) || myLikeSvg;
 
-  const tweetTime = tweetCreatedTime(date);
+    const handleLikeTweet = async () => {
+      await setLikeOnTweet(tweetId, userId);
+      handleGetTweets();
+    };
 
-  const handleLikeTweet = async () => {
-    await setLikeOnTweet(tweetId, userId);
-    handleGetTweets();
-  };
+    const handleShowRemove = () => {
+      setIsRemoveVisible(prev => !prev);
+    };
 
-  const handleShowRemove = () => {
-    setIsRemoveVisible(prev => !prev);
-  };
+    const handleDeleteTweet = async () => {
+      await deleteDoc(doc(db, FirebaseCollections.Tweets, tweetId));
+      setTweets(prev => prev.filter(tweet => tweet.tweetId !== tweetId));
+    };
 
-  const handleDeleteTweet = async () => {
-    await deleteDoc(doc(db, FirebaseCollections.Tweets, tweetId));
-    setTweets(prev => prev.filter(tweet => tweet.tweetId !== tweetId));
-  };
-
-  return (
-    <Wrapper data-cy='tweetItemBlock'>
-      <Icon src={myPhotoSvg} alt='Photo' />
-      <Tweet data-cy='tweetItem'>
-        <TweetContentWrapper data-cy='tweetContent'>
-          <Info>
-            <UserDataBlock>
-              <Name>
-                {name} {lastName}
-                <Credentials>{isFeedPath ? tweetTime : formattedDate}</Credentials>
-              </Name>
-              <Credentials>{email}</Credentials>
-            </UserDataBlock>
-            {creatorId === userId && (
-              <>
-                <EditIcon
-                  data-cy='editIconTweet'
-                  src={currentTheme === ThemeEnum.Dark ? myWhiteEditSvg : myEditSvg}
-                  alt='Edit'
-                  onClick={handleShowRemove}
-                />
-                {isRemoveVisible && (
-                  <IconWrapper>
-                    <ImageIcon
-                      data-cy='deleteIcon'
-                      src={myDeleteSvg}
-                      alt='Delete Tweet'
-                      onClick={handleDeleteTweet}
-                    />
-                  </IconWrapper>
-                )}
-              </>
+    return (
+      <Wrapper data-cy='tweetItemBlock'>
+        <Icon src={myPhotoSvg} alt='Photo' />
+        <Tweet data-cy='tweetItem'>
+          <TweetContentWrapper data-cy='tweetContent'>
+            <Info>
+              <UserDataBlock>
+                <Name>
+                  {name} {lastName}
+                  <Credentials>{isFeedPath ? tweetTime : formattedDate}</Credentials>
+                </Name>
+                <Credentials>{email}</Credentials>
+              </UserDataBlock>
+              {creatorId === userId && (
+                <>
+                  <EditIcon
+                    data-cy='editIconTweet'
+                    src={currentTheme === ThemeEnum.Dark ? myWhiteEditSvg : myEditSvg}
+                    alt='Edit'
+                    onClick={handleShowRemove}
+                  />
+                  {isRemoveVisible && (
+                    <IconWrapper>
+                      <ImageIcon
+                        data-cy='deleteIcon'
+                        src={myDeleteSvg}
+                        alt='Delete Tweet'
+                        onClick={handleDeleteTweet}
+                      />
+                    </IconWrapper>
+                  )}
+                </>
+              )}
+            </Info>
+            <TweetText data-cy='tweetItemText'>{text}</TweetText>
+            {image && (
+              <ImageWrapper>
+                <Image src={image} />
+              </ImageWrapper>
             )}
-          </Info>
-          <TweetText data-cy='tweetItemText'>{text}</TweetText>
-          {image && (
-            <ImageWrapper>
-              <Image src={image} />
-            </ImageWrapper>
-          )}
-          <Info>
-            <ImageIcon
-              src={
-                isLiked
-                  ? myRedLikeSvg
-                  : (currentTheme === ThemeEnum.Dark && myWhiteLikeSvg) || myLikeSvg
-              }
-              alt='Like'
-              data-cy='likeIcon'
-              onClick={handleLikeTweet}
-            />
-            <LikeCount isLiked={isLiked}>{likes.length}</LikeCount>
-          </Info>
-        </TweetContentWrapper>
-      </Tweet>
-    </Wrapper>
-  );
-});
+            <Info>
+              <ImageIcon
+                src={likeRule}
+                alt='Like'
+                data-cy='likeIcon'
+                onClick={handleLikeTweet}
+              />
+              <LikeCount isLiked={isLiked}>{likes.length}</LikeCount>
+            </Info>
+          </TweetContentWrapper>
+        </Tweet>
+      </Wrapper>
+    );
+  },
+);

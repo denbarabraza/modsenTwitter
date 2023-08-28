@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Input } from '../../src/components/Input/Input';
+import { Input } from '../../src/components/Input';
 import { Theme } from '../../src/components/Theme';
 import { ThemeEnum } from '../../src/theme/types';
 

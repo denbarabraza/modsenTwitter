@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { Button } from '../../src/components/Button/Button';
+import { Button } from '../../src/components/Button';
 import { Theme } from '../../src/components/Theme';
 import { ThemeEnum } from '../../src/theme/types';
 

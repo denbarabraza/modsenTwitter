@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Container, GlobalStyles } from '@/components/App/style.ts';
+import { Container, GlobalStyles } from '@/components/App/styled.ts';
 import { Loader } from '@/components/Loader';
 import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { RootPages } from '@/pages';

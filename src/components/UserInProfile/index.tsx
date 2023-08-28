@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getUserSelector } from '@/store/selectors/userSelectors.ts';
 import { setModalStatus } from '@/store/slice/appSlice.ts';
 
+import { userBannerText } from './config.ts';
 import {
   Credentials,
   Icon,
@@ -18,15 +19,7 @@ import {
   TextLink,
   UserInfo,
   Wrapper,
-} from './style.ts';
-
-const userBannerText = {
-  buttonText: 'Edit profile',
-  followingText: 'Following',
-  followersText: 'Followers',
-  followingCount: 11,
-  followersCount: 43,
-};
+} from './styled.ts';
 
 export const UserInProfile: FC<IUserInProfile> = memo(
   ({ photo, name, email, gender, telegram, id }) => {

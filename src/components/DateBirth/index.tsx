@@ -10,7 +10,7 @@ import {
   MonthSelector,
   Option,
   Selectors,
-} from './style.ts';
+} from './styled.ts';
 
 export const DateBirth: FC<IDateBirth> = memo(
   ({ register, handleSetMonth, year, month, handleSetYear }) => {

@@ -3,7 +3,7 @@ import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 import myImageSvg from '@/assets/image-blue.svg';
 import myPhotoSvg from '@/assets/userPhoto.svg';
-import { Button } from '@/components/Button/Button.tsx';
+import { Button } from '@/components/Button';
 import { Loader } from '@/components/Loader';
 import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { createNewTweet } from '@/firebase/helpers/createNewTweet.ts';
@@ -25,7 +25,7 @@ import {
   UploadFileLabel,
   UploadImage,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
 export const CreateTweetBlock: FC<ICreateTweet> = memo(({ setTweets }) => {
   const { id, email, name, photo, lastName } = useAppSelector(getUserSelector);

@@ -2,7 +2,7 @@ import { FC, memo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { IModal } from '@/components/Modal/interface.ts';
-import { ModalContent, ModalItem } from '@/components/Modal/style.ts';
+import { ModalContent, ModalItem } from '@/components/Modal/styled.ts';
 import { ModalStatusEnum } from '@/constants/modalStatus.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';

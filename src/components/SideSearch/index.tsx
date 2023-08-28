@@ -27,9 +27,7 @@ import {
   SideSearchAction,
   Title,
   Wrapper,
-} from './style.ts';
-
-const { title, navLinks, copyrightText } = sideSearchText;
+} from './styled.ts';
 
 export const SideSearch = memo(() => {
   const dispatch = useAppDispatch();
@@ -39,6 +37,8 @@ export const SideSearch = memo(() => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [users, setUsers] = useState<ICreator[]>([]);
   const [tweets, setTweets] = useState<ITweetBySearch[]>([]);
+
+  const { title, navLinks, copyrightText } = sideSearchText;
 
   const { pathname } = useLocation();
   const isFeedPath = checkPath(pathname, PATH.FEED);

@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { Title, Wrapper } from '@/pages/rootStyles.ts';
+import { Title, Wrapper } from '@/pages/rootStyled.ts';
 
 export const Bookmarks = () => {
   return (

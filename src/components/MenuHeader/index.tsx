@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import { BurgerMenu } from '@/components/BurgerMenu';
-import { StyledLink, StyledMenu } from '@/components/MenuHeader/style.ts';
+import { StyledLink, StyledMenu } from '@/components/MenuHeader/styled.ts';
 import { SideMenu } from '@/components/SideMenu';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside.ts';
 
@@ -12,6 +12,10 @@ export const MenuHeader = () => {
 
   useOnClickOutside(node, () => setOpen(false));
 
+  const handleMenuOpen = () => {
+    setOpen(prev => !prev);
+  };
+
   return (
     <div ref={node}>
       <StyledMenu open={open}>
@@ -19,7 +23,7 @@ export const MenuHeader = () => {
           <SideMenu />
         </StyledLink>
       </StyledMenu>
-      <BurgerMenu open={open} setOpen={setOpen} />
+      <BurgerMenu open={open} handleMenuOpen={handleMenuOpen} />
     </div>
   );
 };

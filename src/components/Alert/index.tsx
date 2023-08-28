@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getAlertSelector } from '@/store/selectors/appSelectors.ts';
 import { setAlert } from '@/store/slice/appSlice.ts';
 
-import { Message } from './styles';
+import { Message } from './styled.ts';
 
 export const Alert = () => {
   const dispatch = useAppDispatch();

@@ -26,7 +26,7 @@ import {
   TextLink,
   Title,
   Wrapper,
-} from './style.ts';
+} from './styled.ts';
 
 const {
   title,

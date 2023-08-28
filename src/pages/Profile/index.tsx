@@ -16,7 +16,7 @@ import { useAppSelector } from '@/hooks/useStoreControl.ts';
 import { getModalStatusSelector } from '@/store/selectors/appSelectors.ts';
 import { ITweet, IUser } from '@/types';
 
-import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './style.ts';
+import { Banner, BannerBlock, MainWrapper, Title, Wrapper } from './styled.ts';
 
 export const Profile = () => {
   const modalStatus = useAppSelector(getModalStatusSelector);
