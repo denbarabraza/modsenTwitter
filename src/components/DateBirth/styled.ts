@@ -6,90 +6,105 @@ const hint = keyframes`
   }
   100% {
     transform: scale(1.02)
-  }`;
+  }
+`;
 
 export const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.fontColor};
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${theme.colors.fontColor};
 
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: ${({ theme }) => theme.valueInPercent.pr100};
+    width: ${theme.valueInPercent.pr100};
+    height: ${theme.valueInPercent.pr100};
+  `};
 `;
 
 export const Title = styled.h3`
-  padding: ${({ theme }) => theme.valueInPx.px15} ${({ theme }) => theme.valueInPx.px0};
-  font-size: ${({ theme }) => theme.fontSizes.xxxl};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  line-height: ${({ theme }) => theme.valueInPx.px20};
-  color: ${({ theme }) => theme.colors.fontColor};
+  ${({ theme }) => css`
+    padding: ${theme.valueInPx.px15} ${theme.valueInPx.px0};
+    font-size: ${theme.fontSizes.xxxl};
+    font-weight: ${theme.fontWeight.semibold};
+    line-height: ${theme.valueInPx.px20};
+    color: ${theme.colors.fontColor};
+  `};
 `;
 
 export const Selectors = styled.div`
-  margin-bottom: ${({ theme }) => theme.valueInPx.px10};
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: ${({ theme }) => theme.valueInPx.px30};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  ${({ theme }) => css`
+    margin-bottom: ${theme.valueInPx.px10};
+    width: ${theme.valueInPercent.pr100};
+    height: ${theme.valueInPx.px30};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `};
 `;
 
 export const DateBirthBlock = styled.div`
-  display: flex;
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.valueInPx.px10};
+  ${({ theme }) => css`
+    display: flex;
+    width: ${theme.valueInPercent.pr100};
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    gap: ${theme.valueInPx.px10};
+  `};
 `;
 
-export const Selector = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: ${({ theme }) => theme.valueInPx.px30};
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.usedColors.gray};
-  border-radius: ${({ theme }) => theme.valueInPx.px5};
-  color: ${({ theme }) => theme.colors.fontColor};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+export const Selector = styled.select`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: ${theme.valueInPx.px30};
+    background: transparent;
+    border: 1px solid ${theme.usedColors.gray};
+    border-radius: ${theme.valueInPx.px5};
+    color: ${theme.colors.fontColor};
+    font-size: ${theme.fontSizes.sm};
 
-  &:hover {
-    -webkit-animation: ${hint} 200ms ease-out;
-    animation: ${hint} 200ms ease-out;
-    cursor: pointer;
-  }
+    &:hover {
+      -webkit-animation: ${hint} 200ms ease-out;
+      animation: ${hint} 200ms ease-out;
+      cursor: pointer;
+    }
 
-  &::-webkit-scrollbar {
-    width: ${({ theme }) => theme.valueInPx.px2};
-  }
+    &::-webkit-scrollbar {
+      width: ${theme.valueInPx.px2};
+    }
 
-  &::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => theme.usedColors.white};
-  }
+    &::-webkit-scrollbar-track {
+      background-color: ${theme.usedColors.white};
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.usedColors.gray};
-  }
+    &::-webkit-scrollbar-thumb {
+      background-color: ${theme.usedColors.gray};
+    }
 
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: ${({ theme }) => theme.usedColors.gray};
-  }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: ${theme.usedColors.gray};
+    }
+  `};
 `;
 
-export const MonthSelector = styled.select`
-  width: ${({ theme }) => theme.valueInPercent.pr50};
-  ${Selector}
+export const MonthSelector = styled(Selector)`
+  ${({ theme }) => css`
+    width: ${theme.valueInPercent.pr50};
+  `};
 `;
 
-export const DayYearSelector = styled.select`
-  width: ${({ theme }) => theme.valueInPercent.pr20};
-  ${Selector}
+export const DayYearSelector = styled(Selector)`
+  ${({ theme }) => css`
+    width: ${theme.valueInPercent.pr20};
+  `};
 `;
 
 export const Option = styled.option`
-  cursor: pointer;
-  background: ${({ theme }) => theme.usedColors.white};
-  color: ${({ theme }) => theme.usedColors.black};
+  ${({ theme }) => css`
+    cursor: pointer;
+    background: ${theme.usedColors.white};
+    color: ${theme.usedColors.black};
+  `};
 `;

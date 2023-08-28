@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ToggleContainer = styled.div<{ open: boolean }>`
-  margin: ${({ theme }) => theme.indentation.i20} ${props => props.theme.indentation.i0};
+  ${({ theme }) => css`
+    margin: ${theme.indentation.i20} ${theme.indentation.i0};
+  `}
 `;
 
 export const ToggleLabel = styled.label`
@@ -11,38 +13,42 @@ export const ToggleLabel = styled.label`
 `;
 
 export const ToggleInput = styled.input`
-  opacity: ${({ theme }) => theme.valueInPx.px0};
-  width: ${({ theme }) => theme.valueInPx.px0};
-  height: ${({ theme }) => theme.valueInPx.px0};
+  ${({ theme }) => css`
+    opacity: ${theme.valueInPx.px0};
+    width: ${theme.valueInPx.px0};
+    height: ${theme.valueInPx.px0};
+  `}
 `;
 
 export const ToggleSlider = styled.span`
-  width: ${({ theme }) => theme.valueInPx.px50};
-  height: ${({ theme }) => theme.valueInPx.px30};
-  border-radius: ${({ theme }) => theme.valueInPx.px20};
-  background-color: ${({ theme }) => theme.colors.toggleBackground};
-  border: 1px solid ${({ theme }) => theme.colors.toggleBorder};
-  position: relative;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  ${({ theme }) => css`
+    width: ${theme.valueInPx.px50};
+    height: ${theme.valueInPx.px30};
+    border-radius: ${theme.valueInPx.px20};
+    background-color: ${theme.colors.toggleBackground};
+    border: 1px solid ${theme.colors.toggleBorder};
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 
-  &::before {
-    content: '';
-    position: absolute;
-    width: ${({ theme }) => theme.valueInPx.px20};
-    height: ${({ theme }) => theme.valueInPx.px20};
-    border-radius: ${({ theme }) => theme.valueInPercent.pr50};
-    background-color: ${({ theme }) => theme.colors.toggleCircle};
-    top: ${({ theme }) => theme.valueInPx.px5};
-    left: ${({ theme }) => theme.valueInPx.px2};
-    transition: transform 0.2s ease-in-out;
-  }
+    &::before {
+      content: '';
+      position: absolute;
+      width: ${theme.valueInPx.px20};
+      height: ${theme.valueInPx.px20};
+      border-radius: ${theme.valueInPercent.pr50};
+      background-color: ${theme.colors.toggleCircle};
+      top: ${theme.valueInPx.px5};
+      left: ${theme.valueInPx.px2};
+      transition: transform 0.2s ease-in-out;
+    }
 
-  ${ToggleInput}:checked + & {
-    background-color: ${({ theme }) => theme.colors.toggleBackgroundChecked};
-  }
+    ${ToggleInput}:checked + & {
+      background-color: ${theme.colors.toggleBackgroundChecked};
+    }
 
-  ${ToggleInput}:checked + &::before {
-    transform: translateX(${({ theme }) => theme.valueInPx.px25});
-  }
+    ${ToggleInput}:checked + &::before {
+      transform: translateX(${theme.valueInPx.px25});
+    }
+  `}
 `;

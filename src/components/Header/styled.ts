@@ -1,43 +1,48 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const HeaderWrapper = styled.header`
-  padding: 0 ${({ theme }) => theme.indentation.i20};
-  width: ${({ theme }) => theme.valueInPercent.pr100};
-  height: ${({ theme }) => theme.valueInPx.px50};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.headBackground};
-  border-radius: ${({ theme }) => theme.valueInPx.px10};
-  border-bottom: ${({ theme }) => theme.valueInPx.px1} solid
-    ${({ theme }) => theme.colors.headBackground};
+  ${({ theme }) => css`
+    padding: 0 ${theme.indentation.i20};
+    width: ${theme.valueInPercent.pr100};
+    height: ${theme.valueInPx.px50};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${theme.colors.headBackground};
+    border-radius: ${theme.valueInPx.px10};
+    border-bottom: ${theme.valueInPx.px1} solid ${theme.colors.headBackground};
 
-  @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
-    height: ${({ theme }) => theme.valueInPx.px100};
-  }
+    @media (min-width: ${theme.dimensions.bigScreen}px) {
+      height: ${theme.valueInPx.px100};
+    }
+  `};
 `;
 
 export const Icon = styled.img`
-  width: ${({ theme }) => theme.valueInPx.px30};
-  height: ${({ theme }) => theme.valueInPx.px30};
-  margin-right: ${({ theme }) => theme.valueInPx.px25};
+  ${({ theme }) => css`
+    width: ${theme.valueInPx.px30};
+    height: ${theme.valueInPx.px30};
+    margin-right: ${theme.valueInPx.px25};
 
-  &:hover {
-    transform: scale(1.2);
-  }
+    &:hover {
+      transform: scale(1.2);
+    }
 
-  @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
-    width: ${({ theme }) => theme.valueInPx.px30};
-    height: ${({ theme }) => theme.valueInPx.px30};
-  }
+    @media (min-width: ${theme.dimensions.bigScreen}px) {
+      width: ${theme.valueInPx.px30};
+      height: ${theme.valueInPx.px30};
+    }
+  `};
 `;
 
 export const HeaderRootItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.valueInPx.px10};
-  align-items: center;
-  max-width: ${({ theme }) => theme.valueInPercent.pr80};
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: space-between;
+    gap: ${theme.valueInPx.px10};
+    align-items: center;
+    max-width: ${theme.valueInPercent.pr80};
+  `};
 `;
 
 export const HeaderNav = styled.nav`
@@ -54,22 +59,26 @@ export const HeaderHomeNav = styled.nav`
 `;
 
 export const Title = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeight.normal};
-  color: ${({ theme }) => theme.usedColors.white};
+  ${({ theme }) => css`
+    font-size: ${theme.fontSizes.xl};
+    font-weight: ${theme.fontWeight.normal};
+    color: ${theme.usedColors.white};
 
-  @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
-    font-size: ${({ theme }) => theme.fontSizes.x36};
-  }
+    @media (min-width: ${theme.dimensions.bigScreen}px) {
+      font-size: ${theme.fontSizes.x36};
+    }
+  `};
 `;
 
 export const Counter = styled.p`
-  margin-top: ${({ theme }) => theme.valueInPx.px2};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeight.normal};
-  color: ${({ theme }) => theme.usedColors.white};
+  ${({ theme }) => css`
+    margin-top: ${theme.valueInPx.px2};
+    font-size: ${theme.fontSizes.sm};
+    font-weight: ${theme.fontWeight.normal};
+    color: ${theme.usedColors.white};
 
-  @media (min-width: ${({ theme }) => theme.dimensions.bigScreen}px) {
-    font-size: ${({ theme }) => theme.fontSizes.xxl};
-  }
+    @media (min-width: ${theme.dimensions.bigScreen}px) {
+      font-size: ${theme.fontSizes.xxl};
+    }
+  `};
 `;
